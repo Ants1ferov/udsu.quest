@@ -48,7 +48,7 @@ export default {
   .auth {
     height: 100vh;
     width: 100%;
-    background-color: #818181;
+    background-image: linear-gradient(to right, #eea2a2 0%, #bbc1bf 19%, #57c6e1 42%, #b49fda 79%, #7ac5d8 100%);
   }
   .auth-block {
     padding: 175px 35px;
@@ -78,6 +78,10 @@ export default {
     height: 50px;
     margin: 10px 0;
     max-width: 500px;
+  }
+  .reg-btn {
+    margin: 10px auto auto 0;
+    float: right;
   }
   @media only screen and (max-width: 390px) {
     .auth-block {

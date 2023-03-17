@@ -35,7 +35,10 @@ export default {
   padding-top: 150px;
 }
 .scanner-block {
-  width: 600px;
-  height: 600px;
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
+  border-radius: 35px;
+  font-size: 32px;
 }
 </style>
