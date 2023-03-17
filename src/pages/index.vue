@@ -1,6 +1,6 @@
 <template>
   <div class="index">
-    <h1 class="index-title">Квест УдГУ</h1>
+    <h1 class="index-title">udsu quest</h1>
     <router-link class="button index-registration-button" to="auth">Регистрация</router-link>
   </div>
 </template>

@@ -1,16 +1,10 @@
-<template>
-  <div>
-    <AppHeader />
-    <Nuxt />
-  </div>
-</template>
-
-<script>
-
-export default {
-  name: "default"
-}
+<script setup>
+import { RouterLink, RouterView } from 'vue-router'
 </script>
+
+<template>
+  <RouterView />
+</template>
 
 <style>
 body, h1, h2, h3, h4, p, a {
