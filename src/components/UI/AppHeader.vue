@@ -8,9 +8,9 @@
   <transition name="menu-block">
     <div v-if="open" class="mobile-menu-block">
       <router-link class="menu-block-link" @click="open =!open" to="/">Главная</router-link>
-      <router-link class="menu-block-link" @click="open =!open" to="/">Карта</router-link>
+      <router-link class="menu-block-link" @click="open =!open" to="/map">Карта</router-link>
       <router-link class="menu-block-link" @click="open =!open" to="/scanner">QR сканер</router-link>
-      <router-link class="menu-block-link" @click="open =!open" to="/">Техника<br>безопасности</router-link>
+      <router-link class="menu-block-link" @click="open =!open" to="/help">Помощь</router-link>
     </div>
   </transition>
 </template>

@@ -48,8 +48,7 @@ export default {
   .auth {
     height: 100vh;
     width: 100%;
-    background-image: linear-gradient(to right, #eea2a2 0%, #bbc1bf 19%, #57c6e1 42%, #b49fda 79%, #7ac5d8 100%);
-  }
+    background-image: linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%);  }
   .auth-block {
     padding: 175px 35px;
   }
@@ -63,7 +62,7 @@ export default {
   .form-title {
     margin-bottom: 15px;
     font-size: 48px;
-    color: white;
+    color: #1e1e1e;
     text-align: center;
   }
   .form-input {
