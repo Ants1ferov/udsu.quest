@@ -1,5 +1,5 @@
 <template>
-  <button class="button">
+  <button class="my-button">
     <slot></slot>
   </button>
 </template>
@@ -11,24 +11,24 @@ export default {
 </script>
 
 <style>
-.button {
+.my-button {
   text-decoration: none;
-  height: 50px;
-  width: 150px;
+  height: max-content;
+  width: max-content;
   position: relative;
   border-radius: 20px;
   background-color: #1e1e1e;
   color: #ffffff;
-  font-size: 20px;
+  font-size: 24px;
   text-align: center;
   cursor: pointer;
-  padding: 0 15px;
+  padding: 7px 15px;
   font-family: Nunito, sans-serif;
   transition: background-color 200ms ease-in-out,color 350ms ease-in-out;
   backdrop-filter: blur(10px);
   z-index: 1;
 }
-.button:hover {
+.my-button:hover {
   color: #f5f5f5;
   background-color: rgba(0, 0, 0, 0.55);
   transition: background-color 200ms ease-in-out, color 200ms ease-in-out;
