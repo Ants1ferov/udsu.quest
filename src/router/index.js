@@ -10,11 +10,6 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'main',
-      component: main
-    },
-    {
-      path: '/auth',
       name: 'auth',
       component: auth
     },
