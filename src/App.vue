@@ -4,7 +4,6 @@ import AppHeader from "@/components/UI/AppHeader.vue";
 </script>
 
 <template>
-  <AppHeader></AppHeader>
   <RouterView />
 </template>
 
@@ -27,5 +26,9 @@ button {
   padding: 0;
   margin: 0;
   border: 0;
+  cursor: pointer;
+}
+@font-face {
+
 }
 </style>

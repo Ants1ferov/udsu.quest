@@ -85,7 +85,7 @@ export default {
           })
     },
     recoveryOpenBlock() {
-      this.captchaValue = Math.floor(Math.random() * (9999 - 1000));
+      this.captchaValue = Math.floor(Math.random() * (9999 - 1000) + 1000);
       this.recoveryOpen = true
     },
     recoveryOk() {
