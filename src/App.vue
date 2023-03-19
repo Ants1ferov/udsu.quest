@@ -1,6 +1,5 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import AppHeader from "@/components/UI/AppHeader.vue";
 </script>
 
 <template>
@@ -26,9 +25,5 @@ button {
   padding: 0;
   margin: 0;
   border: 0;
-  cursor: pointer;
-}
-@font-face {
-
 }
 </style>

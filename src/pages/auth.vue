@@ -73,16 +73,17 @@ export default {
 */
     },
     registration() {
-      if (this.email) {
-        this.successful()
-      }
+      this.successful()
       axios
-          .post('http://sloth-1.suslovd.ru:8080/api/add', {
+          .post('https://sloth-1.suslovd.ru:9443/api/add', {
             firstname: this.name,
             secondname: this.surname,
             email: this.email,
             password: this.password,
           })
+      setTimeout(() => {
+        this.$router.push('/safety-rules')
+      }, 3000);
     },
     recoveryOpenBlock() {
       this.captchaValue = Math.floor(Math.random() * (9999 - 1000) + 1000);
@@ -109,7 +110,7 @@ export default {
         if (this.captchaUserValue == this.captchaValue) {
           console.log('Капча правильная')
           axios
-              .post('http://sloth-1.suslovd.ru:8080/api/change', {
+              .post('https://sloth-1.suslovd.ru:9443/api/change', {
                 email: this.email
               }).
               then(() => {

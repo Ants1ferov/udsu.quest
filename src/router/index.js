@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import auth from "@/pages/auth.vue";
 import scanner from "@/pages/scanner.vue";
-import map from "@/pages/map.vue";
 import safetyRules from "@/pages/safety-rules.vue";
+import map from "@/pages/map.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -24,7 +24,7 @@ const router = createRouter({
     },
     {
       path: '/safety-rules',
-      name: 'safety rules',
+      name: 'safety-rules',
       component: safetyRules
     },
   ]

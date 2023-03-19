@@ -21,19 +21,13 @@
     </div>
   </div>
 </template>
-
 <script>
-
-
-
 import AppHeader from "@/components/UI/AppHeader.vue";
-
 export default {
   name: "safe-rules",
   components: {AppHeader},
 }
 </script>
-
 <style scoped>
 .safety-rules {
   display: flex;
