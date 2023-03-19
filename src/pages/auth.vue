@@ -75,7 +75,7 @@ export default {
     registration() {
       this.successful()
       axios
-          .post('https://sloth-1.suslovd.ru:9443/api/add', {
+          .post('https://api.udgu.suslovd.ru:9443/api/add', {
             firstname: this.name,
             secondname: this.surname,
             email: this.email,
@@ -110,7 +110,7 @@ export default {
         if (this.captchaUserValue == this.captchaValue) {
           console.log('Капча правильная')
           axios
-              .post('https://sloth-1.suslovd.ru:9443/api/change', {
+              .post('https://api.udgu.suslovd.ru:9443/api/change', {
                 email: this.email
               }).
               then(() => {
