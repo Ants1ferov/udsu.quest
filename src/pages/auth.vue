@@ -46,11 +46,9 @@
               <div class="recovery-block-title">Восстановление пароля</div>
               <div class="captcha-title">Введите свой email:</div>
               <input type="email" class="form-input" autocomplete="email" id="email" placeholder="Email" :class="{ emailVoid: emailVoid }" v-model="email">
-              <div class="captcha">
                 <div class="captcha-title">Введите новый пароль:</div>
-                <input type="text" class="form-input" placeholder="Новый пароль" :class="{newPasswordVoid: newPasswordVoid}" v-model="newPassword">
+                <input type="password" autocomplete="password"  class="form-input" :class="{newPasswordVoid: newPasswordVoid}" placeholder="Новый пароль" v-model="newPassword">
                 <AppButton class="recovery-button-end">Сбросить пароль</AppButton>
-              </div>
             </form>
           </sky-block>
         </transition>
@@ -157,28 +155,28 @@ export default {
 }
 </script>
 <style>
-.logo-block {
-  display: flex;
-  flex-direction: column;
-  padding-top: 30px;
-  align-items: center
-}
-.logo-img {
-  width: 256px;
-  height: 260px;
-}
-.logo-title {
-  margin-top: 35px;
-  text-align: center;
-  font-size: 20px;
-  color: black;
-  font-weight: bolder;
-}
-.logo-cycle {
-  position: relative;
-  top: 5px;
-  width: 24px;
-}
+  .logo-block {
+    display: flex;
+    flex-direction: column;
+    padding-top: 30px;
+    align-items: center
+  }
+  .logo-img {
+    width: 256px;
+    height: 260px;
+  }
+  .logo-title {
+    margin-top: 35px;
+    text-align: center;
+    font-size: 20px;
+    color: black;
+    font-weight: bolder;
+  }
+  .logo-cycle {
+    position: relative;
+    top: 5px;
+    width: 24px;
+  }
   .auth {
     height: 100vh;
     width: 100%;
@@ -194,7 +192,6 @@ export default {
     min-width: 200px;
     max-width: 500px;
   }
-
   .register-ok-icon {
     margin: 0 auto;
   }
@@ -257,6 +254,7 @@ export default {
     margin: 0 auto;
     display: flex;
     flex-direction: column;
+    align-items: center;
   }
   .form-input.emailVoid::placeholder {
     color: red;
@@ -266,9 +264,6 @@ export default {
     color: #ffffff;
     margin-bottom: 35px;
   }
-  .captcha {
-
-  }
   .form-input.newPasswordVoid::placeholder {
     color: red;
   }
@@ -276,13 +271,6 @@ export default {
     color: white;
     font-size: 18px;
     text-align: left;
-  }
-  .form-input.captcha {
-    width: 50%;
-  }
-  .captcha-value {
-    font-size: 24px;
-    color: #00ff15;
   }
   .recovery-button-end {
     margin: 25px 0;

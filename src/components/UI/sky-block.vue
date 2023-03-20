@@ -14,7 +14,7 @@ export default {
 .sky-block {
   display: flex;
   position: absolute;
-  width: 80%;
+  width: 90%;
   height: 60%;
   margin: auto;
   top: 0; left: 0; bottom: 0; right: 0;
