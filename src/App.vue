@@ -4,10 +4,37 @@ import AppHeader from "@/components/UI/AppHeader.vue";
 </script>
 
 <template>
+  <AppHeader></AppHeader>
   <RouterView />
 </template>
 
 <style>
+.right-btn {
+  margin: 10px auto auto 0;
+  font-size: 24px;
+  float: right;
+  padding: 12px 25px;
+}
+.button {
+
+}
+.m15 {
+  margin: 15px;
+}
+.bold {
+  font-weight: bold;
+}
+.mn-mid-tb {
+  margin: 50px auto;
+}
+.flex-center {
+  display: flex;
+  justify-content: center;
+}
+.button-wt-bg {
+  background-color: #00000000;
+  font-size: 18px;
+}
 body, h1, h2, h3, h4, p, a, button {
   margin: 0;
   font-size: 100%;

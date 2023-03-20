@@ -1,12 +1,12 @@
 <template>
   <AppHeader></AppHeader>
   <div class="safety-rules">
-    <div class="safety-title">Правила<br>безопасности</div>
-    <div class="safety-value">
+    <div class="safety-title bold">правила техники безопасности прохождения квеста</div>
+    <div class="safety-value bold">
       <ol>
         <li class="safety-ol-value">Внимательно выслушать инструктаж по технике безопасности.<br></li>
         <li class="safety-ol-value">Надеть удобную одежду и обувь, не стесняющую движения и соответствующую сезону и погоде.<br></li>
-        <li class="safety-ol-value">Убедиться в наличии аптечки и ее укомплектованности обходимыми медикаментами и перевязочными материалами.<br></li>
+        <li class="safety-ol-value">Убедиться в наличии аптечки и ее укомплектованности необходимыми медикаментами и перевязочными материалами.<br></li>
         <li class="safety-ol-value">Не начинать движение без указания главного.<br></li>
         <li class="safety-ol-value">При движении участники не должны нарушать построения группы: не перебегать, не обгонять товарищей, не кричать, не толкаться.<br></li>
         <li class="safety-ol-value">При переходе улиц, перекрестков соблюдать правила дорожного движения.<br></li>
@@ -35,11 +35,11 @@ export default {
   padding: 100px 25px 100px 15px;
 }
 .safety-title {
-  font-size: 48px;
+  font-size: 40px;
   text-align: center;
 }
 .safety-value {
-  font-size: 20px;
+  font-size: 24px;
 }
 .safety-ol-value {
   margin: 5px 0;
