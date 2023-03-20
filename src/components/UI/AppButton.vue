@@ -23,7 +23,6 @@ export default {
   text-align: center;
   cursor: pointer;
   padding: 7px 15px;
-  font-family: Nunito, sans-serif;
   transition: background-color 200ms ease-in-out,color 350ms ease-in-out;
   backdrop-filter: blur(10px);
   z-index: 1;

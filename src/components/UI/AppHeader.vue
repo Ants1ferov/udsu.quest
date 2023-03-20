@@ -10,7 +10,7 @@
       <router-link class="menu-block-link" @click="open =!open" to="/">Главная</router-link>
       <router-link class="menu-block-link" @click="open =!open" to="/map">Карта</router-link>
       <router-link class="menu-block-link" @click="open =!open" to="/scanner">QR сканер</router-link>
-      <router-link class="menu-block-link" @click="open =!open" to="/safity-rules">Помощь</router-link>
+      <router-link class="menu-block-link" @click="open =!open" to="/safety-rules">Правила</router-link>
     </div>
   </transition>
 </template>
@@ -53,7 +53,7 @@ export default {
   margin-left: 25px;
 }
 .img-main {
-  background-image: url("@/assets/img/button/logo.svg");
+  background-image: url("@/assets/img/design/logo.svg");
   position: absolute;
   width: 42px;
   height: 42px;

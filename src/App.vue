@@ -1,5 +1,6 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
+import AppHeader from "@/components/UI/AppHeader.vue";
 </script>
 
 <template>
@@ -7,12 +8,15 @@ import { RouterLink, RouterView } from 'vue-router'
 </template>
 
 <style>
-body, h1, h2, h3, h4, p, a {
+body, h1, h2, h3, h4, p, a, button {
   margin: 0;
   font-size: 100%;
   font-weight: normal;
-  font-family: "Nunito", sans-serif;
+  font-family: "Zhizn", sans-serif;
   text-decoration: none;
+}
+input {
+  font-family: "Zhizn", sans-serif;
 }
 a {
   all: unset;
@@ -25,5 +29,11 @@ button {
   padding: 0;
   margin: 0;
   border: 0;
+}
+@font-face {
+  font-family: "Zhizn";
+  font-style: normal;
+  font-weight: 400;
+  src: url("@/assets/fonts/ofont_ru_Zhizn.ttf")
 }
 </style>
