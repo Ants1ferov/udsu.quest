@@ -111,6 +111,7 @@ export default {
               password: this.newPassword
             })
             .then((response) => {
+              // пока что кидает на карту сразу
               this.recoveryOpen = false
               console.log('Пароль изменен')
               console.log(response)
