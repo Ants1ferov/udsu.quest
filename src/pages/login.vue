@@ -73,11 +73,16 @@ export default {
               password: this.password,
             })
             .then((response) => {
-              this.loginOk = true
-              console.log(response.data)
-              setTimeout(() => {
-                this.$router.push('/map')
-              }, 750);
+              if (response.data == true) {
+                this.loginOk = true
+                console.log(response.data)
+                setTimeout(() => {
+                  this.$router.push('/map')
+                }, 750);
+              }
+            else {
+                this.authFail = true
+              }
             })
             .catch((reason) => {
               this.authFail = true
