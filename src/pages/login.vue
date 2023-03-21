@@ -48,8 +48,7 @@ export default {
   data() {
     return {
       authFail: false,
-      loginOk: false,
-      loginFail: false,
+      authOk: false,
       email: '',
       password: '',
       register: true,
@@ -73,15 +72,16 @@ export default {
               password: this.password,
             })
             .then((response) => {
-              if (response.data == true) {
-                this.loginOk = true
-                console.log(response.data)
+              console.log(response.status)
+              if (response.status === 200) {
+                this.authOk = true
                 setTimeout(() => {
                   this.$router.push('/map')
-                }, 750);
+                }, 1000);
               }
-            else {
+            else if (response.status === 409) {
                 this.authFail = true
+                console.log('логин или пароль неверный')
               }
             })
             .catch((reason) => {
