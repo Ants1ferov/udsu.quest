@@ -15,6 +15,14 @@
       <AppButton @click="changeMap5" class="dark bold btn-dark m15">5</AppButton>
       <AppButton @click="changeMap6" class="dark bold btn-dark m15">6</AppButton>
     </div>
+    <div class="quest">
+      <quest1 v-if="map1"></quest1>
+      <quest2 v-if="map2"></quest2>
+      <quest3 v-if="map3"></quest3>
+      <quest4 v-if="map4"></quest4>
+      <quest5 v-if="map5"></quest5>
+      <quest6 v-if="map6"></quest6>
+    </div>
   </div>
 </template>
 
@@ -28,10 +36,20 @@ import YaMaps3 from "@/components/maps/ya-maps-3.vue";
 import YaMaps4 from "@/components/maps/ya-maps-4.vue";
 import YaMaps5 from "@/components/maps/ya-maps-5.vue";
 import YaMaps6 from "@/components/maps/ya-maps-6.vue";
+import Quest1 from "@/components/quests/quest1.vue";
+import Quest2 from "@/components/quests/quest2.vue";
+import Quest3 from "@/components/quests/quest3.vue";
+import Quest4 from "@/components/quests/quest4.vue";
+import Quest5 from "@/components/quests/quest5.vue";
+import Quest6 from "@/components/quests/quest6.vue";
 
 export default {
   name: "map",
-  components: {YaMaps6, YaMaps5, YaMaps4, YaMaps3, yaMaps2, AppButton, yaMaps1, AppHeader},
+  components: {
+    Quest6,
+    Quest5,
+    Quest4,
+    Quest3, Quest2, Quest1, YaMaps6, YaMaps5, YaMaps4, YaMaps3, yaMaps2, AppButton, yaMaps1, AppHeader},
   data() {
     return {
       map1: true,

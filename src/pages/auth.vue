@@ -4,7 +4,7 @@
       <img class="logo-img" src="./../assets/img/design/logo.svg" alt="">
       <p class="logo-title">
         ИЖТРУДФРОНТ
-        <img class="logo-cycle" src="./../assets/img/design/cycle.svg" alt="">
+        <img class="logo-cycle" src="./../assets/img/design/circle.svg" alt="">
         ИЖТРУДФРОНТ
       </p>
     </div>
@@ -13,24 +13,24 @@
       <login v-if="login"></login>
     </div>
     <div class="flex-center mn-mid-tb">
-      <button v-if="register" class="my-button button-wt-bg bold font-min" @click="forgotPassword">Уже есть аккаунт?</button>
+      <AppButton v-if="register" class="my-button button-wt-bg bold font-min" @click="forgotPassword">Уже есть аккаунт?</AppButton>
       <button v-if="login" class="my-button button-wt-bg bold font-min" @click="forgotPassword">Еще нет аккаунта?</button>
     </div>
     <div class="footer">
-      <img class="logo-leafs" src="./../assets/img/design/double-leaf.svg" alt="">
+      <img class="logo-leafs" src="./../assets/img/design/double-leaf.png" alt="">
     </div>
   </div>
 </template>
 
 <script>
-import AppButton from "@/components/UI/AppButton.vue";
 import SkyBlock from "@/components/UI/sky-block.vue";
 import Login from "@/pages/login.vue";
 import Register from "@/pages/register.vue";
+import AppButton from "@/components/UI/AppButton.vue";
 
 export default {
   name: "auth",
-  components: {Register, Login, SkyBlock, AppButton},
+  components: {AppButton, Register, Login, SkyBlock},
   data() {
     return {
       register: true,

@@ -9,6 +9,42 @@ import AppHeader from "@/components/UI/AppHeader.vue";
 </template>
 
 <style>
+.quest-block {
+  padding: 35px 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: max-content;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.quest-title {
+  width: max-content;
+}
+.fs-max {
+  font-size: 64px;
+}
+.fs-huge {
+  font-size: 48px;
+}
+.fs-big {
+  font-size: 36px;
+}
+.fs-mid {
+  font-size: 24px;
+}
+.fs-small {
+  font-size: 20px;
+}
+.fs-min {
+  font-size: 16px;
+}
+
+.black {
+  color: black;
+}
 .right-btn {
   margin: 10px auto auto 0;
   font-size: 24px;
