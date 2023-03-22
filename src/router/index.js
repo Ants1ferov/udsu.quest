@@ -3,6 +3,7 @@ import auth from "@/pages/auth.vue";
 import scanner from "@/pages/scanner.vue";
 import safetyRules from "@/pages/safety-rules.vue";
 import map from "@/pages/map.vue";
+import account from "@/pages/account.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -10,7 +11,10 @@ const router = createRouter({
     {
       path: '/',
       name: 'auth',
-      component: auth
+      component: auth,
+      meta:{
+        layout: "not-reg"
+      }
     },
     {
       path: '/scanner',
@@ -27,6 +31,11 @@ const router = createRouter({
       name: 'safety-rules',
       component: safetyRules
     },
+    {
+      path: '/account',
+      name: 'account',
+      component: account
+    }
   ]
 })
 

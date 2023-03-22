@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent="logIn" class="auth-form">
     <transition name="ok">
-      <sky-block v-if="authOk">
+      <sky-block v-if="actionOk">
         <div class="auth-ok-icon">
           <svg xmlns="http://www.w3.org/2000/svg" height="128" width="128" viewBox="0 0 48 48">
             <path d="M18.9 35.1q-.3 0-.55-.1-.25-.1-.5-.35L8.8 25.6q-.45-.45-.45-1.1 0-.65.45-1.1.45-.45 1.05-.45.6 0 1.05.45l8 8 18.15-18.15q.45-.45 1.075-.45t1.075.45q.45.45.45 1.075T39.2 15.4L19.95 34.65q-.25.25-.5.35-.25.1-.55.1Z" fill="#adff00"/>
@@ -10,7 +10,7 @@
       </sky-block>
     </transition>
     <transition name="ok">
-      <error-sky-block v-if="authFail">
+      <error-sky-block v-if="actionFail">
       </error-sky-block>
     </transition>
     <input type="email" class="form-input" autocomplete="email" id="email" placeholder="Email" v-model="email">
@@ -47,8 +47,8 @@ export default {
   components: {ErrorSkyBlock, SkyBlock, AppButton},
   data() {
     return {
-      authFail: false,
-      authOk: false,
+      actionFail: false,
+      actionOk: false,
       email: '',
       password: '',
       register: true,
@@ -74,29 +74,25 @@ export default {
             .then((response) => {
               console.log(response.status)
               if (response.status === 200) {
-                this.authOk = true
+                this.actionOk = true
                 setTimeout(() => {
                   this.$router.push('/map')
                 }, 1000);
               }
             else if (response.status === 409) {
-                this.authFail = true
+                this.actionFail = true
                 console.log('логин или пароль неверный')
               }
             })
             .catch((reason) => {
-              this.authFail = true
+              this.actionFail = true
             })
       } else {
-        this.authFail = true
+        this.actionFail = true
       }
     },
     recoveryOpenBlock() {
-      if (this.recoveryOpen === false) {
-        this.recoveryOpen = true
-      } else {
-        this.recoveryOpen = false
-      }
+      this.recoveryOpen = this.recoveryOpen === false;
     },
     checkValue() {
       if (this.newPassword === '' && this.email === '') {
@@ -244,6 +240,7 @@ export default {
 .close-block {
   font-size: 20px;
   margin-top: 35px;
+  color: white;
 }
 .auth-block-button-recovery {
   margin: 50px auto 25px auto;

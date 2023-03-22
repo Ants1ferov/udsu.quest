@@ -1,27 +1,32 @@
 <template>
   <AppHeader></AppHeader>
   <div class="map" id="map-container">
-    <yaMaps1 v-if="map1"></yaMaps1>
-    <yaMaps2 v-if="map2"></yaMaps2>
-    <yaMaps3 v-if="map3"></yaMaps3>
-    <yaMaps4 v-if="map4"></yaMaps4>
-    <yaMaps5 v-if="map5"></yaMaps5>
-    <yaMaps6 v-if="map6"></yaMaps6>
-    <div class="block-btn">
-      <AppButton @click="changeMap1" class="dark bold btn-dark m15">1</AppButton>
-      <AppButton @click="changeMap2" class="dark bold btn-dark m15">2</AppButton>
-      <AppButton @click="changeMap3" class="dark bold btn-dark m15">3</AppButton>
-      <AppButton @click="changeMap4" class="dark bold btn-dark m15">4</AppButton>
-      <AppButton @click="changeMap5" class="dark bold btn-dark m15">5</AppButton>
-      <AppButton @click="changeMap6" class="dark bold btn-dark m15">6</AppButton>
+    <ya-maps-dot1 v-if="task === '0'"></ya-maps-dot1>
+    <yaMaps1 v-if="task === '1'"></yaMaps1>
+    <yaMaps2 v-if="task === '2'"></yaMaps2>
+    <yaMaps3 v-if="task === '3'"></yaMaps3>
+    <yaMaps4 v-if="task === '4'"></yaMaps4>
+    <yaMaps5 v-if="task === '5'"></yaMaps5>
+    <yaMaps6 v-if="task === '6'"></yaMaps6>
+    <div v-if="road" class="block-btn fs-big">
+      Сканируйте QR код:
+      <button @click="qrOpen">
+        <img class="qr-img" src="@/../src/assets/img/button/qr.svg" alt="qr button">
+      </button>
     </div>
+    <transition name="ok">
+      <sky-block v-if="qr">
+        <p class="fs-big brs-15 br-wh white" @click="scan">Сканировал</p>
+      </sky-block>
+    </transition>
+
     <div class="quest">
-      <quest1 v-if="map1"></quest1>
-      <quest2 v-if="map2"></quest2>
-      <quest3 v-if="map3"></quest3>
-      <quest4 v-if="map4"></quest4>
-      <quest5 v-if="map5"></quest5>
-      <quest6 v-if="map6"></quest6>
+      <quest1 v-if="task === '1'"></quest1>
+      <quest2 v-if="task === '2'"></quest2>
+      <quest3 v-if="task === '3'"></quest3>
+      <quest4 v-if="task === '4'"></quest4>
+      <quest5 v-if="task === '5'"></quest5>
+      <quest6 v-if="task === '6'"></quest6>
     </div>
   </div>
 </template>
@@ -42,79 +47,56 @@ import Quest3 from "@/components/quests/quest3.vue";
 import Quest4 from "@/components/quests/quest4.vue";
 import Quest5 from "@/components/quests/quest5.vue";
 import Quest6 from "@/components/quests/quest6.vue";
+import SkyBlock from "@/components/UI/sky-block.vue";
+import Scanner from "@/pages/scanner.vue";
+import YaMapsDot1 from "@/components/maps/yaMapsDot1.vue";
+import {Html5QrcodeScanner} from "html5-qrcode";
+
 
 export default {
   name: "map",
   components: {
+    YaMapsDot1,
+    Scanner,
+    SkyBlock,
     Quest6,
     Quest5,
     Quest4,
-    Quest3, Quest2, Quest1, YaMaps6, YaMaps5, YaMaps4, YaMaps3, yaMaps2, AppButton, yaMaps1, AppHeader},
+    Quest3, Quest2, Quest1, YaMaps6, YaMaps5, YaMaps4, YaMaps3, yaMaps2, AppButton, yaMaps1, AppHeader
+  },
   data() {
     return {
-      map1: true,
-      map2: false,
-      map3: false,
-      map4: false,
-      map5: false,
-      map6: false,
+      qr: false,
+      task: '0',
+      road: true
     }
   },
   methods: {
-    changeMap1() {
-      this.map1 = true
-      this.map2 = false
-      this.map3 = false
-      this.map4 = false
-      this.map5 = false
-      this.map6 = false
+    qrOpen() {
+      this.qr = true
     },
-    changeMap2() {
-      this.map1 = false
-      this.map2 = true
-      this.map3 = false
-      this.map4 = false
-      this.map5 = false
-      this.map6 = false
-    },
-    changeMap3() {
-      this.map1 = false
-      this.map2 = false
-      this.map3 = true
-      this.map4 = false
-      this.map5 = false
-      this.map6 = false
-    },
-    changeMap4() {
-      this.map1 = false
-      this.map2 = false
-      this.map3 = false
-      this.map4 = true
-      this.map5 = false
-      this.map6 = false
-    },
-    changeMap5() {
-      this.map1 = false
-      this.map2 = false
-      this.map3 = false
-      this.map4 = false
-      this.map5 = true
-      this.map6 = false
-    },
-    changeMap6() {
-      this.map1 = false
-      this.map2 = false
-      this.map3 = false
-      this.map4 = false
-      this.map5 = false
-      this.map6 = true
-    },
+    scan() {
+      this.task = '1'
+      this.road = false
+      this.qr = false
+    }
   }
 }
 
 </script>
 
 <style scoped>
+.scanner {
+  padding-top: 150px;
+}
+.scanner-block {
+  width: 300px;
+  height: 400px;
+  margin: 0 auto;
+  border-radius: 35px;
+  font-size: 32px;
+  border: 6px solid #1e1e1e !important;
+}
   .map {
     padding-top: 70px;
     width: 100%;
@@ -122,10 +104,14 @@ export default {
   }
   .block-btn {
     display: flex;
-    margin: 0 auto;
+    margin: 35px auto;
     width: 70%;
     justify-content: center;
-    flex-wrap: wrap;
+    text-align: center;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
   }
   .ya-map {
     width: 100%;
@@ -143,5 +129,22 @@ export default {
   .ymaps-2-1-79-balloon__content {
     font-size: 20px !important;
     font-family: sans-serif !important;
+  }
+  .qr-img {
+    width: 64px;
+  }
+  .ok-enter-active {
+    transition: all 750ms cubic-bezier(0, 1, .15, 1);
+  }
+  .ok-leave-active {
+    transition: all 1500ms cubic-bezier(0, 1, .15, 1);
+  }
+  .ok-enter-from {
+    opacity: 1;
+    transform: translateY(-150%);
+  }
+  .ok-leave-to {
+    opacity: 0;
+    transform: translateY(+150%);
   }
 </style>
