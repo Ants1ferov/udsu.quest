@@ -1,5 +1,5 @@
 <template>
-  <button class="my-button">
+  <button class="my-button btn-dark fs-mid">
     <slot></slot>
   </button>
 </template>
@@ -30,6 +30,16 @@ export default {
   cursor: pointer;
   padding: 7px 15px;
   z-index: 1;
+}
+.br-wh {
+  padding: 7px 15px;
+  border: 4px white solid;
+}
+.brs-15 {
+  border-radius: 15px;
+}
+.white {
+  color: white;
 }
 .btn-dark {
   background-color: #1e1e1e;

@@ -3,14 +3,14 @@
     <button name="button to open mobile menu" @click="open = !open" class="mobile-open-menu-button">
       <img id="top-btn-img" class="img-menu" src="@/assets/img/button/menu-open.svg" alt="">
     </button>
-      <router-link to="/" class="mobile-top-menu-link img-main"></router-link>
+      <router-link to="/map" class="mobile-top-menu-link img-main"></router-link>
+      <router-link to="/account" class="mobile-top-menu-link img-account"></router-link>
   </div>
   <transition name="menu-block">
     <div v-if="open" class="mobile-menu-block">
-      <router-link class="menu-block-link" @click="open =!open" to="/">Главная</router-link>
-      <router-link class="menu-block-link" @click="open =!open" to="/map">Карта</router-link>
+      <router-link class="menu-block-link" @click="open =!open" to="/map">Квест</router-link>
       <router-link class="menu-block-link" @click="open =!open" to="/scanner">QR сканер</router-link>
-      <router-link class="menu-block-link" @click="open =!open" to="/safety-rules">Правила</router-link>
+      <router-link class="menu-block-link" @click="open =!open" to="/safety-rules">Техника безопасности</router-link>
     </div>
   </transition>
 </template>
@@ -62,6 +62,15 @@ export default {
   margin-left: -24px;
   text-align: center;
 }
+.img-account {
+  width: 42px;
+  height: 42px;
+  position: absolute;
+  right: max(0px,env(safe-area-inset-left));
+  background-image: url("@/assets/img/button/account.svg");
+  margin-right: 35px;
+  top: 15px;
+}
 .mobile-menu-block {
   display: flex;
   flex-direction: column;
@@ -79,7 +88,7 @@ export default {
 .menu-block-link {
   width: 70%;
   font-size: 36px;
-  margin: 0 0 10px 0;
+  margin: 0 0 20px 0;
   color: white;
   text-align: center;
 }
