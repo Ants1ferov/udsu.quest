@@ -1,0 +1,67 @@
+<svg width="250" height="250" viewBox="0 0 250 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="30" height="100" rx="10" fill="black"/>
+    <rect y="30" width="30" height="100" rx="10" transform="rotate(-90 0 30)" fill="black"/>
+    <rect y="250" width="30" height="100" rx="10" transform="rotate(-90 0 250)" fill="black"/>
+    <rect x="30" y="250" width="30" height="100" rx="10" transform="rotate(-180 30 250)" fill="black"/>
+    <rect x="250" y="250" width="30" height="100" rx="10" transform="rotate(-180 250 250)" fill="black"/>
+    <rect x="250" y="220" width="30" height="100" rx="10" transform="rotate(90 250 220)" fill="black"/>
+    <rect x="250" width="30" height="100" rx="10" transform="rotate(90 250 0)" fill="black"/>
+    <rect x="220" width="30" height="100" rx="10" fill="black"/>
+    <path d="M65 75C65 69.4772 69.4772 65 75 65H77V77H65V75Z" fill="black"/>
+    <rect x="65" y="89" width="12" height="12" fill="black"/>
+    <rect x="89" y="65" width="12" height="12" fill="black"/>
+    <rect x="113" y="77" width="12" height="12" fill="black"/>
+    <rect x="113" y="113" width="12" height="12" fill="black"/>
+    <rect x="137" y="77" width="12" height="12" fill="black"/>
+    <rect x="149" y="89" width="12" height="12" fill="black"/>
+    <rect x="137" y="101" width="12" height="12" fill="black"/>
+    <rect x="173" y="89" width="12" height="12" fill="black"/>
+    <rect x="161" y="101" width="12" height="12" fill="black"/>
+    <rect x="149" y="137" width="12" height="12" fill="black"/>
+    <rect x="161" y="161" width="12" height="12" fill="black"/>
+    <path d="M173 173H185V175C185 180.523 180.523 185 175 185H173V173Z" fill="black"/>
+    <rect x="137" y="161" width="12" height="12" fill="black"/>
+    <rect x="124" y="172" width="12" height="12" fill="black"/>
+    <rect x="101" y="173" width="12" height="12" fill="black"/>
+    <rect x="77" y="173" width="12" height="12" fill="black"/>
+    <rect x="149" y="113" width="12" height="12" fill="black"/>
+    <rect x="161" y="125" width="12" height="12" fill="black"/>
+    <rect x="173" y="125" width="12" height="12" fill="black"/>
+    <rect x="113" y="65" width="12" height="12" fill="black"/>
+    <rect x="125" y="65" width="12" height="12" fill="black"/>
+    <rect x="149" y="65" width="12" height="12" fill="black"/>
+    <path d="M173 65H175C180.523 65 185 69.4772 185 75V77H173V65Z" fill="black"/>
+    <rect x="137" y="113" width="12" height="12" fill="black"/>
+    <rect x="137" y="124" width="12" height="12" fill="black"/>
+    <rect x="173" y="113" width="12" height="12" fill="black"/>
+    <rect x="113" y="137" width="12" height="12" fill="black"/>
+    <rect x="101" y="149" width="12" height="12" fill="black"/>
+    <rect x="113" y="161" width="12" height="12" fill="black"/>
+    <rect x="125" y="149" width="12" height="12" fill="black"/>
+    <rect x="149" y="149" width="12" height="12" fill="black"/>
+    <rect x="149" y="173" width="12" height="12" fill="black"/>
+    <rect x="173" y="149" width="12" height="12" fill="black"/>
+    <rect x="65" y="149" width="12" height="12" fill="black"/>
+    <path d="M65 173H77V185H75C69.4772 185 65 180.523 65 175V173Z" fill="black"/>
+    <rect x="161" y="77" width="12" height="12" fill="black"/>
+    <rect x="125" y="101" width="12" height="12" fill="black"/>
+    <rect x="101" y="125" width="12" height="12" fill="black"/>
+    <rect x="77" y="149" width="12" height="12" fill="black"/>
+    <rect x="125" y="125" width="12" height="12" fill="black"/>
+    <rect x="89" y="137" width="12" height="12" fill="black"/>
+    <rect x="89" y="161" width="12" height="12" fill="black"/>
+    <rect x="89" y="125" width="12" height="12" fill="black"/>
+    <rect x="125" y="137" width="12" height="12" fill="black"/>
+    <rect x="65" y="89" width="12" height="12" fill="black"/>
+    <rect x="89" y="65" width="12" height="12" fill="black"/>
+    <rect x="77" y="101" width="12" height="12" fill="black"/>
+    <rect x="77" y="125" width="12" height="12" fill="black"/>
+    <rect x="101" y="89" width="12" height="12" fill="black"/>
+    <rect x="89" y="89" width="12" height="12" fill="black"/>
+    <rect x="77" y="77" width="12" height="12" fill="black"/>
+    <rect x="89" y="113" width="12" height="12" fill="black"/>
+    <rect x="125" y="89" width="12" height="12" fill="black"/>
+    <rect x="65" y="101" width="12" height="12" fill="black"/>
+    <rect x="65" y="125" width="12" height="12" fill="black"/>
+    <rect x="101" y="101" width="12" height="12" fill="black"/>
+</svg>
