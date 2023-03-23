@@ -1,17 +1,24 @@
-<script setup>
-ymaps.ready(init);
-function init(){
-  var myMap = new ymaps.Map("map", {
-    center: [56.844301,53.212378],
-    zoom: 16
-  });
-  myMap.geoObjects
-      .add(new ymaps.Placemark([56.844301,53.212378], {
-        balloonContent: 'Вы здесь'
-      }, {
-        preset: 'islands#icon',
-        iconColor: '#ff0000'
-      }))}
+<script>
+export default {
+  name: "YaMapsPoint1",
+  mounted() {
+    ymaps.ready(init);
+
+    function init() {
+      var myMap = new ymaps.Map("map", {
+        center: [56.844301, 53.212378],
+        zoom: 16
+      });
+      myMap.geoObjects
+          .add(new ymaps.Placemark([56.844301, 53.212378], {
+            balloonContent: 'Вы здесь'
+          }, {
+            preset: 'islands#icon',
+            iconColor: '#ff0000'
+          }))
+    }
+  }
+}
 </script>
 
 <template>

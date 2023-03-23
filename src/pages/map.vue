@@ -47,19 +47,19 @@ function scanOpen() {
     <div class="block-1">
       <count-score>{{ score.count }}</count-score>
       <div class="maps">
-        <yaMapsPoint1 v-if="quest.count === 1 && !road"></yaMapsPoint1>
+        <ya-maps-point1 v-if="quest.count === 1 && !road"></ya-maps-point1>
         <yaMaps1 v-if="quest.count === 1 && road"></yaMaps1>
-        <yaMapsPoint2 v-if="quest.count === 2 && !road"></yaMapsPoint2>
+        <ya-maps-point2 v-if="quest.count === 2 && !road"></ya-maps-point2>
         <yaMaps2 v-if="quest.count === 2 && road"></yaMaps2>
-        <yaMapsPoint3 v-if="quest.count === 3 && !road"></yaMapsPoint3>
+        <ya-maps-point3 v-if="quest.count === 3 && !road"></ya-maps-point3>
         <yaMaps3 v-if="quest.count === 3 && road"></yaMaps3>
-        <yaMapsPoint4 v-if="quest.count === 4 && !road"></yaMapsPoint4>
+        <ya-maps-point4 v-if="quest.count === 4 && !road"></ya-maps-point4>
         <yaMaps4 v-if="quest.count === 4 && road"></yaMaps4>
-        <yaMapsPoint5 v-if="quest.count === 5 && !road"></yaMapsPoint5>
+        <ya-maps-point5 v-if="quest.count === 5 && !road"></ya-maps-point5>
         <yaMaps5 v-if="quest.count === 5 && road"></yaMaps5>
-        <yaMapsPoint6 v-if="quest.count === 6 && !road"></yaMapsPoint6>
+        <ya-maps-point6 v-if="quest.count === 6 && !road"></ya-maps-point6>
         <yaMaps6 v-if="quest.count === 6 && road"></yaMaps6>
-        <yaMapsPoint7 v-if="quest.count === 7"></yaMapsPoint7>
+        <ya-maps-point7 v-if="quest.count === 7"></ya-maps-point7>
       </div>
       <AppButton class="qr-block bold" v-if="road" @click="scanOpen">Сканировать
       </AppButton>
