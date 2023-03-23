@@ -1,13 +1,13 @@
 <template>
-    <div class="sky-block">
-      <slot></slot>
-    </div>
+  <div class="sky-block">
+    <slot></slot>
+  </div>
 </template>
 
 <script>
 
 export default {
-  name: "sky-block",
+  name: "pop-up-block",
 }
 
 </script>

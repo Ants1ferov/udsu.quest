@@ -1,14 +1,10 @@
 <template>
   <div class="quest-block">
-    <div class="quest-title bold fs-max black">Задание 3</div>
-    <div class="quest-description fs-big">Вставить правильные слова в пропуски</div>
-    <div class="quest-task">
-      <input class="task-input" placeholder="имя" v-bind="answer1"> Черезов является выпускником школы №24.
-      Родился он в <input class="task-input" placeholder="год" v-bind="answer2"> году в посёлке Валамаз.
-      Окончив семилетку, будущий лётчик перебрался в Ижевск, где продолжил учиться в школе № 24.
-      Параллельно посещал <input class="task-input" placeholder="название" v-bind="answer3">,
-      который окончил с отличием в <input class="task-input" placeholder="год" v-bind="answer4"> году.
-      Затем Черезов поступил в <input class="task-input" placeholder="название" v-bind="answer5">
+    <div class="quest-title bold fz-56 black">Задание 3</div>
+    <div class="quest-description fz-24 bold">
+      Игра. Так как во время войны в здании школы располагался военный госпиталь №3777 предлагаю
+      вам ощутить на себе оказание первой помощи не стандартными методами, как делалось это раньше, годы ВОВ.</div>
+    <div class="quest-task fz-24">
     </div>
   </div>
 </template>

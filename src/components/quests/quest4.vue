@@ -3,7 +3,7 @@
     <div class="quest-title bold fs-max black">Задание 4</div>
     <div class="quest-description fs-big">Тест</div>
     <div class="test-block">
-      <p class="fs-max">Вопрос</p>
+      <p class="fs-max">тест в разработке</p>
     </div>
     <AppButton @click="check" class="quest-submit-button fs-big">Проверить</AppButton>
   </div>

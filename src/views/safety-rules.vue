@@ -1,5 +1,9 @@
+<script setup>
+
+import AppButton from "@/components/UI/AppButton.vue";
+</script>
+
 <template>
-  <AppHeader></AppHeader>
   <div class="safety-rules">
     <div class="safety-title bold">правила техники безопасности прохождения квеста</div>
     <div class="safety-value bold">
@@ -16,23 +20,18 @@
         <li class="safety-ol-value">Группа возвращается в полном составе, запрещается отпускать кого-либо по дороге.<br></li>
       </ol>
     </div>
-    <div class="help">
-      <button onclick="window.location.href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'" class="rick-roll">Ознакомлен</button>
+    <div class="continue">
+      <RouterLink class="app-button fz-36 bg-dark" to="/map">Далее</RouterLink>
     </div>
   </div>
 </template>
-<script>
-import AppHeader from "@/components/UI/AppHeader.vue";
-export default {
-  name: "safe-rules",
-  components: {AppHeader},
-}
-</script>
+
 <style scoped>
 .safety-rules {
   display: flex;
   flex-direction: column;
-  padding: 100px 25px 100px 15px;
+  padding: 75px 15px;
+  align-items: center;
 }
 .safety-title {
   font-size: 40px;
@@ -44,19 +43,9 @@ export default {
 .safety-ol-value {
   margin: 5px 0;
 }
-.help {
+.continue {
   display: flex;
   padding-top: 25px;
 }
-.rick-roll {
-  margin: 0 auto;
-  width: max-content;
-  height: 60px;
-  background-color: #1e1e1e;
-  border-radius: 25px;
-  font-size: 24px;
-  color: white;
-  padding: 10px 25px;
-  font-family: sans-serif;
-}
+
 </style>
