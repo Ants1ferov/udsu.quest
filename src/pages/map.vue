@@ -1,5 +1,5 @@
 <script setup>
-import {reactive, ref} from "vue";
+import {reactive, ref, watch} from "vue";
 import YaMaps1 from "@/components/maps/road/ya-maps-1.vue";
 import YaMaps2 from "@/components/maps/road/ya-maps-2.vue";
 import YaMaps3 from "@/components/maps/road/ya-maps-3.vue";
@@ -22,11 +22,24 @@ import Quest4 from "@/components/quests/quest4.vue";
 import Quest5 from "@/components/quests/quest5.vue";
 import Quest6 from "@/components/quests/quest6.vue";
 import CountScore from "@/components/UI/countScore.vue";
+import {gsap} from "gsap";
+import PointOne from "@/components/maps/points/pointOne.vue";
 
 let score = reactive({count: 0})
 let road = ref(false)
 let quest = ({count: 1})
 let scanner = ref(false)
+
+
+ function animatedNumber()
+{
+  return score.count.toFixed(0)
+}
+
+
+
+
+
 function scan() {
   quest.count += 1
   road.value = ! road.value
@@ -60,7 +73,7 @@ function scanOpen() {
 <!--        <ya-maps-point6 v-if="quest.count === 6 && !road"></ya-maps-point6>-->
 <!--        <yaMaps6 v-if="quest.count === 6 && road"></yaMaps6>-->
 <!--        <ya-maps-point7 v-if="quest.count === 7"></ya-maps-point7>-->
-        <yaMaps1 v-if="quest.count === 1 && !road"></yaMaps1>
+        <point-one v-if="quest.count === 1 && !road"></point-one>
         <yaMaps1 v-if="quest.count === 1 && road"></yaMaps1>
         <yaMaps2 v-if="quest.count === 2 && !road"></yaMaps2>
         <yaMaps2 v-if="quest.count === 2 && road"></yaMaps2>

@@ -1,19 +1,15 @@
 <template>
-  <div class="sky-block">
+  <div class="pop-up-block">
     <slot></slot>
   </div>
 </template>
 
-<script>
-
-export default {
-  name: "pop-up-block",
-}
+<script setup>
 
 </script>
 
 <style scoped>
-.sky-block {
+.pop-up-block {
   display: flex;
   flex-direction: column;
   position: absolute;

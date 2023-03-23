@@ -62,8 +62,14 @@ button {
 .bdr-blk {
     border: 4px black solid;
 }
+.bdr-wht {
+    border: 4px white solid;
+}
 .bg-dark {
     background-color: #1e1e1e;
+    color: white;
+}
+.white {
     color: white;
 }
 .form-auth {

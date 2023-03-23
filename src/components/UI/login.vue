@@ -2,11 +2,17 @@
 import axios from "axios";
 import AppButton from "@/components/UI/AppButton.vue";
 import {ref} from "vue";
+import router from "@/router";
+import ErrorPopUp from "@/components/UI/errorPopUp.vue";
+import OkPopUp from "@/components/UI/okPopUp.vue";
 
 let email = ''
 let password = ''
 let actionOk = ref(false)
 let actionFail = ref(false)
+function cancel() {
+  actionFail.value = !actionFail.value
+}
 function register() {
   if (email !== '' && password !== '') {
     axios
@@ -18,14 +24,14 @@ function register() {
           actionOk.value = !actionOk.value
           console.log(response.data)
           setTimeout(() => {
-            this.$router.push('/map')
-          }, 1000);
+              router.push({path: "map"})
+          }, 750);
         })
         .catch((reason) => {
-          actionFail = true
+          actionFail.value = !actionFail.value
         })
   } else {
-    actionFail = true
+    actionFail.value = !actionFail.value
     console.log('false')
   }
 }
@@ -33,6 +39,14 @@ function register() {
 
 <template>
   <div class="register">
+    <transition name="ok">
+      <error-pop-up v-if="actionFail">
+        <AppButton class="bg-dark bold btn-mn-auto" type="button" @click="cancel">Закрыть</AppButton>
+      </error-pop-up>
+    </transition>
+    <transition name="ok">
+      <ok-pop-up v-if="actionOk"></ok-pop-up>
+    </transition>
     <form @submit.prevent="register" class="form-auth">
       <input type="email" placeholder="Email" autocomplete="email" class="form-input" v-model="email">
       <input type="password" placeholder="Пароль" autocomplete="new-password" class="form-input" v-model="password">
