@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: "ya-maps-point-1",
+  name: "YaMapsPoint2",
   mounted() {
     ymaps.ready(init);
     function init(){
