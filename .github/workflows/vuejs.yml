@@ -47,7 +47,7 @@ jobs:
             ${{ runner.os }}-vue-build-
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
-      - name: Static HTML export with Vite   # собираться будет с помощью Vite
+      - name: Build with Vite   # собираться будет с помощью Vite
         run: ${{ steps.detect-package-manager.outputs.manager }} run build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1

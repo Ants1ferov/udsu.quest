@@ -6,6 +6,7 @@ import YaMaps3 from "@/components/maps/road/ya-maps-3.vue";
 import YaMaps4 from "@/components/maps/road/ya-maps-4.vue";
 import YaMaps5 from "@/components/maps/road/ya-maps-5.vue";
 import YaMaps6 from "@/components/maps/road/ya-maps-6.vue";
+import YaMapsPoint1 from "@/components/maps/point/YaMapsPoint1.vue";
 import YaMapsPoint2 from "@/components/maps/point/YaMapsPoint2.vue";
 import YaMapsPoint3 from "@/components/maps/point/YaMapsPoint3.vue";
 import YaMapsPoint4 from "@/components/maps/point/YaMapsPoint4.vue";
@@ -46,7 +47,7 @@ function scanOpen() {
     <div class="block-1">
       <count-score>{{ score.count }}</count-score>
       <div class="maps">
-        <yaMapsPoint2 v-if="quest.count === 1 && !road"></yaMapsPoint2>
+        <yaMapsPoint1 v-if="quest.count === 1 && !road"></yaMapsPoint1>
         <yaMaps1 v-if="quest.count === 1 && road"></yaMaps1>
         <yaMapsPoint2 v-if="quest.count === 2 && !road"></yaMapsPoint2>
         <yaMaps2 v-if="quest.count === 2 && road"></yaMaps2>

@@ -1,8 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import auth from "@/views/auth.vue";
-import safetyRules from "@/views/safety-rules.vue";
-import map from "@/views/map.vue";
-
+import auth from "@/pages/auth.vue";
+import safetyRules from "@/pages/safety-rules.vue";
+import map from "@/pages/map.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
