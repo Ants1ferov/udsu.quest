@@ -6,13 +6,13 @@ import YaMaps3 from "@/components/maps/road/ya-maps-3.vue";
 import YaMaps4 from "@/components/maps/road/ya-maps-4.vue";
 import YaMaps5 from "@/components/maps/road/ya-maps-5.vue";
 import YaMaps6 from "@/components/maps/road/ya-maps-6.vue";
-import YaMapsPoint1 from "@/components/maps/point/YaMapsPoint1.vue";
-import YaMapsPoint2 from "@/components/maps/point/YaMapsPoint2.vue";
-import YaMapsPoint3 from "@/components/maps/point/YaMapsPoint3.vue";
-import YaMapsPoint4 from "@/components/maps/point/YaMapsPoint4.vue";
-import YaMapsPoint5 from "@/components/maps/point/YaMapsPoint5.vue";
-import YaMapsPoint6 from "@/components/maps/point/YaMapsPoint6.vue";
-import YaMapsPoint7 from "@/components/maps/point/YaMapsPoint7.vue";
+// import YaMapsPoint1 from "@/components/maps/point/YaMapsPoint1.vue";
+// import YaMapsPoint2 from "@/components/maps/point/YaMapsPoint2.vue";
+// import YaMapsPoint3 from "@/components/maps/point/YaMapsPoint3.vue";
+// import YaMapsPoint4 from "@/components/maps/point/YaMapsPoint4.vue";
+// import YaMapsPoint5 from "@/components/maps/point/YaMapsPoint5.vue";
+// import YaMapsPoint6 from "@/components/maps/point/YaMapsPoint6.vue";
+// import YaMapsPoint7 from "@/components/maps/point/YaMapsPoint7.vue";
 import PopUpBlock from "@/components/UI/popUpBlock.vue";
 import AppButton from "@/components/UI/AppButton.vue";
 import Quest1 from "@/components/quests/quest1.vue";
@@ -47,19 +47,32 @@ function scanOpen() {
     <div class="block-1">
       <count-score>{{ score.count }}</count-score>
       <div class="maps">
-        <ya-maps-point1 v-if="quest.count === 1 && !road"></ya-maps-point1>
+<!--        <ya-maps-point1 v-if="quest.count === 1 && !road"></ya-maps-point1>-->
+<!--        <yaMaps1 v-if="quest.count === 1 && road"></yaMaps1>-->
+<!--        <ya-maps-point2 v-if="quest.count === 2 && !road"></ya-maps-point2>-->
+<!--        <yaMaps2 v-if="quest.count === 2 && road"></yaMaps2>-->
+<!--        <ya-maps-point3 v-if="quest.count === 3 && !road"></ya-maps-point3>-->
+<!--        <yaMaps3 v-if="quest.count === 3 && road"></yaMaps3>-->
+<!--        <ya-maps-point4 v-if="quest.count === 4 && !road"></ya-maps-point4>-->
+<!--        <yaMaps4 v-if="quest.count === 4 && road"></yaMaps4>-->
+<!--        <ya-maps-point5 v-if="quest.count === 5 && !road"></ya-maps-point5>-->
+<!--        <yaMaps5 v-if="quest.count === 5 && road"></yaMaps5>-->
+<!--        <ya-maps-point6 v-if="quest.count === 6 && !road"></ya-maps-point6>-->
+<!--        <yaMaps6 v-if="quest.count === 6 && road"></yaMaps6>-->
+<!--        <ya-maps-point7 v-if="quest.count === 7"></ya-maps-point7>-->
+        <yaMaps1 v-if="quest.count === 1 && !road"></yaMaps1>
         <yaMaps1 v-if="quest.count === 1 && road"></yaMaps1>
-        <ya-maps-point2 v-if="quest.count === 2 && !road"></ya-maps-point2>
+        <yaMaps2 v-if="quest.count === 2 && !road"></yaMaps2>
         <yaMaps2 v-if="quest.count === 2 && road"></yaMaps2>
-        <ya-maps-point3 v-if="quest.count === 3 && !road"></ya-maps-point3>
+        <yaMaps3 v-if="quest.count === 3 && !road"></yaMaps3>
         <yaMaps3 v-if="quest.count === 3 && road"></yaMaps3>
-        <ya-maps-point4 v-if="quest.count === 4 && !road"></ya-maps-point4>
+        <yaMaps4 v-if="quest.count === 4 && !road"></yaMaps4>
         <yaMaps4 v-if="quest.count === 4 && road"></yaMaps4>
-        <ya-maps-point5 v-if="quest.count === 5 && !road"></ya-maps-point5>
+        <yaMaps5 v-if="quest.count === 5 && !road"></yaMaps5>
         <yaMaps5 v-if="quest.count === 5 && road"></yaMaps5>
-        <ya-maps-point6 v-if="quest.count === 6 && !road"></ya-maps-point6>
+        <yaMaps6 v-if="quest.count === 6 && !road"></yaMaps6>
         <yaMaps6 v-if="quest.count === 6 && road"></yaMaps6>
-        <ya-maps-point7 v-if="quest.count === 7"></ya-maps-point7>
+        <yaMaps6 v-if="quest.count === 7"></yaMaps6>
       </div>
       <AppButton class="qr-block bold" v-if="road" @click="scanOpen">Сканировать
       </AppButton>
