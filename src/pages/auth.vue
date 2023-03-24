@@ -12,7 +12,7 @@ onMounted(() => {
     console.log('не авторизован', localStorage.getItem('email'))
   } else {
     console.log('авторизован', localStorage.getItem('email'))
-    router.push({path: "/map"})
+    router.push({path: "/"})
   }
 })
 </script>

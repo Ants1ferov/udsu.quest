@@ -32,12 +32,18 @@ import PointZero from "@/components/maps/points/pointZero.vue";
 let scanner = ref(false)
 let questCompleted = ref(false)
 let actionFail = ref(false)
+let score = reactive({count: 0})
+
+
 
 let road = ref({count: JSON.parse(localStorage.getItem('road'))})
-
-let score = reactive({count: 0})
 console.log(road.value)
-console.log(road)
+console.log(JSON.parse(localStorage.getItem('road')))
+console.log(typeof road)
+
+
+
+
 let quest = ({count: parseInt(localStorage.getItem('quest'))})
 if (quest.count === 2) {
   score.count += 85
@@ -45,7 +51,7 @@ if (quest.count === 2) {
 onMounted( () => {
   if (localStorage.getItem('email') === null) {
     console.log('не авторизован', localStorage.getItem('email'))
-    router.push({path: "/"})
+    router.push({path: "auth"})
   } else {
     console.log('авторизован', localStorage.getItem('email'))
   }
@@ -61,9 +67,6 @@ function cancel() {
   return score.count.toFixed(0)
 }
 
-function start() {
-  quest.count += 1
-}
 
 
 
@@ -138,7 +141,7 @@ function scanOpen() {
         <yaMaps6 v-if="quest.count === 6 && road"></yaMaps6>
         <yaMaps6 v-if="quest.count === 7"></yaMaps6>
       </div>
-      <AppButton class="fz-42" @click="start" v-if="quest.count === 0">Начать квест</AppButton>
+      <AppButton class="fz-42" v-if="quest.count === 0">Начало квеста</AppButton>
       <div class="on-the-road" v-if="road">
         <p class="fz-32 mrg-25">Следуйте до точки {{ quest.count + 1}}</p>
         <AppButton class="qr-block bold bdr-blk" @click="scanOpen">

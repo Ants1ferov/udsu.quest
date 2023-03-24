@@ -4,14 +4,15 @@ import safetyRules from "@/pages/safety-rules.vue";
 import map from "@/pages/map.vue";
 import test from "@/components/UI/test.vue";
 import account from "@/pages/account.vue";
+import quiz from "@/pages/quiz.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      name: 'auth',
-      component: auth
+      name: 'map',
+      component: map
     },
     {
       path: '/safety-rules',
@@ -19,9 +20,9 @@ const router = createRouter({
       component: safetyRules
     },
     {
-      path: '/map',
-      name: 'map',
-      component: map
+      path: '/auth',
+      name: 'auth',
+      component: auth
     },
     {
       path: '/account',
