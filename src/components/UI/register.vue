@@ -23,17 +23,19 @@ function register() {
           secondname: userSurname,
           email: email,
           password: password,
+          quest: 0,
+          road: false
         })
         .then((response) => {
           localStorage.setItem('email', email)
           localStorage.setItem('name', userName)
           localStorage.setItem('surname', userSurname)
           localStorage.setItem('quest', '0')
-          localStorage.setItem('road', 'false')
+          localStorage.road = JSON.stringify(false)
           actionOk.value = !actionOk.value
           console.log(response)
           setTimeout(() => {
-            router.push({path: "safety-rules"})
+            router.push({path: "/safety-rules"})
           }, 1000);
         })
         .catch((reason) => {

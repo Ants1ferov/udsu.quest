@@ -21,14 +21,16 @@ function register() {
           password: password,
         })
         .then((response) => {
-          const {firstname, secondname} = response.data
+          const {firstname, secondname, quest, road} = response.data
           console.log(response.data)
           localStorage.setItem('email', email)
           localStorage.setItem('name', firstname)
           localStorage.setItem('surname', secondname)
+          localStorage.setItem('quest', toString(quest))
+          localStorage.setItem('road', JSON.stringify(road))
           actionOk.value = !actionOk.value
           setTimeout(() => {
-              router.push({path: "map"})
+              router.push({path: "/"})
           }, 750);
         })
         .catch((reason) => {
