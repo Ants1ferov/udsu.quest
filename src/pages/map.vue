@@ -1,5 +1,5 @@
 <script setup>
-import {reactive, ref, watch} from "vue";
+import {onMounted, reactive, ref, watch} from "vue";
 import YaMaps1 from "@/components/maps/road/ya-maps-1.vue";
 import YaMaps2 from "@/components/maps/road/ya-maps-2.vue";
 import YaMaps3 from "@/components/maps/road/ya-maps-3.vue";
@@ -26,13 +26,31 @@ import {gsap} from "gsap";
 import PointOne from "@/components/maps/points/pointOne.vue";
 import ErrorPopUp from "@/components/UI/errorPopUp.vue";
 import OkPopUp from "@/components/UI/okPopUp.vue";
+import router from "@/router";
+import PointZero from "@/components/maps/points/pointZero.vue";
 
-let score = reactive({count: 0})
-let road = ref(false)
-let quest = ({count: 1})
 let scanner = ref(false)
 let questCompleted = ref(false)
 let actionFail = ref(false)
+
+let road = ref({count: JSON.parse(localStorage.getItem('road'))})
+
+let score = reactive({count: 0})
+console.log(road.value)
+console.log(road)
+let quest = ({count: parseInt(localStorage.getItem('quest'))})
+if (quest.count === 2) {
+  score.count += 85
+}
+onMounted( () => {
+  if (localStorage.getItem('email') === null) {
+    console.log('не авторизован', localStorage.getItem('email'))
+    router.push({path: "/"})
+  } else {
+    console.log('авторизован', localStorage.getItem('email'))
+  }
+})
+
 function cancel() {
   actionFail.value = false
   questCompleted.value = false
@@ -43,13 +61,17 @@ function cancel() {
   return score.count.toFixed(0)
 }
 
-
+function start() {
+  quest.count += 1
+}
 
 
 
 function scan() {
   quest.count += 1
   road.value = ! road.value
+  localStorage.setItem('quest', quest.count)
+  localStorage.setItem('road', road.value)
   scanner.value = !scanner.value
 }
 const change = () => {
@@ -57,6 +79,9 @@ const change = () => {
   questCompleted.value = true
   road.value = true
   score.count += 10
+  localStorage.setItem('road', road.value)
+  localStorage.setItem('quest', quest.count)
+  localStorage.setItem('score', score.count)
 };
 function scanOpen() {
   scanner.value = !scanner.value
@@ -78,7 +103,12 @@ function scanOpen() {
       </ok-pop-up>
     </transition>
     <div class="block-1">
-      <count-score>{{ score.count }}</count-score>
+      <count-score>
+        <router-link class="test" to="/account">
+          {{ score.count }}
+        </router-link>
+      </count-score>
+
       <div class="maps">
 <!--        <ya-maps-point1 v-if="quest.count === 1 && !road"></ya-maps-point1>-->
 <!--        <yaMaps1 v-if="quest.count === 1 && road"></yaMaps1>-->
@@ -93,6 +123,7 @@ function scanOpen() {
 <!--        <ya-maps-point6 v-if="quest.count === 6 && !road"></ya-maps-point6>-->
 <!--        <yaMaps6 v-if="quest.count === 6 && road"></yaMaps6>-->
 <!--        <ya-maps-point7 v-if="quest.count === 7"></ya-maps-point7>-->
+        <point-zero v-if="quest.count === 0"></point-zero>
         <point-one v-if="quest.count === 1 && !road"></point-one>
         <yaMaps1 v-if="quest.count === 1 && road"></yaMaps1>
         <yaMaps2 v-if="quest.count === 2 && !road"></yaMaps2>
@@ -107,8 +138,9 @@ function scanOpen() {
         <yaMaps6 v-if="quest.count === 6 && road"></yaMaps6>
         <yaMaps6 v-if="quest.count === 7"></yaMaps6>
       </div>
+      <AppButton class="fz-42" @click="start" v-if="quest.count === 0">Начать квест</AppButton>
       <div class="on-the-road" v-if="road">
-        <p class="fz-32 mrg-25">Следуйте до точки B</p>
+        <p class="fz-32 mrg-25">Следуйте до точки {{ quest.count + 1}}</p>
         <AppButton class="qr-block bold bdr-blk" @click="scanOpen">
           <div>Сканировать</div>
           <img class="qr-img" src="@/../src/assets/img/button/qr.svg" alt="qr button">
@@ -140,6 +172,10 @@ function scanOpen() {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.test {
+  width: 100px;
+  padding: 7px 45px;
 }
 .block-2 {
   display: flex;

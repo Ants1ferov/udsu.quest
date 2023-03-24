@@ -20,7 +20,7 @@
 }
 .count-score-block {
   background-color: black;
-  padding: 7px 45px;
+  padding: 7px;
   border-radius: 25px;
 }
 .score-count {

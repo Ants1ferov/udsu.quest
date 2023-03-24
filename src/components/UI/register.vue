@@ -25,8 +25,13 @@ function register() {
           password: password,
         })
         .then((response) => {
+          localStorage.setItem('email', email)
+          localStorage.setItem('name', userName)
+          localStorage.setItem('surname', userSurname)
+          localStorage.setItem('quest', '0')
+          localStorage.setItem('road', 'false')
           actionOk.value = !actionOk.value
-          console.log(response.data)
+          console.log(response)
           setTimeout(() => {
             router.push({path: "safety-rules"})
           }, 1000);

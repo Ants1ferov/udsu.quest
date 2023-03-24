@@ -28,7 +28,7 @@
 .safety-rules {
   display: flex;
   flex-direction: column;
-  padding: 75px 15px;
+  padding: 50px 15px;
   align-items: center;
 }
 .safety-title {

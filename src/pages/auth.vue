@@ -2,11 +2,19 @@
 import AppButton from "@/components/UI/AppButton.vue";
 import Register from "@/components/UI/register.vue";
 import Login from "@/components/UI/login.vue";
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
+import router from "@/router";
 
 const regLog = ref(true)
 
-
+onMounted(() => {
+  if (localStorage.getItem('email') === null) {
+    console.log('не авторизован', localStorage.getItem('email'))
+  } else {
+    console.log('авторизован', localStorage.getItem('email'))
+    router.push({path: "/map"})
+  }
+})
 </script>
 
 <template>

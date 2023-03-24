@@ -21,8 +21,12 @@ function register() {
           password: password,
         })
         .then((response) => {
-          actionOk.value = !actionOk.value
+          const {firstname, secondname} = response.data
           console.log(response.data)
+          localStorage.setItem('email', email)
+          localStorage.setItem('name', firstname)
+          localStorage.setItem('surname', secondname)
+          actionOk.value = !actionOk.value
           setTimeout(() => {
               router.push({path: "map"})
           }, 750);
