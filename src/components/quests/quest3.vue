@@ -10,25 +10,11 @@
 </template>
 
 <script>
-export default {
-  name: "quest3",
-  data() {
-    let answer1 = ''
-    let answer2 = ''
-    let answer3 = ''
-    let answer4 = ''
-    let answer5 = ''
-    return {
-      answer1,
-      answer2,
-      answer3,
-      answer4,
-      answer5
-    }
-  }
-}
+
 </script>
 
 <style scoped>
-
+.quest-description {
+  padding: 0 15px;
+}
 </style>

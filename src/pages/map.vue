@@ -24,12 +24,19 @@ import Quest6 from "@/components/quests/quest6.vue";
 import CountScore from "@/components/UI/countScore.vue";
 import {gsap} from "gsap";
 import PointOne from "@/components/maps/points/pointOne.vue";
+import ErrorPopUp from "@/components/UI/errorPopUp.vue";
+import OkPopUp from "@/components/UI/okPopUp.vue";
 
 let score = reactive({count: 0})
 let road = ref(false)
 let quest = ({count: 1})
 let scanner = ref(false)
-
+let questCompleted = ref(false)
+let actionFail = ref(false)
+function cancel() {
+  actionFail.value = false
+  questCompleted.value = false
+}
 
  function animatedNumber()
 {
@@ -47,7 +54,8 @@ function scan() {
 }
 const change = () => {
   console.log('задание выполнено')
-  road.value = !road.value
+  questCompleted.value = true
+  road.value = true
   score.count += 10
 };
 function scanOpen() {
@@ -57,6 +65,18 @@ function scanOpen() {
 
 <template>
   <div class="map">
+    <transition name="ok">
+      <error-pop-up v-if="actionFail">
+        <AppButton class="bg-dark bold btn-mn-auto" type="button" @click="cancel">Закрыть</AppButton>
+      </error-pop-up>
+    </transition>
+    <transition name="ok">
+      <ok-pop-up v-if="questCompleted">
+        <div class="white fz-32">Задание №{{ quest.count }} выполнено
+        </div>
+        <AppButton class="bg-dark bold btn-mn-auto" type="button" @click="cancel">Прекрасно</AppButton>
+      </ok-pop-up>
+    </transition>
     <div class="block-1">
       <count-score>{{ score.count }}</count-score>
       <div class="maps">
@@ -87,13 +107,18 @@ function scanOpen() {
         <yaMaps6 v-if="quest.count === 6 && road"></yaMaps6>
         <yaMaps6 v-if="quest.count === 7"></yaMaps6>
       </div>
-      <AppButton class="qr-block bold" v-if="road" @click="scanOpen">Сканировать
-      </AppButton>
-      <transition name="ok">
-        <pop-up-block v-if="scanner">
-          <AppButton class="fz-32 bg-dark" @click="scan">Сканировал</AppButton>
-        </pop-up-block>
-      </transition>
+      <div class="on-the-road" v-if="road">
+        <p class="fz-32 mrg-25">Следуйте до точки B</p>
+        <AppButton class="qr-block bold bdr-blk" @click="scanOpen">
+          <div>Сканировать</div>
+          <img class="qr-img" src="@/../src/assets/img/button/qr.svg" alt="qr button">
+        </AppButton>
+        <transition name="ok">
+          <pop-up-block v-if="scanner">
+            <AppButton class="fz-32 bg-dark" @click="scan">Сканировал</AppButton>
+          </pop-up-block>
+        </transition>
+      </div>
     </div>
     <div class="quests">
       <quest1 v-if="quest.count === 1 && !road"></quest1>
@@ -149,6 +174,15 @@ function scanOpen() {
 .ok-leave-to {
   opacity: 0;
   transform: translateY(+150%);
+}
+.on-the-road {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.qr-img {
+  width: 64px;
+  margin-top: 10px;
 }
 .quest-block {
   margin: 35px 0;

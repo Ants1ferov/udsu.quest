@@ -1,118 +1,9 @@
-<script>
+<script setup>
 import axios from "axios";
 import AppButton from "@/components/UI/AppButton.vue";
-import {ref} from "vue";
+import {reactive, ref} from "vue";
 
-export default {
-  name: "quest1",
-  components: {AppButton},
-  data() {
-    return {
-      answers: [
-        'test',
-        'гимнастерка',
-        'пуск',
-        'медали',
-        'госпиталь',
-        'орден',
-        'гильзы',
-        'мина',
-        'атака',
-        'танк',
-        'окоп',
-        'фуражка',
-        'пушка',
-        'медаль',
-        'парашют',
-        'самолет',
-        'пилот',
-        'граната'],
-      answer: '',
-      words: [
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ],
-      colorGreen: false,
-      colorRed: false,
-      count: 1,
-      taskOk: false,
-      quest: 1
-    }
-  },
-  props: {
-    task: {
-      type: String,
-      default() {
-      }
-    }
-  },
-  methods: {
-    check() {
-      for (let i in this.answers) {
-        if (this.answer === 'test') {
-          for (let j in this.words) {
-            this.words[j] = true
-          }
-          this.taskOk = true
-        }
-        if (this.answer.toLowerCase() === this.answers[i]) {
-          if (this.count === 17) {
-            this.taskOk = true
-          }
-          this.count += 1
-          this.colorRed = false
-          this.colorGreen = true
-          this.words[i] = true
-          this.answer = ''
-        } else {
-          this.colorGreen = false
-          this.colorRed = true
-        }
-      }
-    },
-    answerCheck() {
-      if (this.taskOk === true) {
-        this.quest = '2'
-        // axios
-        //     .post('', {
-        //       email: this.email,
-        //       quest: this.task,
-        //     })
-        //     .then((response) => {
-        //       console.log(response.status)
-        //       if (response.status === 200) {
-        //
-        //       }
-        //       else if (response.status === 409) {
-        //
-        //       }
-        //     })
-        //     .catch((reason) => {
-        //
-        //     })
-      } else {
-
-      }
-    }
-  }
-}
-/*let answers = [
+const answers = [
   'test',
   'гимнастерка',
   'пуск',
@@ -130,56 +21,52 @@ export default {
   'парашют',
   'самолет',
   'пилот',
-  'граната'
+  'граната',
+    'bug'
 ]
 let words = [
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
+  ref(false),
+  ref(false),
+  ref(false),
+  ref(false),
+  ref(false),
+  ref(false),
+  ref(false),
+  ref(false),
+  ref(false),
+  ref(false),
+  ref(false),
+  ref(false),
+  ref(false),
+  ref(false),
+  ref(false),
+  ref(false),
+  ref(false),
+    ref(false)
 ]
 let answer = ''
-let colorGreen = false
-let colorRed = false
-let taskOk = false
-let count = 0
+let color = ref('')
+let taskOk = ref(false)
+let count = reactive({count: 0})
 
 function check() {
-  console.log('х')
   for (let i in answers) {
-    console.log('ф')
     if (answer === 'test') {
-      console.log('тест')
       for (let j in words) {
-        words[j] = true
+        words[j].value = true
       }
-      taskOk = true
+      taskOk.value = true
     }
     if (answer === answers[i]) {
-      if (count === 17) {
-        taskOk = true
+      color.value = 'green'
+      if (count.count === 17) {
+        taskOk.value = true
       }
-      count += 1
-      colorRed = false
-      colorGreen = true
-      words[i] = true
+      count.count += 1
+      words[i].value = !words[i].value
       answer = ''
     } else {
-      colorGreen = false
-      colorRed = true
+      color.value = 'red'
     }
   }
 }
@@ -206,7 +93,7 @@ function answerCheck() {
   } else {
 
   }
-}*/
+}
 </script>
 
 <template>
@@ -216,28 +103,29 @@ function answerCheck() {
     <div class="quest-task">
       <div class="crossword">
         <img src="@/../src/assets/img/quest/crossword2.svg" alt="crossword">
-        <img v-if="words[1]" class="cross" src="@/../src/assets/img/crossword/1.svg" alt="">
-        <img v-if="words[2]" class="cross" src="@/../src/assets/img/crossword/2.svg" alt="">
-        <img v-if="words[3]" class="cross" src="@/../src/assets/img/crossword/3.svg" alt="">
-        <img v-if="words[4]" class="cross" src="@/../src/assets/img/crossword/4.svg" alt="">
-        <img v-if="words[5]" class="cross" src="@/../src/assets/img/crossword/5.svg" alt="">
-        <img v-if="words[6]" class="cross" src="@/../src/assets/img/crossword/6.svg" alt="">
-        <img v-if="words[7]" class="cross" src="@/../src/assets/img/crossword/7.svg" alt="">
-        <img v-if="words[8]" class="cross" src="@/../src/assets/img/crossword/8.svg" alt="">
-        <img v-if="words[9]" class="cross" src="@/../src/assets/img/crossword/9.svg" alt="">
-        <img v-if="words[10]" class="cross" src="@/../src/assets/img/crossword/10.svg" alt="">
-        <img v-if="words[11]" class="cross" src="@/../src/assets/img/crossword/11.svg" alt="">
-        <img v-if="words[12]" class="cross" src="@/../src/assets/img/crossword/12.svg" alt="">
-        <img v-if="words[13]" class="cross" src="@/../src/assets/img/crossword/13.svg" alt="">
-        <img v-if="words[14]" class="cross" src="@/../src/assets/img/crossword/14.svg" alt="">
-        <img v-if="words[15]" class="cross" src="@/../src/assets/img/crossword/15.svg" alt="">
-        <img v-if="words[16]" class="cross" src="@/../src/assets/img/crossword/16.svg" alt="">
-        <img v-if="words[17]" class="cross" src="@/../src/assets/img/crossword/17.svg" alt="">
+        <img v-if="words[1].value" class="cross" src="@/../src/assets/img/crossword/1.svg" alt="">
+        <img v-if="words[2].value" class="cross" src="@/../src/assets/img/crossword/2.svg" alt="">
+        <img v-if="words[3].value" class="cross" src="@/../src/assets/img/crossword/3.svg" alt="">
+        <img v-if="words[4].value" class="cross" src="@/../src/assets/img/crossword/4.svg" alt="">
+        <img v-if="words[5].value" class="cross" src="@/../src/assets/img/crossword/5.svg" alt="">
+        <img v-if="words[6].value" class="cross" src="@/../src/assets/img/crossword/6.svg" alt="">
+        <img v-if="words[7].value" class="cross" src="@/../src/assets/img/crossword/7.svg" alt="">
+        <img v-if="words[8].value" class="cross" src="@/../src/assets/img/crossword/8.svg" alt="">
+        <img v-if="words[9].value" class="cross" src="@/../src/assets/img/crossword/9.svg" alt="">
+        <img v-if="words[10].value" class="cross" src="@/../src/assets/img/crossword/10.svg" alt="">
+        <img v-if="words[11].value" class="cross" src="@/../src/assets/img/crossword/11.svg" alt="">
+        <img v-if="words[12].value" class="cross" src="@/../src/assets/img/crossword/12.svg" alt="">
+        <img v-if="words[13].value" class="cross" src="@/../src/assets/img/crossword/13.svg" alt="">
+        <img v-if="words[14].value" class="cross" src="@/../src/assets/img/crossword/14.svg" alt="">
+        <img v-if="words[15].value" class="cross" src="@/../src/assets/img/crossword/15.svg" alt="">
+        <img v-if="words[16].value" class="cross" src="@/../src/assets/img/crossword/16.svg" alt="">
+        <img v-if="words[17].value" class="cross" src="@/../src/assets/img/crossword/17.svg" alt="">
       </div>
       <div class="block-input-flex">
         <input type="text" class="form-input" placeholder="Слово" v-model="answer">
       </div>
-      <AppButton @click="check" class="answer-check bg-dark fz-24 bold" :class="{colorGreen: colorGreen, colorRed: colorRed}">Проверить слово</AppButton>
+      <AppButton @click="check" class="answer-check bg-dark fz-24 bold"
+                 :class="{colorGreen: color.value === 'green', colorRed: color.value === 'red'}">Проверить слово</AppButton>
       <div v-if="!taskOk" class="crossword-questions fz-24">
         <p class="bold mrg-25">Вопросы по вертикали:</p>
         2. Команда стрелять?<br>
