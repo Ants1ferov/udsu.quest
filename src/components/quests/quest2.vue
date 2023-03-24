@@ -1,6 +1,7 @@
 <script setup>
 import AppButton from "@/components/UI/AppButton.vue";
 import { ref, defineProps, defineEmits, watch } from 'vue';
+import Quiz from "@/pages/quiz.vue";
 const answer = [
   '',
   '',
