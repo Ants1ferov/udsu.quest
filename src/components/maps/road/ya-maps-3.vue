@@ -29,21 +29,24 @@ export default {
           ]
         },
         properties:{
-          hintContent: "Я геообъект"
+          balloonContent: "Я путь, проложенный яндекс.картами, которому вы должны следовать"
         }
       }, {
         draggable: false,
         strokeColor: "#000",
         strokeWidth: 5
       });
+      const myPlacemark = new ymaps.Placemark(myMap.getCenter(), {
+        balloonContent: 'Это точка 3, а вам нужна точка 4'
+      }, {
+        iconLayout: 'default#image',
+        iconImageHref: './src/assets/img/button/ya.png',
+        iconImageSize: [64, 64],
+        iconImageOffset: [-32, -60]
+      });
       myMap.geoObjects
           .add(myGeoObject)
-          .add(new ymaps.Placemark([56.849242,53.214006], {
-            balloonContent: '1 точка'
-          }, {
-            preset: 'islands#icon',
-            iconColor: '#ff0000'
-          }))
+          .add(myPlacemark)
     }
   }
 }

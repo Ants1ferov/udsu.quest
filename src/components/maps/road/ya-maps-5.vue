@@ -30,22 +30,25 @@ export default {
             [56.852765, 53.207936],
           ]
         },
-        properties: {
-          hintContent: "Я геообъект"
+        properties:{
+          balloonContent: "Я путь, проложенный яндекс.картами, которому вы должны следовать"
         }
       }, {
         draggable: false,
         strokeColor: "#000",
         strokeWidth: 5
       });
+      const myPlacemark = new ymaps.Placemark(myMap.getCenter(), {
+        balloonContent: 'Это точка 5, а вам нужна точка 6'
+      }, {
+        iconLayout: 'default#image',
+        iconImageHref: './src/assets/img/button/ya.png',
+        iconImageSize: [64, 64],
+        iconImageOffset: [-32, -60]
+      });
       myMap.geoObjects
           .add(myGeoObject)
-          .add(new ymaps.Placemark([56.850672,53.206719], {
-            balloonContent: '5 точка'
-          }, {
-            preset: 'islands#icon',
-            iconColor: '#ff0000'
-          }))
+          .add(myPlacemark)
     }
   }
 }
