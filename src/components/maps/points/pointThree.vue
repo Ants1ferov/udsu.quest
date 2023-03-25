@@ -3,16 +3,19 @@ ymaps.ready(init);
 
 function init() {
   var myMap = new ymaps.Map("map", {
-    center: [56.849162, 53.214363],
+    center: [56.849245, 53.213994],
     zoom: 16
   });
+  const myPlacemark = new ymaps.Placemark(myMap.getCenter(), {
+    balloonContent: 'Это точка 3, здесь вы должны выполнить задание'
+  }, {
+    iconLayout: 'default#image',
+    iconImageHref: './src/assets/img/button/ya.png',
+    iconImageSize: [64, 64],
+    iconImageOffset: [-32, -60]
+  });
   myMap.geoObjects
-      .add(new ymaps.Placemark([56.849162, 53.214363], {
-        balloonContent: 'Вы здесь, выполните задание и вам откроется путь до точки 4'
-      }, {
-        preset: 'islands#icon',
-        iconColor: '#ff0000'
-      }))
+      .add(myPlacemark)
 }
 </script>
 

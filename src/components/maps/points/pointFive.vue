@@ -6,13 +6,16 @@ function init() {
     center: [56.850453, 53.206431],
     zoom: 16
   });
+  const myPlacemark = new ymaps.Placemark(myMap.getCenter(), {
+    balloonContent: 'Это точка 5, здесь вы должны выполнить задание'
+  }, {
+    iconLayout: 'default#image',
+    iconImageHref: './src/assets/img/button/ya.png',
+    iconImageSize: [64, 64],
+    iconImageOffset: [-32, -60]
+  });
   myMap.geoObjects
-      .add(new ymaps.Placemark([56.850453, 53.206431], {
-        balloonContent: 'Вы здесь, выполните задание и вам откроется путь до точки 6'
-      }, {
-        preset: 'islands#icon',
-        iconColor: '#ff0000'
-      }))
+      .add(myPlacemark)
 }
 </script>
 
