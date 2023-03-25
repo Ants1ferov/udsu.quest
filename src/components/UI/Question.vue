@@ -1,6 +1,6 @@
 <template>
   <section class="question">
-    <div class="fz-24">
+    <div class="fz-24 pdg-0-15">
       <span>{{ index + 1 }}</span>.
       <span v-html="questionText"></span>
     </div>
@@ -11,25 +11,25 @@
 
     <div class="answers">
       <AppButton
-        class="bdr-blk fz-28"
+        class="bdr-blk fz-24 e3x3"
         @click="checkAnswer($event)"
         :style="[roundEnded ? '' : { background: '#fff' }]"
         v-html="question1"
       ></AppButton>
       <AppButton
-        class="bdr-blk fz-28"
+        class="bdr-blk fz-24 e3x3"
         @click="checkAnswer($event)"
         :style="[roundEnded ? '' : { background: '#fff' }]"
         v-html="question2"
       ></AppButton>
       <AppButton
-        class="bdr-blk fz-28"
+        class="bdr-blk fz-24 e3x3"
         @click="checkAnswer($event)"
         :style="[roundEnded ? '' : { background: '#fff' }]"
         v-html="question3"
       ></AppButton>
       <AppButton
-        class="bdr-blk fz-28"
+        class="bdr-blk fz-24 e3x3"
         @click="checkAnswer($event)"
         :style="[roundEnded ? '' : { background: '#fff' }]"
         v-html="question4"
@@ -202,5 +202,8 @@ export default {
 }
 .f43fsa {
   width: 240px;
+}
+.e3x3 {
+  width: 260px;
 }
 </style>

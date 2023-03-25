@@ -20,6 +20,7 @@ import Home from "@/components/UI/Home.vue";
 import Question from "@/components/UI/Question.vue";
 import Final from "@/components/UI/Final.vue";
 import axios from "axios";
+import json from "./questions.json"
 
 export default {
   name: "quiz",
@@ -45,9 +46,8 @@ export default {
     },
     async makeRequest(difficulty, categoryId, questions) {
       try {
-        const { data } = await axios.get('http://localhost:8000/test');
-        this.quizData = data;
-        console.log(data);
+        this.quizData = json;
+        console.log(json);
       } catch (error) {
         console.error(error);
       }
@@ -57,13 +57,6 @@ export default {
 
       this.correctAnswers = correctAnswers;
       this.gameFinished = true;
-    },
-    resetGame() {
-      this.showHome = true;
-      this.gameStarted = false;
-      this.gameFinished = false;
-      this.quizData = undefined;
-      this.numberOfQuestions = 0;
     },
   },
 };
