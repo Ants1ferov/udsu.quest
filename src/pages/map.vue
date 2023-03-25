@@ -42,12 +42,10 @@ let score = reactive({count: 0})
 
 
 
-// let road = ref(JSON.parse(localStorage.getItem('road'))})
-// console.log(road.value)
-// console.log(JSON.parse(localStorage.getItem('road')))
-// console.log(typeof road)
-
-let road = ref( false)
+let road = ref(JSON.parse(localStorage.getItem('road')))
+console.log(road.value)
+console.log(JSON.parse(localStorage.getItem('road')))
+console.log(typeof road)
 
 
 let quest = ({count: parseInt(localStorage.getItem('quest'))})
