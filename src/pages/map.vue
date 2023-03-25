@@ -34,6 +34,8 @@ import PointFour from "@/components/maps/points/pointFour.vue";
 import PointFive from "@/components/maps/points/pointFive.vue";
 import PointSix from "@/components/maps/points/pointSix.vue";
 import PointSeven from "@/components/maps/points/pointSeven.vue";
+import axios from "axios";
+import Scanner from "@/components/UI/scanner.vue";
 
 let scanner = ref(false)
 let questCompleted = ref(false)
@@ -157,6 +159,7 @@ function scanOpen() {
         </AppButton>
         <transition name="ok">
           <pop-up-block v-if="scanner">
+            <scanner></scanner>
             <AppButton class="fz-32 bg-dark" @click="scan">Сканировал</AppButton>
           </pop-up-block>
         </transition>
@@ -206,6 +209,10 @@ function scanOpen() {
 }
 .ymaps-2-1-79-controls__control_toolbar, .ymaps-2-1-79-copyright.ymaps-2-1-79-copyright_logo_no, .ymaps-2-1-79-map-copyrights-promo {
   display: none !important;
+}
+#id_167974419086094789939 {
+  text-align: center;
+  font-weight: bold;
 }
 .ok-enter-active {
   transition: all 750ms cubic-bezier(0, 1, .15, 1);

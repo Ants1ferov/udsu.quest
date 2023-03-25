@@ -19,7 +19,6 @@
 import Home from "@/components/UI/Home.vue";
 import Question from "@/components/UI/Question.vue";
 import Final from "@/components/UI/Final.vue";
-import axios from "axios";
 import json from "./questions.json"
 
 export default {
@@ -54,7 +53,6 @@ export default {
     },
     endGame({ numberOfQuestions, correctAnswers }) {
       this.numberOfQuestions = numberOfQuestions;
-
       this.correctAnswers = correctAnswers;
       this.gameFinished = true;
     },
