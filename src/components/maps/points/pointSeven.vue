@@ -3,12 +3,12 @@ ymaps.ready(init);
 
 function init() {
   var myMap = new ymaps.Map("map", {
-    center: [56.846569, 53.220352],
+    center: [56.853858, 53.219066],
     zoom: 16
   });
   myMap.geoObjects
-      .add(new ymaps.Placemark([56.846569, 53.220352], {
-        balloonContent: 'Вы здесь, выполните задание и вам откроется путь до точки 3'
+      .add(new ymaps.Placemark([56.853858, 53.219066], {
+        balloonContent: 'Вы здесь, это конечная точка, спасибо за прохождение квеста!'
       }, {
         preset: 'islands#icon',
         iconColor: '#ff0000'

@@ -12,24 +12,22 @@ export default {
 
     function init() {
       var myMap = new ymaps.Map("map", {
-        center: [56.850262,53.216932],
+        center: [56.850453, 53.206431],
         zoom: 16
       });
       var myGeoObject = new ymaps.GeoObject({
         geometry: {
           type: "LineString",
           coordinates: [
-              [56.850483, 53.217740],
-              [56.850394, 53.216922],
-              [56.850267, 53.216934],
-              [56.852052, 53.217155],
-              [56.852130, 53.212191],
-              [56.852089, 53.211682],
-              [56.850638, 53.212111],
-              [56.850433, 53.209496],
-              [56.850633, 53.209331],
-              [56.850441, 53.206506],
-              [56.850672,53.206719],
+            [56.850453, 53.206431],
+            [56.850429, 53.206279],
+            [56.851535, 53.206063],
+            [56.851522, 53.205746],
+            [56.852161, 53.205642],
+            [56.852193, 53.206667],
+            [56.852495, 53.206638],
+            [56.852539, 53.207383],
+            [56.852765, 53.207936],
           ]
         },
         properties: {
@@ -37,13 +35,13 @@ export default {
         }
       }, {
         draggable: false,
-        strokeColor: "#494949",
+        strokeColor: "#000",
         strokeWidth: 5
       });
       myMap.geoObjects
           .add(myGeoObject)
           .add(new ymaps.Placemark([56.850672,53.206719], {
-            balloonContent: '1 точка'
+            balloonContent: '5 точка'
           }, {
             preset: 'islands#icon',
             iconColor: '#ff0000'
