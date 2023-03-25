@@ -28,6 +28,12 @@ import ErrorPopUp from "@/components/UI/errorPopUp.vue";
 import OkPopUp from "@/components/UI/okPopUp.vue";
 import router from "@/router";
 import PointZero from "@/components/maps/points/pointZero.vue";
+import PointTwo from "@/components/maps/points/pointTwo.vue";
+import PointThree from "@/components/maps/points/pointThree.vue";
+import PointFour from "@/components/maps/points/pointFour.vue";
+import PointFive from "@/components/maps/points/pointFive.vue";
+import PointSix from "@/components/maps/points/pointSix.vue";
+import PointSeven from "@/components/maps/points/pointSeven.vue";
 
 let scanner = ref(false)
 let questCompleted = ref(false)
@@ -36,12 +42,12 @@ let score = reactive({count: 0})
 
 
 
-let road = ref({count: JSON.parse(localStorage.getItem('road'))})
-console.log(road.value)
-console.log(JSON.parse(localStorage.getItem('road')))
-console.log(typeof road)
+// let road = ref(JSON.parse(localStorage.getItem('road'))})
+// console.log(road.value)
+// console.log(JSON.parse(localStorage.getItem('road')))
+// console.log(typeof road)
 
-
+let road = ref( false)
 
 
 let quest = ({count: parseInt(localStorage.getItem('quest'))})
@@ -71,6 +77,9 @@ function cancel() {
 
 
 function scan() {
+  if (quest.count > 7) {
+    router.push({path: 'account'})
+  }
   quest.count += 1
   road.value = ! road.value
   localStorage.setItem('quest', quest.count)
@@ -129,17 +138,17 @@ function scanOpen() {
         <point-zero v-if="quest.count === 0"></point-zero>
         <point-one v-if="quest.count === 1 && !road"></point-one>
         <yaMaps1 v-if="quest.count === 1 && road"></yaMaps1>
-        <yaMaps2 v-if="quest.count === 2 && !road"></yaMaps2>
+        <point-two v-if="quest.count === 2 && !road"></point-two>
         <yaMaps2 v-if="quest.count === 2 && road"></yaMaps2>
-        <yaMaps3 v-if="quest.count === 3 && !road"></yaMaps3>
+        <point-three v-if="quest.count === 3 && !road"></point-three>
         <yaMaps3 v-if="quest.count === 3 && road"></yaMaps3>
-        <yaMaps4 v-if="quest.count === 4 && !road"></yaMaps4>
+        <point-four v-if="quest.count === 4 && !road"></point-four>
         <yaMaps4 v-if="quest.count === 4 && road"></yaMaps4>
-        <yaMaps5 v-if="quest.count === 5 && !road"></yaMaps5>
+        <point-five v-if="quest.count === 5 && !road"></point-five>
         <yaMaps5 v-if="quest.count === 5 && road"></yaMaps5>
-        <yaMaps6 v-if="quest.count === 6 && !road"></yaMaps6>
+        <point-six v-if="quest.count === 6 && !road"></point-six>
         <yaMaps6 v-if="quest.count === 6 && road"></yaMaps6>
-        <yaMaps6 v-if="quest.count === 7"></yaMaps6>
+        <point-seven v-if="quest.count === 7"></point-seven>
       </div>
       <AppButton class="fz-42" v-if="quest.count === 0">Начало квеста</AppButton>
       <div class="on-the-road" v-if="road">

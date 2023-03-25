@@ -22,7 +22,7 @@ const answers = [
   'самолет',
   'пилот',
   'граната',
-    'bug'
+  'bug'
 ]
 let words = [
   ref(false),
@@ -57,7 +57,7 @@ function check() {
       }
       taskOk.value = true
     }
-    if (answer === answers[i]) {
+    if (answer.toLowerCase() === answers[i]) {
       color.value = 'green'
       if (count.count === 17) {
         taskOk.value = true
