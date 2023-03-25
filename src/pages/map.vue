@@ -6,13 +6,6 @@ import YaMaps3 from "@/components/maps/road/ya-maps-3.vue";
 import YaMaps4 from "@/components/maps/road/ya-maps-4.vue";
 import YaMaps5 from "@/components/maps/road/ya-maps-5.vue";
 import YaMaps6 from "@/components/maps/road/ya-maps-6.vue";
-// import YaMapsPoint1 from "@/components/maps/point/YaMapsPoint1.vue";
-// import YaMapsPoint2 from "@/components/maps/point/YaMapsPoint2.vue";
-// import YaMapsPoint3 from "@/components/maps/point/YaMapsPoint3.vue";
-// import YaMapsPoint4 from "@/components/maps/point/YaMapsPoint4.vue";
-// import YaMapsPoint5 from "@/components/maps/point/YaMapsPoint5.vue";
-// import YaMapsPoint6 from "@/components/maps/point/YaMapsPoint6.vue";
-// import YaMapsPoint7 from "@/components/maps/point/YaMapsPoint7.vue";
 import PopUpBlock from "@/components/UI/popUpBlock.vue";
 import AppButton from "@/components/UI/AppButton.vue";
 import Quest1 from "@/components/quests/quest1.vue";
@@ -37,23 +30,6 @@ import PointSeven from "@/components/maps/points/pointSeven.vue";
 import axios from "axios";
 import Scanner from "@/components/UI/scanner.vue";
 
-let scanner = ref(false)
-let questCompleted = ref(false)
-let actionFail = ref(false)
-let score = reactive({count: 0})
-
-
-
-let road = ref(JSON.parse(localStorage.getItem('road')))
-console.log(road.value)
-console.log(JSON.parse(localStorage.getItem('road')))
-console.log(typeof road)
-
-
-let quest = ({count: parseInt(localStorage.getItem('quest'))})
-if (quest.count === 2) {
-  score.count += 85
-}
 onMounted( () => {
   if (localStorage.getItem('email') === null) {
     console.log('не авторизован', localStorage.getItem('email'))
@@ -63,15 +39,57 @@ onMounted( () => {
   }
 })
 
+let scanner = ref(false)
+let questCompleted = ref(false)
+let actionFail = ref(false)
+let score = reactive({count: 0})
+
+let road = ref(JSON.parse(localStorage.getItem('road')))
+
+let quest = ({count: parseInt(localStorage.getItem('quest'))})
+if (quest.count === 1 && road.value === true) {
+  score.count = 85
+}
+// else if (quest.count === 2 && road.value === false) {
+//   score.count = 85
+// }
+// else if (quest.count === 2 && road.value === true) {
+//   score.count = 130
+// }
+// else if (quest.count === 3 && road.value === false) {
+//   score.count = 130
+// }
+// else if (quest.count === 3 && road.value === true) {
+//   score.count = 180
+// }
+// else if (quest.count === 4 && road.value === false) {
+//   score.count = 180
+// }
+// else if (quest.count === 4 && road.value === true) {
+//   score.count = 230
+// }
+// else if (quest.count === 5 && road.value === false) {
+//   score.count = 230
+// }
+// else if (quest.count === 5 && road.value === true) {
+//   score.count = 320
+// }
+// else if (quest.count === 6 && road.value === false) {
+//   score.count = 320
+// }
+// else if (quest.count === 6 && road.value === true) {
+//   score.count = 370
+// }
+// else if (quest.count === 7) {
+//   score.count = 500
+// }
+
+
 function cancel() {
   actionFail.value = false
   questCompleted.value = false
 }
 
- function animatedNumber()
-{
-  return score.count.toFixed(0)
-}
 
 
 
@@ -86,15 +104,30 @@ function scan() {
   localStorage.setItem('road', road.value)
   scanner.value = !scanner.value
 }
-const change = () => {
+function nextQuest() {
   console.log('задание выполнено')
   questCompleted.value = true
   road.value = true
-  score.count += 10
   localStorage.setItem('road', road.value)
   localStorage.setItem('quest', quest.count)
-  localStorage.setItem('score', score.count)
-};
+  axios
+      .post('https://api.udgu.suslovd.ru:9443/api/complete', {
+        email: localStorage.getItem('email'),
+        quest: quest.count,
+        road: road.value
+      })
+      .then((response) => {
+        console.log(response.status)
+        if (response.status === 200) {
+          console.log('данные сохранены')
+        }
+        else if (response.status === 409) {
+        }
+      })
+      .catch((reason) => {
+
+      })
+}
 function scanOpen() {
   scanner.value = !scanner.value
 }
@@ -122,19 +155,6 @@ function scanOpen() {
       </count-score>
 
       <div class="maps">
-<!--        <ya-maps-point1 v-if="quest.count === 1 && !road"></ya-maps-point1>-->
-<!--        <yaMaps1 v-if="quest.count === 1 && road"></yaMaps1>-->
-<!--        <ya-maps-point2 v-if="quest.count === 2 && !road"></ya-maps-point2>-->
-<!--        <yaMaps2 v-if="quest.count === 2 && road"></yaMaps2>-->
-<!--        <ya-maps-point3 v-if="quest.count === 3 && !road"></ya-maps-point3>-->
-<!--        <yaMaps3 v-if="quest.count === 3 && road"></yaMaps3>-->
-<!--        <ya-maps-point4 v-if="quest.count === 4 && !road"></ya-maps-point4>-->
-<!--        <yaMaps4 v-if="quest.count === 4 && road"></yaMaps4>-->
-<!--        <ya-maps-point5 v-if="quest.count === 5 && !road"></ya-maps-point5>-->
-<!--        <yaMaps5 v-if="quest.count === 5 && road"></yaMaps5>-->
-<!--        <ya-maps-point6 v-if="quest.count === 6 && !road"></ya-maps-point6>-->
-<!--        <yaMaps6 v-if="quest.count === 6 && road"></yaMaps6>-->
-<!--        <ya-maps-point7 v-if="quest.count === 7"></ya-maps-point7>-->
         <point-zero v-if="quest.count === 0"></point-zero>
         <point-one v-if="quest.count === 1 && !road"></point-one>
         <yaMaps1 v-if="quest.count === 1 && road"></yaMaps1>
@@ -166,16 +186,15 @@ function scanOpen() {
       </div>
     </div>
     <div class="quests">
-      <quest1 v-if="quest.count === 1 && !road"></quest1>
-      <quest2 v-if="quest.count === 2 && !road"></quest2>
+      <quest1  v-if="quest.count === 1 && !road"></quest1>
+      <quest2 @questComplete="nextQuest" v-if="quest.count === 2 && !road"></quest2>
       <quest3 v-if="quest.count === 3 && !road"></quest3>
       <quest4 v-if="quest.count === 4 && !road"></quest4>
       <quest5 v-if="quest.count === 5 && !road"></quest5>
       <quest6 v-if="quest.count === 6 && !road"></quest6>
     </div>
     <div class="block-2">
-      <AppButton v-if="!road" @click="change" class="bg-dark">Отправить</AppButton>
-
+<!--      <AppButton v-if="!road" @click="change" class="bg-dark">Отправить</AppButton>-->
     </div>
   </div>
 </template>
