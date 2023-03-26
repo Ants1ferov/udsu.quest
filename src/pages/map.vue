@@ -136,20 +136,15 @@ function scanOpen() {
 <template>
   <div class="map">
     <transition name="ok">
-      <error-pop-up v-if="actionFail">
-        <AppButton class="bg-dark bold btn-mn-auto" type="button" @click="cancel">Закрыть</AppButton>
-      </error-pop-up>
-    </transition>
-    <transition name="ok">
       <ok-pop-up v-if="questCompleted">
         <div class="white fz-32">Задание №{{ quest.count }} выполнено
         </div>
-        <AppButton class="bg-dark bold btn-mn-auto" type="button" @click="cancel">Прекрасно</AppButton>
+        <AppButton class="bg-dark bold" type="button" @click="cancel">Прекрасно</AppButton>
       </ok-pop-up>
     </transition>
     <div class="block-1">
       <count-score>
-        <router-link class="test" to="/account">
+        <router-link class="score-block" to="/account">
           {{ score.count }}
         </router-link>
       </count-score>
@@ -186,15 +181,12 @@ function scanOpen() {
       </div>
     </div>
     <div class="quests">
-      <quest1  v-if="quest.count === 1 && !road"></quest1>
+      <quest1 @questComplete="nextQuest" v-if="quest.count === 1 && !road"></quest1>
       <quest2 @questComplete="nextQuest" v-if="quest.count === 2 && !road"></quest2>
-      <quest3 v-if="quest.count === 3 && !road"></quest3>
-      <quest4 v-if="quest.count === 4 && !road"></quest4>
-      <quest5 v-if="quest.count === 5 && !road"></quest5>
-      <quest6 v-if="quest.count === 6 && !road"></quest6>
-    </div>
-    <div class="block-2">
-<!--      <AppButton v-if="!road" @click="change" class="bg-dark">Отправить</AppButton>-->
+      <quest3 @questComplete="nextQuest" v-if="quest.count === 3 && !road"></quest3>
+      <quest4 @questComplete="nextQuest" v-if="quest.count === 4 && !road"></quest4>
+      <quest5 @questComplete="nextQuest" v-if="quest.count === 5 && !road"></quest5>
+      <quest6 @questComplete="nextQuest" v-if="quest.count === 6 && !road"></quest6>
     </div>
   </div>
 </template>
@@ -205,14 +197,9 @@ function scanOpen() {
   flex-direction: column;
   align-items: center;
 }
-.test {
+.score-block {
   width: 100px;
   padding: 7px 45px;
-}
-.block-2 {
-  display: flex;
-  justify-content: center;
-  padding-bottom: 50px;
 }
 .maps {
   width: 100%;
@@ -232,20 +219,6 @@ function scanOpen() {
 #id_167974419086094789939 {
   text-align: center;
   font-weight: bold;
-}
-.ok-enter-active {
-  transition: all 750ms cubic-bezier(0, 1, .15, 1);
-}
-.ok-leave-active {
-  transition: all 1500ms cubic-bezier(0, 1, .15, 1);
-}
-.ok-enter-from {
-  opacity: 1;
-  transform: translateY(-150%);
-}
-.ok-leave-to {
-  opacity: 0;
-  transform: translateY(+150%);
 }
 .on-the-road {
   display: flex;

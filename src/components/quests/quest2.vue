@@ -1,8 +1,8 @@
 <script setup>
 import AppButton from "@/components/UI/AppButton.vue";
-import { ref, defineProps, defineEmits, watch } from 'vue';
-import Quiz from "@/pages/quiz.vue";
-const answer = [
+import {ref, defineEmits} from 'vue';
+import ErrorPopUp from "@/components/UI/errorPopUp.vue";
+let answer = [
   '',
   '',
   '',
@@ -14,46 +14,70 @@ const answer = [
   '',
 ]
 const answers = [
-  'Аркадий',
+  'аркадий',
   '1923',
-  'Аэроклуб',
+  'аэроклуб',
   '1940',
-  'Авиационную',
+  'авиационную',
   '3672',
   '400',
   '24',
   '50',
 ]
-function answerCheck() {
-
+const emit = defineEmits(['questComplete'])
+let questFailed = ref(false)
+function cancel() {
+  questFailed.value = false
 }
+function answerCheck() {
+  let count = 0
+  for (let i in answers) {
+    if (answer[i].toLowerCase() === answers[i])
+      count += 1
+  }
+  if (count === 9) {
+    console.log('задание выполнено')
+    emit('questComplete', true)
+  } else {
+    console.log('задание не выполнено')
+    questFailed.value = true
+  }
+}
+
 </script>
 
 <template>
   <div class="quest-block">
+    <transition name="ok">
+      <error-pop-up v-if="questFailed">
+        <div class="fz-42 white">Не все ответы верны</div>
+        <AppButton class="bg-dark bold" type="button" @click="cancel">Ну ладно</AppButton>
+      </error-pop-up>
+    </transition>
     <div class="quest-title bold fz-56 black">Задание 2</div>
     <div class="quest-description fz-24 bold">Прослушайте аудиофайл, и вставьте правильные слова в пропуски</div>
-    <div class="quest-task fz-24">
+    <div v-if="!questFailed" class="quest-task fz-24">
       <audio class="audio" controls>
         <source src="@/../src/assets/audio/rickroll.mp3"/>
       </audio>
       <div class="task-text">
-        <input class="form-input text" v-bind="answer[0]"> Черезов является выпускником школы №24.
-        Родился он в <input class="form-input number" v-bind="answer[1]"> году в посёлке Валамаз.
+        <input class="form-input text" v-model="answer[0]"> Черезов является выпускником школы №24.
+        Родился он в <input class="form-input number" v-model="answer[1]"> году в посёлке Валамаз.
         Окончив семилетку, будущий лётчик перебрался в Ижевск, где продолжил учиться в школе № 24.
-        Параллельно посещал <input class="form-input text" v-bind="answer[2]">,
-        который окончил с отличием в <input class="form-input number" v-bind="answer[3]"> году.
-        Затем Черезов поступил в Балашовскую <input class="form-input text" v-bind="answer[4]"> школу.<br><br>
-        Врачи госпиталя <input class="form-input number" v-bind="answer[5]"> специализировались
+        Параллельно посещал <input class="form-input text" v-model="answer[2]">,
+        который окончил с отличием в <input class="form-input number" v-model="answer[3]"> году.
+        Затем Черезов поступил в Балашовскую <input class="form-input text" v-model="answer[4]"> школу.<br><br>
+        Врачи госпиталя <input class="form-input number" v-model="answer[5]"> специализировались
         на черепно-мозговых травмах и повреждениях позвоночника.
         На первом этаже расположились перевязочная, процедурная, столовая, физиокабинет и кабинет рентгена,
         на втором лежали самые тяжелые больные, а на третьем и четвертом – те, кто уже шел на поправку.
-        Одновременно в госпитале могло лечиться около <input class="form-input number" v-bind="answer[6]"> человек.<br><br>
+        Одновременно в госпитале могло лечиться около <input class="form-input number" v-model="answer[6]"> человек.<br><br>
         В годы войны здесь проводили уникальные операции для заживления
-        черепа после трепанации и ранений головы. В стенах лицея <input class="form-input number" v-bind="answer[7]">
-        было проведено около <input class="form-input number" v-bind="answer[8]"> таких операций
+        черепа после трепанации и ранений головы. В стенах лицея <input class="form-input number" v-model="answer[7]">
+        было проведено около <input type="text" class="form-input number" v-model="answer[8]"> таких операций
       </div>
     </div>
+    <AppButton @click="answerCheck" class="bg-dark">Отправить</AppButton>
   </div>
 </template>
 
@@ -75,7 +99,7 @@ function answerCheck() {
   width: 50px;
   margin: 0;
 }
-.audio::-webkit-media-controls-panel {
-  color: white;
+.d3ed2f3 {
+  display: flex;
 }
 </style>

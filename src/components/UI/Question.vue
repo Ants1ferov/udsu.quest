@@ -1,12 +1,12 @@
 <template>
   <section class="question">
-    <div class="fz-24 pdg-0-15">
+    <div class="fz-20 pdg-0-15">
       <span>{{ index + 1 }}</span>.
       <span v-html="questionText"></span>
     </div>
     <div class="timer">
       <span></span>
-      <p class="fz-20">0:{{ secondsLeft }}</p>
+      <p class="fz-20 bold">0:{{ secondsLeft }}</p>
     </div>
 
     <div class="answers">
@@ -205,5 +205,10 @@ export default {
 }
 .e3x3 {
   width: 260px;
+}
+.app-button {
+  padding: 7px 10px;
+  margin: 5px;
+  box-shadow: 6px 6px 5px #aaaaaa;
 }
 </style>

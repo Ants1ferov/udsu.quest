@@ -5,16 +5,20 @@
     <div>
       <p class="fz-36 bold">{{ correctAnswers }}/{{ numberOfQuestions }}</p>
     </div>
+    <AppButton @click="questComplete" class="bg-dark">Продолжить</AppButton>
   </section>
 </template>
-
 <script>
+import AppButton from "@/components/UI/AppButton.vue";
+
 export default {
   name: "Final",
+  components: {AppButton},
   props: {
     correctAnswers: Number,
     numberOfQuestions: Number,
   },
+  emits: ['questComplete'],
   data() {
     return {
       message: "",
@@ -28,6 +32,9 @@ export default {
     this.changeResultText();
   },
   methods: {
+    questComplete() {
+      this.$emit('questComplete', true)
+    },
     calculatePercentages() {
       this.correctAnswersPercentage =
         (this.correctAnswers / this.numberOfQuestions) * 100;
@@ -70,5 +77,8 @@ export default {
 <style scoped>
 .final {
   padding: 0 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 </style>

@@ -6,11 +6,10 @@
       :quizData="this.quizData"
       @endGame="endGame"
     />
-    <Final
+    <Final @questComplete="questComplete"
       v-if="gameFinished"
       :correctAnswers="correctAnswers"
       :numberOfQuestions="numberOfQuestions"
-      @resetGame="resetGame"
     />
   </main>
 </template>
@@ -28,6 +27,7 @@ export default {
     Question,
     Final,
   },
+  emits: ['questComplete'],
   data() {
     return {
       showHome: true,
@@ -38,6 +38,9 @@ export default {
     };
   },
   methods: {
+    questComplete() {
+      this.$emit('questComplete', true)
+    },
     startTheGame({ difficulty, categoryId, questions }) {
       this.makeRequest(difficulty, categoryId, questions);
       this.showHome = false;

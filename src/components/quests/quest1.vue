@@ -1,7 +1,7 @@
 <script setup>
 import axios from "axios";
 import AppButton from "@/components/UI/AppButton.vue";
-import {reactive, ref} from "vue";
+import {defineEmits, reactive, ref} from "vue";
 
 const answers = [
   'test',
@@ -42,14 +42,15 @@ let words = [
   ref(false),
   ref(false),
   ref(false),
-    ref(false)
+  ref(false)
 ]
 let answer = ''
 let color = ref('')
 let taskOk = ref(false)
 let count = reactive({count: 0})
+const emit = defineEmits(['questComplete'])
 
-function check() {
+function answerCheck() {
   for (let i in answers) {
     if (answer === 'test') {
       for (let j in words) {
@@ -70,29 +71,8 @@ function check() {
     }
   }
 }
-function answerCheck() {
-  if (taskOk === true) {
-    console.log('вы прошли на 2 задание')
-    // axios
-    //     .post('', {
-    //       email: this.email,
-    //       quest: this.task,
-    //     })
-    //     .then((response) => {
-    //       console.log(response.status)
-    //       if (response.status === 200) {
-    //
-    //       }
-    //       else if (response.status === 409) {
-    //
-    //       }
-    //     })
-    //     .catch((reason) => {
-    //
-    //     })
-  } else {
-
-  }
+function taskComplete() {
+  emit('questComplete', true)
 }
 </script>
 
@@ -121,33 +101,38 @@ function answerCheck() {
         <img v-if="words[16].value" class="cross" src="@/../src/assets/img/crossword/16.svg" alt="">
         <img v-if="words[17].value" class="cross" src="@/../src/assets/img/crossword/17.svg" alt="">
       </div>
-      <div class="block-input-flex">
-        <input type="text" class="form-input" placeholder="Слово" v-model="answer">
-      </div>
-      <AppButton @click="check" class="answer-check bg-dark fz-24 bold"
-                 :class="{colorGreen: color.value === 'green', colorRed: color.value === 'red'}">Проверить слово</AppButton>
-      <div v-if="!taskOk" class="crossword-questions fz-24">
-        <p class="bold mrg-25">Вопросы по вертикали:</p>
-        2. Команда стрелять?<br>
-        3. Знаки отличия военных?<br>
-        4. Больница для военных?<br>
-        5. Высшая награда?<br>
-        6. Остается от патрона после выстрела?<br>
-        8. Бегут с криком ура?<br>
-        11. Головной убор военного?<br>
-        12. Стреляет ядрами?<br>
-        14. С ним прыгают с самолета?<br>
-        16. Управляет самолетом?<br>
-        <p class="bold mrg-25">Вопросы по горизонтали:</p>
-        1. Солдатская рубашка?<br>
-        6. Снаряд который взрывается после броска?<br>
-        7. Бывает противотанковая?<br>
-        9. Военная машина на гусеницах?<br>
-        10. Место где прячется солдат во время боя?<br>
-        13. Награда за отвагу?<br>
-        15. На них сражались в небе?<br>
-      </div>
+      <transition name="adf">
+        <div v-if="!taskOk">
+          <div class="block-input-flex">
+            <input type="text" class="form-input" placeholder="Слово" v-model="answer">
+          </div>
+          <AppButton @click="answerCheck" class="answer-check bg-dark fz-24 bold"
+                     :class="{colorGreen: color.value === 'green', colorRed: color.value === 'red'}">Проверить слово</AppButton>
+          <div class="crossword-questions fz-24">
+            <p class="bold mrg-25">Вопросы по вертикали:</p>
+            2. Команда стрелять?<br>
+            3. Знаки отличия военных?<br>
+            4. Больница для военных?<br>
+            5. Высшая награда?<br>
+            6. Остается от патрона после выстрела?<br>
+            8. Бегут с криком ура?<br>
+            11. Головной убор военного?<br>
+            12. Стреляет ядрами?<br>
+            14. С ним прыгают с самолета?<br>
+            16. Управляет самолетом?<br>
+            <p class="bold mrg-25">Вопросы по горизонтали:</p>
+            1. Солдатская рубашка?<br>
+            6. Снаряд который взрывается после броска?<br>
+            7. Бывает противотанковая?<br>
+            9. Военная машина на гусеницах?<br>
+            10. Место где прячется солдат во время боя?<br>
+            13. Награда за отвагу?<br>
+            15. На них сражались в небе?<br>
+          </div>
+        </div>
+      </transition>
     </div>
+    <AppButton @click="taskComplete" v-if="taskOk" class="bg-dark">Отправить</AppButton>
   </div>
 </template>
 
@@ -178,5 +163,12 @@ function answerCheck() {
 }
 .answer-check {
   margin: 35px auto;
+}
+.adf-leave-active {
+  transition: all 900ms cubic-bezier(0, 1, .15, 1);
+}
+.adf-leave-to {
+  opacity: 0;
+  transform: translateX(+50%);
 }
 </style>
