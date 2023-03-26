@@ -132,3 +132,32 @@ button {
     opacity: 0;
     transform: translateY(+150%);
 }
+.non-copy {
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+.question-enter-active {
+    transition: opacity 0.25s;
+}
+.question-leave-active {
+    transition: opacity 0.25s;
+}
+.question-enter-from {
+    opacity: 0;
+}
+.question-leave-to {
+    opacity: 0;
+}
+
+@media only screen and (max-width: 360px) {
+    .app-button {
+        font-size: 20px;
+    }
+}
+@media (max-height: 700px) {
+    .pop-up-block {
+        height: 400px !important;
+    }
+}

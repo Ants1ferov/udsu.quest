@@ -40,76 +40,38 @@ onMounted( () => {
 })
 
 let scanner = ref(false)
+let qrFail = ref(false)
 let questCompleted = ref(false)
 let actionFail = ref(false)
-let score = reactive({count: 0})
-
 let road = ref(JSON.parse(localStorage.getItem('road')))
-
 let quest = ({count: parseInt(localStorage.getItem('quest'))})
-if (quest.count === 1 && road.value === true) {
-  score.count = 85
-}
-// else if (quest.count === 2 && road.value === false) {
-//   score.count = 85
-// }
-// else if (quest.count === 2 && road.value === true) {
-//   score.count = 130
-// }
-// else if (quest.count === 3 && road.value === false) {
-//   score.count = 130
-// }
-// else if (quest.count === 3 && road.value === true) {
-//   score.count = 180
-// }
-// else if (quest.count === 4 && road.value === false) {
-//   score.count = 180
-// }
-// else if (quest.count === 4 && road.value === true) {
-//   score.count = 230
-// }
-// else if (quest.count === 5 && road.value === false) {
-//   score.count = 230
-// }
-// else if (quest.count === 5 && road.value === true) {
-//   score.count = 320
-// }
-// else if (quest.count === 6 && road.value === false) {
-//   score.count = 320
-// }
-// else if (quest.count === 6 && road.value === true) {
-//   score.count = 370
-// }
-// else if (quest.count === 7) {
-//   score.count = 500
-// }
-
-
-function cancel() {
-  actionFail.value = false
-  questCompleted.value = false
-}
+const score = reactive({number: parseInt(localStorage.getItem('score'))})
+const number = ref(parseInt(localStorage.getItem('score')))
+watch(number, (n) => {
+  gsap.to(score, { duration: 1, number: Number(n) || 0})
+})
 
 
 
 
-
-function scan() {
-  if (quest.count > 7) {
-    router.push({path: 'account'})
+function qrCheck(count) {
+  if (count === 2 && quest.count < 2) {
+    quest.count = 2
+    road.value = ! road.value
+    localStorage.setItem('quest', quest.count)
+    localStorage.setItem('road', road.value)
+    scanner.value = !scanner.value
+    updateServerValue()
+  } else {
+    scanner.value = false
+    setTimeout(() => {
+      qrFail.value = true
+    }, 250);
   }
-  quest.count += 1
-  road.value = ! road.value
-  localStorage.setItem('quest', quest.count)
-  localStorage.setItem('road', road.value)
-  scanner.value = !scanner.value
 }
-function nextQuest() {
-  console.log('задание выполнено')
-  questCompleted.value = true
-  road.value = true
-  localStorage.setItem('road', road.value)
+function updateServerValue() {
   localStorage.setItem('quest', quest.count)
+  localStorage.setItem('road', road.value)
   axios
       .post('https://api.udgu.suslovd.ru:9443/api/complete', {
         email: localStorage.getItem('email'),
@@ -125,8 +87,34 @@ function nextQuest() {
         }
       })
       .catch((reason) => {
-
       })
+}
+function questEnd() {
+  quest.count += 1
+  localStorage.setItem('quest', '7')
+}
+function scoreUpdate(count) {
+  number.value += count
+  let num = number.value
+  localStorage.setItem('score', num)
+}
+function cancel() {
+  actionFail.value = false
+  questCompleted.value = false
+  qrFail.value = false
+  scanner.value = false
+}
+function scan() {
+  quest.count += 1
+  road.value = ! road.value
+  scanner.value = !scanner.value
+  updateServerValue()
+}
+function nextQuest() {
+  console.log('задание выполнено')
+  questCompleted.value = true
+  road.value = true
+  updateServerValue()
 }
 function scanOpen() {
   scanner.value = !scanner.value
@@ -142,13 +130,18 @@ function scanOpen() {
         <AppButton class="bg-dark bold" type="button" @click="cancel">Прекрасно</AppButton>
       </ok-pop-up>
     </transition>
+    <transition name="ok">
+      <error-pop-up v-if="qrFail" style="z-index: 100">
+        <p class="fz-36 white">Вы отсканировали qr-код прошлого задания!</p>
+        <AppButton class="bg-dark bold" type="button" @click="cancel">Ну блин</AppButton>
+      </error-pop-up>
+    </transition>
     <div class="block-1">
       <count-score>
         <router-link class="score-block" to="/account">
-          {{ score.count }}
+          {{ score.number.toFixed(0) }}
         </router-link>
       </count-score>
-
       <div class="maps">
         <point-zero v-if="quest.count === 0"></point-zero>
         <point-one v-if="quest.count === 1 && !road"></point-one>
@@ -165,28 +158,30 @@ function scanOpen() {
         <yaMaps6 v-if="quest.count === 6 && road"></yaMaps6>
         <point-seven v-if="quest.count === 7"></point-seven>
       </div>
-      <AppButton class="fz-42" v-if="quest.count === 0">Начало квеста</AppButton>
-      <div class="on-the-road" v-if="road">
+      <div class="on-the-road" v-if="road && quest.count < 7">
         <p class="fz-32 mrg-25">Следуйте до точки {{ quest.count + 1}}</p>
-        <AppButton class="qr-block bold bdr-blk" @click="scanOpen">
+        <AppButton v-if="road && quest.count <= 5" class="qr-block bold bdr-blk" @click="scanOpen">
           <div>Сканировать</div>
           <img class="qr-img" src="@/../src/assets/img/button/qr.svg" alt="qr button">
         </AppButton>
         <transition name="ok">
           <pop-up-block v-if="scanner">
-            <scanner></scanner>
-            <AppButton class="fz-32 bg-dark" @click="scan">Сканировал</AppButton>
+            <scanner @qr-ok="qrCheck"></scanner>
+            <AppButton @click="cancel" class="bdr-wht white bold">Закрыть</AppButton>
           </pop-up-block>
         </transition>
       </div>
+      <div v-if="quest.count === 6 && road">
+        <AppButton class="bg-dark fz-42" @click="questEnd">Я на месте</AppButton>
+      </div>
     </div>
     <div class="quests">
-      <quest1 @questComplete="nextQuest" v-if="quest.count === 1 && !road"></quest1>
-      <quest2 @questComplete="nextQuest" v-if="quest.count === 2 && !road"></quest2>
-      <quest3 @questComplete="nextQuest" v-if="quest.count === 3 && !road"></quest3>
-      <quest4 @questComplete="nextQuest" v-if="quest.count === 4 && !road"></quest4>
-      <quest5 @questComplete="nextQuest" v-if="quest.count === 5 && !road"></quest5>
-      <quest6 @questComplete="nextQuest" v-if="quest.count === 6 && !road"></quest6>
+      <quest1 @questComplete="nextQuest" @score="scoreUpdate" v-if="quest.count === 1 && !road"></quest1>
+      <quest2 @questComplete="nextQuest" @score="scoreUpdate" v-if="quest.count === 2 && !road"></quest2>
+      <quest3 @questComplete="nextQuest" @score="scoreUpdate" v-if="quest.count === 3 && !road"></quest3>
+      <quest4 @questComplete="nextQuest" @score="scoreUpdate" v-if="quest.count === 4 && !road"></quest4>
+      <quest5 @questComplete="nextQuest" @score="scoreUpdate" v-if="quest.count === 5 && !road"></quest5>
+      <quest6 @questComplete="nextQuest" @score="scoreUpdate" v-if="quest.count === 6 && !road"></quest6>
     </div>
   </div>
 </template>
