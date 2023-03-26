@@ -3,6 +3,7 @@ import {Html5Qrcode, Html5QrcodeScanner} from "html5-qrcode";
 import {onMounted} from "vue";
 import AppButton from "@/components/UI/AppButton.vue";
 import router from "@/router";
+const emit = defineEmits(['qrOk', 'qrFail'])
 function qrFromCamera () {
   const html5QrCode = new Html5Qrcode("reader");
   const qrCodeSuccessCallback = (decodedText, decodedResult) => {
@@ -13,18 +14,34 @@ function qrFromCamera () {
 }
 onMounted(() => {
   const html5QrCode = new Html5Qrcode("readImage");
-
   const fileinput = document.getElementById('qr-input-file');
   fileinput.addEventListener('change', e => {
     if (e.target.files.length == 0) {
       return;
     }
-
     const imageFile = e.target.files[0];
     html5QrCode.scanFile(imageFile, true)
         .then(decodedText => {
-          if (decodedText) {
-            
+          if (decodedText === 'dbn89f32') {
+            emit('qrOk', 1)
+          }
+          else if (decodedText === 'xd324r3x2') {
+            emit('qrOk', 2)
+          }
+          else if (decodedText === 'x23fr23qf') {
+            emit('qrOk', 3)
+          }
+          else if (decodedText === 'v3Ww3rvtf') {
+            emit('qrOk', 4)
+          }
+          else if (decodedText === 'cW4H435V3') {
+            emit('qrOk', 5)
+          }
+          else if (decodedText === 'vq4TC7fawg') {
+            emit('qrOk', 6)
+          }
+          else {
+
           }
         })
         .catch(err => {
@@ -35,10 +52,10 @@ onMounted(() => {
 </script>
 
 <template>
-  <AppButton class="bg-dark">Сканировать камерой</AppButton>
+  <AppButton class="bg-dark mrg-25">Сканировать камерой</AppButton>
   <div v-if="cameraScan" id="reader" class="reader"></div>
   <div id="readImage"></div>
-    <label class="input-file">
+    <label class="input-file mrg-25">
       <input id="qr-input-file" type="file" name="file">
       <span class="app-button bg-dark">Сканировать из галереи</span>
     </label>
