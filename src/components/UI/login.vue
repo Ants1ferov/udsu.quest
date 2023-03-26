@@ -5,15 +5,49 @@ import {ref} from "vue";
 import router from "@/router";
 import ErrorPopUp from "@/components/UI/errorPopUp.vue";
 import OkPopUp from "@/components/UI/okPopUp.vue";
+import PopUpBlock from "@/components/UI/popUpBlock.vue";
 
 let email = ''
 let password = ''
 let actionOk = ref(false)
 let actionFail = ref(false)
+let openRec = ref(false)
+
+
+
+function openRecovery() {
+  openRec.value = true
+}
 function cancel() {
   actionFail.value = !actionFail.value
 }
-function register() {
+function recovery() {
+  if (password === '' && email === '') {
+
+  } else {
+    axios
+        .post('https://api.udgu.suslovd.ru:9443/api/change', {
+          email: email,
+          password: password
+        })
+        .then((response) => {
+          console.log(response)
+          openRec.value = false
+          console.log('Пароль изменен')
+          setTimeout(() => {
+            actionOk.value = true
+            setTimeout(() => {
+              actionOk.value = false
+            }, 500);
+          }, 1000);
+        })
+        .catch((reason) => {
+          console.log(reason)
+          actionFail.value = !actionFail.value
+        })
+  }
+}
+function login() {
   if (email !== '' && password !== '') {
     axios
         .post('https://api.udgu.suslovd.ru:9443/api/login', {
@@ -26,12 +60,12 @@ function register() {
           localStorage.setItem('email', email)
           localStorage.setItem('name', firstname)
           localStorage.setItem('surname', secondname)
-          localStorage.setItem('quest', toString(quest))
-          localStorage.setItem('road', JSON.stringify(road))
+          localStorage.setItem('quest', quest)
+          localStorage.road = JSON.stringify(road)
           actionOk.value = !actionOk.value
           setTimeout(() => {
               router.push({path: "/"})
-          }, 750);
+          }, 1500);
         })
         .catch((reason) => {
           actionFail.value = !actionFail.value
@@ -51,13 +85,23 @@ function register() {
       </error-pop-up>
     </transition>
     <transition name="ok">
+      <pop-up-block v-if="openRec">
+        <form @submit.prevent="recovery">
+          <input type="email" placeholder="Email" autocomplete="email" class="form-input" v-model="email">
+          <input type="password" placeholder="Новый пароль" autocomplete="new-password" class="form-input" v-model="password">
+          <button class="bg-dark">Изменить</button>
+        </form>
+      </pop-up-block>
+    </transition>
+    <transition name="ok">
       <ok-pop-up v-if="actionOk"></ok-pop-up>
     </transition>
-    <form @submit.prevent="register" class="form-auth">
+    <form @submit.prevent="login" class="form-auth">
       <input type="email" placeholder="Email" autocomplete="email" class="form-input" v-model="email">
-      <input type="password" placeholder="Пароль" autocomplete="new-password" class="form-input" v-model="password">
-      <AppButton @click="register" @submit.prevent class="bg-dark fz-24">Вход</AppButton>
+      <input type="password" placeholder="Пароль" autocomplete="password" class="form-input" v-model="password">
+      <AppButton @click="login" @submit.prevent class="bg-dark fz-24">Вход</AppButton>
     </form>
+    <AppButton @click="openRecovery" class="bdr-blk">Забыли пароль?</AppButton>
   </div>
 </template>
 
