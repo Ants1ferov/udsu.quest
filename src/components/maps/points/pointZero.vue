@@ -10,7 +10,7 @@ function init() {
     balloonContent: 'Это точка 0'
   }, {
     iconLayout: 'default#image',
-    iconImageHref: 'ya.png',
+    iconImageHref: 'pointB.png',
     iconImageSize: [64, 64],
     iconImageOffset: [-32, -60]
   });
