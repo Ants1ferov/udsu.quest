@@ -15,10 +15,9 @@
 </template>
 
 <script>
-import Home from "@/components/UI/Home.vue";
-import Question from "@/components/UI/Question.vue";
-import Final from "@/components/UI/Final.vue";
-import json from "./questions.json"
+import Home from "@/components/sections/Home.vue";
+import Question from "@/components/sections/Question.vue";
+import Final from "@/components/sections/Final.vue";
 
 export default {
   name: "quiz",
@@ -28,6 +27,15 @@ export default {
     Final,
   },
   emits: ['questComplete'],
+  props: {
+    json: {
+      type: Object,
+      default() {
+        return{}
+      }
+    }
+
+  },
   data() {
     return {
       showHome: true,
@@ -48,8 +56,8 @@ export default {
     },
     async makeRequest(difficulty, categoryId, questions) {
       try {
-        this.quizData = json;
-        console.log(json);
+        this.quizData = this.json;
+        console.log(this.json);
       } catch (error) {
         console.error(error);
       }

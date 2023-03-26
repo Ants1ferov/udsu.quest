@@ -1,7 +1,7 @@
 <script setup>
 import AppButton from "@/components/UI/AppButton.vue";
-import Register from "@/components/UI/register.vue";
-import Login from "@/components/UI/login.vue";
+import Register from "@/components/sections/register.vue";
+import Login from "@/components/sections/login.vue";
 import {onMounted, ref} from "vue";
 import router from "@/router";
 
