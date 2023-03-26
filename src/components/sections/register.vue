@@ -23,14 +23,15 @@ function register() {
           secondname: userSurname,
           email: email,
           password: password,
-          quest: 0,
+          quest: 1,
           road: false
         })
         .then((response) => {
           localStorage.setItem('email', email)
           localStorage.setItem('name', userName)
           localStorage.setItem('surname', userSurname)
-          localStorage.setItem('quest', '0')
+          localStorage.setItem('quest', '1')
+          localStorage.setItem('score', '0')
           localStorage.road = JSON.stringify(false)
           actionOk.value = !actionOk.value
           console.log(response)

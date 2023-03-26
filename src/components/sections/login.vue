@@ -61,6 +61,7 @@ function login() {
           localStorage.setItem('name', firstname)
           localStorage.setItem('surname', secondname)
           localStorage.setItem('quest', quest)
+          localStorage.setItem('score', '0')
           localStorage.road = JSON.stringify(road)
           actionOk.value = !actionOk.value
           setTimeout(() => {
