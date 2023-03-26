@@ -38,7 +38,7 @@ export default {
         balloonContent: 'Это точка 1, а вам нужна точка 2'
       }, {
         iconLayout: 'default#image',
-        iconImageHref: './src/assets/img/button/ya.png',
+        iconImageHref: 'ya.png',
         iconImageSize: [64, 64],
         iconImageOffset: [-32, -60]
       });
