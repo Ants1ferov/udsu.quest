@@ -45,7 +45,7 @@ export default {
         this.correctAnswersPercentage >= 0 &&
         this.correctAnswersPercentage <= 30
       ) {
-        this.message = "Вы читали задание???";
+        this.message = "Вы читали задание?";
         this.result = `Вы ответили на ${this.correctAnswersPercentage}% всех вопросов правильно. Может попробуйте еще раз? (так нельзя)`;
       } else if (
         this.correctAnswersPercentage > 30 &&
@@ -66,7 +66,7 @@ export default {
         this.message = "Замечательно!";
         this.result = `Вы ответили на ${this.correctAnswersPercentage}% всех вопросов правильно, поздравляем! 🐢`;
       } else if (this.correctAnswersPercentage >= 95) {
-        this.message = "Отлично";
+        this.message = "Идеально!";
         this.result = `Вы ответили на ${this.correctAnswersPercentage}% всех вопросов правильно, поздравляем! 🐢`;
       }
     },

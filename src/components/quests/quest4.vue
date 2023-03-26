@@ -2,9 +2,12 @@
 import Quiz from "@/components/sections/quiz.vue";
 import qwe from "@/components/quests/quizzes/quest4.json"
 const json = qwe
-const emit = defineEmits(['questComplete'])
+const emit = defineEmits(['questComplete', 'score'])
 function questComplete() {
   emit('questComplete', true)
+}
+function score() {
+  emit('score', 10)
 }
 </script>
 
@@ -13,7 +16,7 @@ function questComplete() {
     <div class="quest-title bold fz-56 black">Задание 4</div>
     <div class="quest-description fz-36">Тест</div>
     <div class="test-block">
-      <quiz v-bind:json="json" @questComplete="questComplete"></quiz>
+      <quiz v-bind:json="json" @questComplete="questComplete" @score="score"></quiz>
     </div>
   </div>
 </template>

@@ -24,7 +24,7 @@ const answers = [
   '24',
   '50',
 ]
-const emit = defineEmits(['questComplete'])
+const emit = defineEmits(['questComplete', 'score'])
 let questFailed = ref(false)
 function cancel() {
   questFailed.value = false
@@ -36,14 +36,12 @@ function answerCheck() {
       count += 1
   }
   if (count === 9) {
-    console.log('задание выполнено')
     emit('questComplete', true)
+    emit('score', 70)
   } else {
-    console.log('задание не выполнено')
     questFailed.value = true
   }
 }
-
 </script>
 
 <template>
@@ -60,7 +58,7 @@ function answerCheck() {
       <audio class="audio" controls>
         <source src="@/../src/assets/audio/rickroll.mp3"/>
       </audio>
-      <div class="task-text">
+      <div class="task-text non-copy">
         <input class="form-input text" v-model="answer[0]"> Черезов является выпускником школы №24.
         Родился он в <input class="form-input number" v-model="answer[1]"> году в посёлке Валамаз.
         Окончив семилетку, будущий лётчик перебрался в Ижевск, где продолжил учиться в школе № 24.

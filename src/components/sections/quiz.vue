@@ -1,12 +1,17 @@
 <template>
-  <main>
+  <main class="non-copy">
     <Home @startTheGame="startTheGame" v-if="showHome" />
-    <Question
-      v-if="gameStarted && quizData && !gameFinished"
-      :quizData="this.quizData"
-      @endGame="endGame"
-    />
-    <Final @questComplete="questComplete"
+    <transition name="question">
+      <Question
+          v-if="gameStarted && quizData && !gameFinished"
+          :quizData="this.quizData"
+          @endGame="endGame"
+          @score="score"
+      />
+    </transition>
+    <Final
+        class="mrg-25"
+      @questComplete="questComplete"
       v-if="gameFinished"
       :correctAnswers="correctAnswers"
       :numberOfQuestions="numberOfQuestions"
@@ -26,7 +31,7 @@ export default {
     Question,
     Final,
   },
-  emits: ['questComplete'],
+  emits: ['questComplete', 'score'],
   props: {
     json: {
       type: Object,
@@ -48,6 +53,9 @@ export default {
   methods: {
     questComplete() {
       this.$emit('questComplete', true)
+    },
+    score() {
+      this.$emit('score', true)
     },
     startTheGame({ difficulty, categoryId, questions }) {
       this.makeRequest(difficulty, categoryId, questions);

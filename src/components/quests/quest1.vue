@@ -48,7 +48,7 @@ let answer = ''
 let color = ref('')
 let taskOk = ref(false)
 let count = reactive({count: 0})
-const emit = defineEmits(['questComplete'])
+const emit = defineEmits(['questComplete', 'score'])
 
 function answerCheck() {
   for (let i in answers) {
@@ -59,7 +59,7 @@ function answerCheck() {
       taskOk.value = true
     }
     if (answer.toLowerCase() === answers[i]) {
-      color.value = 'green'
+      emit('score', 7)
       if (count.count === 17) {
         taskOk.value = true
       }
@@ -67,7 +67,6 @@ function answerCheck() {
       words[i].value = !words[i].value
       answer = ''
     } else {
-      color.value = 'red'
     }
   }
 }
@@ -108,7 +107,7 @@ function taskComplete() {
           </div>
           <AppButton @click="answerCheck" class="answer-check bg-dark fz-24 bold"
                      :class="{colorGreen: color.value === 'green', colorRed: color.value === 'red'}">Проверить слово</AppButton>
-          <div class="crossword-questions fz-24">
+          <div class="crossword-questions fz-24 non-copy">
             <p class="bold mrg-25">Вопросы по вертикали:</p>
             2. Команда стрелять?<br>
             3. Знаки отличия военных?<br>

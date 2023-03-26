@@ -8,47 +8,50 @@
       <span></span>
       <p class="fz-20 bold">0:{{ secondsLeft }}</p>
     </div>
-
-    <div class="answers">
-      <AppButton
-        class="bdr-blk fz-24 e3x3"
-        @click="checkAnswer($event)"
-        :style="[roundEnded ? '' : { background: '#fff' }]"
-        v-html="question1"
-      ></AppButton>
-      <AppButton
-        class="bdr-blk fz-24 e3x3"
-        @click="checkAnswer($event)"
-        :style="[roundEnded ? '' : { background: '#fff' }]"
-        v-html="question2"
-      ></AppButton>
-      <AppButton
-        class="bdr-blk fz-24 e3x3"
-        @click="checkAnswer($event)"
-        :style="[roundEnded ? '' : { background: '#fff' }]"
-        v-html="question3"
-      ></AppButton>
-      <AppButton
-        class="bdr-blk fz-24 e3x3"
-        @click="checkAnswer($event)"
-        :style="[roundEnded ? '' : { background: '#fff' }]"
-        v-html="question4"
-      ></AppButton>
-    </div>
-    <div
-      class="post-answer"
-      :style="[roundEnded ? { display: 'flex' } : { display: 'none' }]">
-      <p class="fz-24 f43fsa">
-        {{ message }}
-      </p>
-      <AppButton
-          class="bg-dark fz-28 "
-        @click="goToNextQuestion"
-        v-html="[
+      <div class="answers">
+        <AppButton
+            class="bdr-blk fz-24 e3x3"
+            @click="checkAnswer($event)"
+            :style="[roundEnded ? '' : { background: '#fff' }]"
+            v-html="question1"
+            v-if="question1 !== ''"
+        ></AppButton>
+        <AppButton
+            class="bdr-blk fz-24 e3x3"
+            @click="checkAnswer($event)"
+            :style="[roundEnded ? '' : { background: '#fff' }]"
+            v-html="question2"
+            v-if="question2 !== ''"
+        ></AppButton>
+        <AppButton
+            class="bdr-blk fz-24 e3x3"
+            @click="checkAnswer($event)"
+            :style="[roundEnded ? '' : { background: '#fff' }]"
+            v-html="question3"
+            v-if="question3 !== ''"
+        ></AppButton>
+        <AppButton
+            class="bdr-blk fz-24 e3x3"
+            @click="checkAnswer($event)"
+            :style="[roundEnded ? '' : { background: '#fff' }]"
+            v-html="question4"
+            v-if="question4 !== ''"
+        ></AppButton>
+      </div>
+      <div
+          class="post-answer"
+          :style="[roundEnded ? { display: 'flex' } : { display: 'none' }]">
+        <p class="fz-24 f43fsa">
+          {{ message }}
+        </p>
+        <AppButton
+            class="bg-dark fz-28 "
+            @click="goToNextQuestion"
+            v-html="[
           index == numberOfQuestions - 1 ? 'Посмотреть результаты!' : 'Следующий вопрос',
         ]">
-      </AppButton>
-    </div>
+        </AppButton>
+      </div>
   </section>
 </template>
 
@@ -60,6 +63,7 @@ export default {
   props: {
     quizData: Object,
   },
+  emits: ['score'],
   data() {
     return {
       gameFinished: false,
@@ -82,38 +86,28 @@ export default {
   mounted() {
     this.prepareQuestion();
   },
-
   methods: {
     prepareQuestion() {
       const questions = this.quizData.results;
       const index = this.index;
-
       this.numberOfQuestions = questions.length;
-
-      // Put all the answers in an array to shuffle them later
       this.answers.push(questions[index].correct_answer);
       questions[index].incorrect_answers.forEach((answer) => {
         this.answers.push(answer);
       });
-
       this.correctAnswer = questions[index].correct_answer;
-
       this.questionText = questions[index].question;
       this.question1 = this.getRandomAnswer();
       this.question2 = this.getRandomAnswer();
       this.question3 = this.getRandomAnswer();
       this.question4 = this.getRandomAnswer();
-
       this.countdown();
     },
-
     getRandomAnswer() {
       const randomNumber = Math.floor(Math.random() * this.answers.length);
       let answer = this.answers.splice(randomNumber, 1)[0];
-
       return answer;
     },
-
     countdown() {
       this.secondsLeft = 60;
       this.timer = setInterval(() => {
@@ -129,36 +123,31 @@ export default {
         }
       }, 1000);
     },
-
     stopTimer() {
       clearInterval(this.timer);
     },
-
     checkAnswer(event) {
       if (!this.roundEnded) {
         this.userAnswered = true;
         this.roundEnded = true;
-
         this.isUserAnswerCorrect =
           event.target.innerText == this.correctAnswer ? true : false;
-
+        if (this.isUserAnswerCorrect === true) {
+          this.$emit('score', true)
+        }
         this.message = this.isUserAnswerCorrect
           ? "Молодец! 🐢"
           : "Не правильно, будь внимательнее";
-
         if (this.isUserAnswerCorrect) this.correctAnswers++;
-
         setTimeout(() => {
           event.target.style.background = this.isUserAnswerCorrect
-            ? "#00e900"
-            : "#ff4a4a";
+            ? "#48ff00"
+            : "#ff2424";
         }, 200);
       }
     },
-
     goToNextQuestion() {
       this.checkIfItIsTheLastRound();
-
       if (!this.gameFinished) {
         this.index++;
         this.roundEnded = false;
@@ -169,7 +158,6 @@ export default {
         this.prepareQuestion();
       }
     },
-
     checkIfItIsTheLastRound() {
       if (this.index == this.numberOfQuestions - 1) {
         this.gameFinished = true;
