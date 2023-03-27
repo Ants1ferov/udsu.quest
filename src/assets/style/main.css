@@ -2,11 +2,11 @@ body, h1, h2, h3, h4, p, a, button {
     margin: 0;
     font-size: 100%;
     font-weight: normal;
-    font-family: Nunito, sans-serif;
+    font-family: "Nunito", sans-serif;
     text-decoration: none;
 }
 input {
-    font-family: Nunito, sans-serif;
+    font-family: "Nunito", sans-serif;
 }
 a {
     all: unset;
@@ -24,7 +24,13 @@ button {
     font-family: "Nunito";
     font-style: normal;
     font-weight: 400;
-    src: url("@/assets/fonts/Nunito-VariableFont_wght.ttf")
+    src: url("@/assets/fonts/Nunito-Regular.ttf")
+}
+@font-face {
+    font-family: "JetBrains Mono";
+    font-style: normal;
+    font-weight: 400;
+    src: url("@/assets/fonts/JetBrainsMono-Regular.ttf")
 }
 .mrg-25 {
     margin: 25px 0;
