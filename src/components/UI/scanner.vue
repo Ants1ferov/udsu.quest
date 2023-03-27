@@ -1,9 +1,20 @@
 <script setup>
 import {Html5Qrcode, Html5QrcodeScanner} from "html5-qrcode";
-import {onMounted} from "vue";
+import {onMounted, ref} from "vue";
 import AppButton from "@/components/UI/AppButton.vue";
 import router from "@/router";
+
+let cameraScan = ref(false)
+
 const emit = defineEmits(['qrOk', 'qrFail'])
+
+function cameraOpen() {
+  cameraScan.value = !cameraScan.value
+  setTimeout(() => {
+    qrFromCamera()
+  }, 1000);
+
+}
 function qrFromCamera () {
   const html5QrCode = new Html5Qrcode("reader");
   const qrCodeSuccessCallback = (decodedText, decodedResult) => {
@@ -25,19 +36,19 @@ onMounted(() => {
           if (decodedText === 'dbn89f32') {
             emit('qrOk', 1)
           }
-          else if (decodedText === 'xd324r3x2') {
+          else if (decodedText === 'xd32r3x2') {
             emit('qrOk', 2)
           }
-          else if (decodedText === 'x23fr23qf') {
+          else if (decodedText === 'x23fr2qf') {
             emit('qrOk', 3)
           }
-          else if (decodedText === 'v3Ww3rvtf') {
+          else if (decodedText === 'v3Ww3r7f') {
             emit('qrOk', 4)
           }
-          else if (decodedText === 'cW4H435V3') {
+          else if (decodedText === 'cW4H45V3') {
             emit('qrOk', 5)
           }
-          else if (decodedText === 'vq4TC7fawg') {
+          else if (decodedText === 'vq4TC7f0') {
             emit('qrOk', 6)
           }
           else {
@@ -52,9 +63,9 @@ onMounted(() => {
 </script>
 
 <template>
-  <AppButton class="bg-dark mrg-25">Сканировать камерой</AppButton>
-  <div v-if="cameraScan" id="reader" class="reader"></div>
-  <div id="readImage"></div>
+  <AppButton class="bg-dark mrg-25" @click="cameraOpen">Сканировать камерой</AppButton>
+  <div v-if="cameraScan" id="reader" class="reader bdr-wht"></div>
+  <div id="readImage" v-if="!cameraScan"></div>
     <label class="input-file mrg-25">
       <input id="qr-input-file" type="file" name="file">
       <span class="app-button bg-dark">Сканировать из галереи</span>
@@ -65,6 +76,7 @@ onMounted(() => {
 .reader {
   width: 300px;
   height: 300px;
+  border-radius: 25px;
 }
 .input-file {
   position: relative;

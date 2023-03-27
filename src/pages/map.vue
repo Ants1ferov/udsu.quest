@@ -41,6 +41,7 @@ onMounted( () => {
 
 let scanner = ref(false)
 let qrFail = ref(false)
+let qrOk = ref(false)
 let questCompleted = ref(false)
 let actionFail = ref(false)
 let road = ref(JSON.parse(localStorage.getItem('road')))
@@ -50,19 +51,34 @@ const number = ref(parseInt(localStorage.getItem('score')))
 watch(number, (n) => {
   gsap.to(score, { duration: 1, number: Number(n) || 0})
 })
-
-
-
-
+function qrCheckOK() {
+  quest.count += 1
+  road.value = ! road.value
+  localStorage.setItem('quest', quest.count)
+  localStorage.setItem('road', road.value)
+  scanner.value = !scanner.value
+  updateServerValue()
+  setTimeout(() => {
+    qrOk.value = true
+  }, 250);
+}
 function qrCheck(count) {
-  if (count === 2 && quest.count < 2) {
-    quest.count = 2
-    road.value = ! road.value
-    localStorage.setItem('quest', quest.count)
-    localStorage.setItem('road', road.value)
-    scanner.value = !scanner.value
-    updateServerValue()
-  } else {
+  if (count === 2 && quest.count === 2) {
+    qrCheckOK()
+  }
+  else if (count === 3 && quest.count < 3) {
+    qrCheckOK()
+  }
+  else if (count === 4 && quest.count < 4) {
+    qrCheckOK()
+  }
+  else if (count === 5 && quest.count < 5) {
+    qrCheckOK()
+  }
+  else if (count === 6 && quest.count < 6) {
+    qrCheckOK()
+  }
+  else {
     scanner.value = false
     setTimeout(() => {
       qrFail.value = true
@@ -103,12 +119,7 @@ function cancel() {
   questCompleted.value = false
   qrFail.value = false
   scanner.value = false
-}
-function scan() {
-  quest.count += 1
-  road.value = ! road.value
-  scanner.value = !scanner.value
-  updateServerValue()
+  qrOk.value = false
 }
 function nextQuest() {
   console.log('задание выполнено')
@@ -135,6 +146,13 @@ function scanOpen() {
         <p class="fz-36 white">Вы отсканировали qr-код прошлого задания!</p>
         <AppButton class="bg-dark bold" type="button" @click="cancel">Ну блин</AppButton>
       </error-pop-up>
+    </transition>
+    <transition name="ok">
+      <ok-pop-up v-if="qrOk">
+        <div class="white fz-32">QR-код успешно отсканирован
+        </div>
+        <AppButton class="bg-dark bold" type="button" @click="cancel">Прекрасно</AppButton>
+      </ok-pop-up>
     </transition>
     <div class="block-1">
       <count-score>
