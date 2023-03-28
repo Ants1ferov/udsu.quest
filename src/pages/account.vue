@@ -13,24 +13,31 @@ let logoutAlert = ref(false)
 
 function setQuest1() {
   localStorage.setItem('quest', '1')
+  router.push({path: '/'})
 }
 function setQuest2() {
   localStorage.setItem('quest', '2')
+  router.push({path: '/'})
 }
 function setQuest3() {
   localStorage.setItem('quest', '3')
+  router.push({path: '/'})
 }
 function setQuest4() {
   localStorage.setItem('quest', '4')
+  router.push({path: '/'})
 }
 function setQuest5() {
   localStorage.setItem('quest', '5')
+  router.push({path: '/'})
 }
 function setQuest6() {
   localStorage.setItem('quest', '6')
+  router.push({path: '/'})
 }
 function setQuest7() {
   localStorage.setItem('quest', '7')
+  router.push({path: '/'})
 }
 
 

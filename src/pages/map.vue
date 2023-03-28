@@ -29,6 +29,7 @@ import PointSix from "@/components/maps/points/pointSix.vue";
 import PointSeven from "@/components/maps/points/pointSeven.vue";
 import axios from "axios";
 import Scanner from "@/components/UI/scanner.vue";
+import Quest7 from "@/components/quests/quest7.vue";
 
 onMounted( () => {
   if (localStorage.getItem('email') === null) {
@@ -107,7 +108,8 @@ function updateServerValue() {
 }
 function questEnd() {
   quest.count += 1
-  localStorage.setItem('quest', '7')
+  road.value = false
+  updateServerValue()
 }
 function scoreUpdate(count) {
   number.value += count
@@ -122,7 +124,6 @@ function cancel() {
   qrOk.value = false
 }
 function nextQuest() {
-  console.log('задание выполнено')
   questCompleted.value = true
   road.value = true
   updateServerValue()
@@ -200,6 +201,7 @@ function scanOpen() {
       <quest4 @questComplete="nextQuest" @score="scoreUpdate" v-if="quest.count === 4 && !road"></quest4>
       <quest5 @questComplete="nextQuest" @score="scoreUpdate" v-if="quest.count === 5 && !road"></quest5>
       <quest6 @questComplete="nextQuest" @score="scoreUpdate" v-if="quest.count === 6 && !road"></quest6>
+      <quest7 v-if="quest.count === 7"></quest7>
     </div>
   </div>
 </template>

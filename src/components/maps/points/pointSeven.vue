@@ -7,7 +7,7 @@ function init() {
     zoom: 16
   });
   const myPlacemark = new ymaps.Placemark(myMap.getCenter(), {
-    balloonContent: 'Это точка 7, здесь вы должны выполнить задание'
+    balloonContent: '7 точка, конечная'
   }, {
     iconLayout: 'default#image',
     iconImageHref: 'pointB.png',
