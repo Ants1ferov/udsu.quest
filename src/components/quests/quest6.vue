@@ -7,7 +7,7 @@ function questComplete() {
   emit('questComplete', true)
 }
 function score() {
-  emit('score', 25)
+  emit('score', 35)
 }
 </script>
 
