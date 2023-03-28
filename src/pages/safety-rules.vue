@@ -3,7 +3,7 @@
 
 <template>
   <div class="safety-rules">
-    <div class="safety-title bold">правила техники безопасности прохождения квеста</div>
+    <div class="safety-title bold">Правила техники безопасности прохождения квеста</div>
     <div class="safety-value bold">
       <ol>
         <li class="safety-ol-value">Внимательно выслушать инструктаж по технике безопасности.<br></li>

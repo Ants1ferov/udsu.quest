@@ -49,7 +49,7 @@ let quest = ({count: parseInt(localStorage.getItem('quest'))})
 const score = reactive({number: parseInt(localStorage.getItem('score'))})
 const number = ref(parseInt(localStorage.getItem('score')))
 watch(number, (n) => {
-  gsap.to(score, { duration: 1, number: Number(n) || 0})
+  gsap.to(score, { duration: 1.5, number: Number(n) || 0})
 })
 function qrCheckOK() {
   quest.count += 1
