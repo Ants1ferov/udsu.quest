@@ -26,12 +26,6 @@ button {
     font-weight: 400;
     src: url("@/assets/fonts/Nunito-Regular.ttf")
 }
-@font-face {
-    font-family: "JetBrains Mono";
-    font-style: normal;
-    font-weight: 400;
-    src: url("@/assets/fonts/JetBrainsMono-Regular.ttf")
-}
 .mrg-25 {
     margin: 25px 0;
 }
@@ -125,7 +119,7 @@ button {
     justify-content: center;
 }
 .ok-enter-active {
-    transition: all 750ms cubic-bezier(0, 1, .15, 1);
+    transition: all 900ms cubic-bezier(0, 1, .15, 1);
 }
 .ok-leave-active {
     transition: all 1500ms cubic-bezier(0, 1, .15, 1);
@@ -137,6 +131,20 @@ button {
 .ok-leave-to {
     opacity: 0;
     transform: translateY(+150%);
+}
+.lfrt-enter-active {
+    transition: all 500ms cubic-bezier(0, 1, .15, 1);
+}
+.lfrt-leave-active {
+    transition: all 700ms cubic-bezier(0, 1, .15, 1);
+}
+.lfrt-enter-from {
+    opacity: 1;
+    transform: translateX(-150%);
+}
+.lfrt-leave-to {
+    opacity: 0;
+    transform: translateX(+200%);
 }
 .non-copy {
     -ms-user-select: none;
