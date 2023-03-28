@@ -223,7 +223,7 @@ function taskComplete() {
 }
 .fixed-check {
   position: fixed;
-  bottom: 15%;
+  bottom: 5%;
   display: flex;
   flex-direction: column;
 }
