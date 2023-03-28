@@ -37,7 +37,7 @@ function answerCheck() {
   }
   if (count === 9) {
     emit('questComplete', true)
-    emit('score', 70)
+    emit('score', 135)
   } else {
     questFailed.value = true
   }
@@ -56,7 +56,7 @@ function answerCheck() {
     <div class="quest-description fz-24 bold">Прослушайте аудиофайл, и вставьте правильные слова в пропуски</div>
     <div v-if="!questFailed" class="quest-task fz-24">
       <audio class="audio" controls>
-        <source src="@/../src/assets/audio/rickroll.mp3"/>
+        <source src="@/../src/assets/audio/pointTwo.mp3"/>
       </audio>
       <div class="task-text non-copy">
         <input class="form-input text" v-model="answer[0]"> Черезов является выпускником школы №24.

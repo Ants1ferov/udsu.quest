@@ -7,17 +7,22 @@ function questComplete() {
   emit('questComplete', true)
 }
 function score() {
-  emit('score', 10)
+  emit('score', 20)
 }
 </script>
 
 <template>
   <div class="quest-block">
     <div class="quest-title bold fz-56 black">Задание 4</div>
-    <div class="quest-description fz-36">Тест</div>
+    <div class="quest-description fz-24 bold">Прослушайте аудиофайл, и пройдите тест</div>
+    <div class="quest-task fz-24">
+      <audio class="audio mrg-25" controls>
+        <source src="@/../src/assets/audio/pointFour.mp3"/>
+      </audio>
     <div class="test-block">
       <quiz v-bind:json="json" @questComplete="questComplete" @score="score"></quiz>
     </div>
+  </div>
   </div>
 </template>
 
