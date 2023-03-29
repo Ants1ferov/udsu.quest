@@ -15,7 +15,7 @@
 .count-score {
   position: fixed;
   padding: 35px 0;
-  z-index: 15;
+  z-index: 8000;
   margin: 0 auto;
 }
 .count-score-block {

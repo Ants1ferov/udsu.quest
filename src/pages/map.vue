@@ -30,6 +30,7 @@ import PointSeven from "@/components/maps/points/pointSeven.vue";
 import axios from "axios";
 import Scanner from "@/components/UI/scanner.vue";
 import Quest7 from "@/components/quests/quest7.vue";
+import Account from "@/pages/account.vue";
 
 onMounted( () => {
   if (localStorage.getItem('email') === null) {
@@ -40,6 +41,7 @@ onMounted( () => {
   }
 })
 
+const account = ref(false)
 let scanner = ref(false)
 let qrRepeat = ref(false)
 let qrFail = ref(false)
@@ -142,6 +144,9 @@ function scanOpen() {
 
 <template>
   <div class="map">
+    <transition name="account">
+      <account v-if="account"></account>
+    </transition>
     <transition name="ok">
       <ok-pop-up v-if="questCompleted">
         <div class="white fz-32">Задание №{{ quest.count }} выполнено
@@ -170,9 +175,9 @@ function scanOpen() {
     </transition>
     <div class="block-1">
       <count-score>
-        <router-link class="score-block" to="/account">
+        <div class="score-block" @click="account = !account">
           {{ score.number.toFixed(0) }}
-        </router-link>
+        </div>
       </count-score>
       <div class="maps">
         <point-zero v-if="quest.count === 0"></point-zero>
@@ -192,7 +197,7 @@ function scanOpen() {
       </div>
       <div class="on-the-road" v-if="road && quest.count < 7">
         <p class="fz-32 mrg-25">Следуйте до точки {{ quest.count + 1}}</p>
-        <AppButton v-if="road && quest.count <= 5" class="qr-block bold bdr-blk" @click="scanOpen">
+        <AppButton v-if="road && quest.count <= 5 && (quest.count !== 2 && road.value !== true)" class="qr-block bold bdr-blk" @click="scanOpen">
           <div>Сканировать</div>
           <img class="qr-img" src="@/../src/assets/img/button/qr.svg" alt="qr button">
         </AppButton>
@@ -203,7 +208,7 @@ function scanOpen() {
           </pop-up-block>
         </transition>
       </div>
-      <div v-if="quest.count === 6 && road">
+      <div v-if="quest.count === 6 && road || quest.count === 2 && road">
         <AppButton class="bg-dark fz-42" @click="questEnd">Я на месте</AppButton>
       </div>
     </div>
@@ -226,8 +231,10 @@ function scanOpen() {
   align-items: center;
 }
 .score-block {
+  text-align: center;
   width: 100px;
-  padding: 7px 45px;
+
+  z-index: 9000;
 }
 .maps {
   width: 100%;
