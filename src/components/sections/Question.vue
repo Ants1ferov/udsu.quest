@@ -45,7 +45,7 @@
           {{ message }}
         </p>
         <AppButton
-            class="bg-dark fz-28 "
+            class="bg-dark-gray fz-28 "
             @click="goToNextQuestion"
             v-html="[
           index == numberOfQuestions - 1 ? 'Посмотреть результаты!' : 'Следующий вопрос',

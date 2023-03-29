@@ -30,7 +30,7 @@ import PointSeven from "@/components/maps/points/pointSeven.vue";
 import axios from "axios";
 import Scanner from "@/components/UI/scanner.vue";
 import Quest7 from "@/components/quests/quest7.vue";
-import Account from "@/pages/account.vue";
+import Account from "@/components/sections/account.vue";
 
 onMounted( () => {
   if (localStorage.getItem('email') === null) {
@@ -151,26 +151,26 @@ function scanOpen() {
       <ok-pop-up v-if="questCompleted">
         <div class="white fz-32">Задание №{{ quest.count }} выполнено
         </div>
-        <AppButton class="bg-dark bold" type="button" @click="cancel">Прекрасно</AppButton>
+        <AppButton class="white bdr-wht bold" type="button" @click="cancel">Прекрасно</AppButton>
       </ok-pop-up>
     </transition>
     <transition name="ok">
       <error-pop-up v-if="qrRepeat">
         <p class="fz-36 white">Вы отсканировали qr-код прошлого задания!</p>
-        <AppButton class="bg-dark bold" type="button" @click="cancel">Ну блин</AppButton>
+        <AppButton class="bg-gray bold" type="button" @click="cancel">Ну блин</AppButton>
       </error-pop-up>
     </transition>
     <transition name="ok">
       <error-pop-up v-if="qrFail">
         <p class="fz-36 white">Неправильный qr!😔</p>
-        <AppButton class="bg-dark bold" type="button" @click="cancel">Ну блин</AppButton>
+        <AppButton class="bg-gray bold" type="button" @click="cancel">Ну блин</AppButton>
       </error-pop-up>
     </transition>
     <transition name="ok">
       <ok-pop-up v-if="qrOk">
         <div class="white fz-32">QR-код успешно отсканирован
         </div>
-        <AppButton class="bg-dark bold" type="button" @click="cancel">Прекрасно</AppButton>
+        <AppButton class="bg-gray bold" type="button" @click="cancel">Прекрасно</AppButton>
       </ok-pop-up>
     </transition>
     <div class="block-1">
@@ -259,6 +259,7 @@ function scanOpen() {
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
 }
 .qr-img {
   width: 64px;

@@ -55,7 +55,7 @@ function register() {
   <div class="register">
     <transition name="ok">
       <error-pop-up v-if="actionFail">
-        <AppButton class="bg-dark bold btn-mn-auto" type="button" @click="cancel">Закрыть</AppButton>
+        <AppButton class="bg-gray bold btn-mn-auto" type="button" @click="cancel">Закрыть</AppButton>
       </error-pop-up>
     </transition>
     <transition name="ok">
@@ -66,7 +66,7 @@ function register() {
       <input type="text" placeholder="Фамилия" autocomplete="family-name" class="form-input" v-model="userSurname">
       <input type="email" placeholder="Email" autocomplete="email" class="form-input" v-model="email">
       <input type="password" placeholder="Пароль" autocomplete="new-password" class="form-input" v-model="password">
-      <AppButton @click="register" @submit.prevent class="bg-dark fz-24">Регистрация</AppButton>
+      <AppButton @click="register" @submit.prevent class="bg-dark-gray fz-24">Регистрация</AppButton>
     </form>
   </div>
 </template>

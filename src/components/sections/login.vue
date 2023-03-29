@@ -14,11 +14,6 @@ let actionOk = ref(false)
 let actionFail = ref(false)
 let openRec = ref(false)
 
-
-
-function openRecovery() {
-  openRec.value = true
-}
 function cancel() {
   actionFail.value = !actionFail.value
 }
@@ -83,7 +78,7 @@ function login() {
   <div class="login">
     <transition name="ok">
       <error-pop-up v-if="actionFail">
-        <AppButton class="bg-dark bold btn-mn-auto" type="button" @click="cancel">Закрыть</AppButton>
+        <AppButton class="bg-dark-gray bold btn-mn-auto" type="button" @click="cancel">Закрыть</AppButton>
       </error-pop-up>
     </transition>
     <transition name="ok">
@@ -91,7 +86,7 @@ function login() {
         <form class="recovery" @submit.prevent="recovery">
           <input type="email" placeholder="Email" autocomplete="email" class="form-input" v-model="email">
           <input type="password" placeholder="Новый пароль" autocomplete="new-password" class="form-input" v-model="password">
-          <AppButton @submit.prevent @click="recovery" class="bg-dark">Изменить</AppButton>
+          <AppButton @submit.prevent @click="recovery" class="bg-dark-gray">Изменить</AppButton>
         </form>
       </pop-up-block>
     </transition>
@@ -101,9 +96,9 @@ function login() {
     <form @submit.prevent="login" class="form-auth">
       <input type="email" placeholder="Email" autocomplete="email" class="form-input" v-model="email">
       <input type="password" placeholder="Пароль" autocomplete="password" class="form-input" v-model="password">
-      <AppButton @click="login" @submit.prevent class="bg-dark fz-24">Вход</AppButton>
+      <AppButton @click="login" @submit.prevent class="bg-dark-gray fz-24">Вход</AppButton>
     </form>
-    <AppButton @click="openRecovery" class="">Забыли пароль?</AppButton>
+    <AppButton @click="openRec = !openRec" class="">Забыли пароль?</AppButton>
   </div>
 </template>
 

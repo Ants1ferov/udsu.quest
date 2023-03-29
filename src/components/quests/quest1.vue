@@ -180,10 +180,10 @@ function taskComplete() {
       <div class="block-input-flex">
         <input type="text" class="form-input" placeholder="Слово" :class="{ red: wrongAns }" v-model="answer.count">
       </div>
-      <AppButton @click="answerCheck" class="answer-check bg-dark fz-24 bold"
+      <AppButton @click="answerCheck" class="answer-check bg-dark-gray fz-24 bold"
                  :class="{ shake: wrongAns }">Проверить</AppButton>
     </div>
-    <AppButton @click="taskComplete" v-if="taskOk" class="bg-dark k9fc">Отправить</AppButton>
+    <AppButton @click="taskComplete" v-if="taskOk" class="bg-dark-gray k9fc">Отправить</AppButton>
   </div>
 </template>
 
@@ -235,6 +235,7 @@ function taskComplete() {
   background-color: #1e1e1e;
   margin: 0;
   color: white;
+  font-size: 24px;
 }
 .form-input::placeholder {
   color: #dadada;

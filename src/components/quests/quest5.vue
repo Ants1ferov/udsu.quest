@@ -2,7 +2,7 @@
   <div class="quest-block">
     <div class="quest-title bold fs-max black">Задание 5</div>
     <div class="quest-description fs-big">Правильно собрать фразу</div>
-    <AppButton @click="questComplete" class="bg-dark">Отправить</AppButton>
+    <AppButton @click="questComplete" class="bg-dark-gray">Отправить</AppButton>
   </div>
 </template>
 

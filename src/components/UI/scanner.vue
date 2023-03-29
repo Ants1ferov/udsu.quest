@@ -65,13 +65,13 @@ onMounted(() => {
 </script>
 
 <template>
-  <AppButton class="bg-dark mrg-25" v-if="!cameraScan" @click="cameraOpen">Сканировать камерой</AppButton>
+  <AppButton class="bg-gray mrg-25" v-if="!cameraScan" @click="cameraOpen">Сканировать камерой</AppButton>
   <div v-if="cameraScan" id="reader" class="reader bdr-wht"></div>
   <div v-if="!cameraScan">
   <div id="readImage"></div>
     <label class="input-file mrg-25">
       <input id="qr-input-file" type="file" name="file">
-      <span class="app-button bg-dark">Сканировать из галереи</span>
+      <span class="app-button bg-gray">Сканировать из галереи</span>
     </label>
   </div>
 </template>

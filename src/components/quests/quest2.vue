@@ -49,7 +49,7 @@ function answerCheck() {
     <transition name="ok">
       <error-pop-up v-if="questFailed">
         <div class="fz-42 white">Не все ответы верны</div>
-        <AppButton class="bg-dark bold" type="button" @click="cancel">Ну ладно</AppButton>
+        <AppButton class="bdr-wht white bold" type="button" @click="cancel">Ну ладно</AppButton>
       </error-pop-up>
     </transition>
     <div class="quest-title bold fz-56 black">Задание 2</div>
@@ -75,7 +75,7 @@ function answerCheck() {
         было проведено около <input type="text" class="form-input number" v-model="answer[8]"> таких операций
       </div>
     </div>
-    <AppButton @click="answerCheck" class="bg-dark">Отправить</AppButton>
+    <AppButton @click="answerCheck" class="bg-dark-gray">Отправить</AppButton>
   </div>
 </template>
 

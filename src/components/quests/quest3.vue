@@ -14,7 +14,7 @@ function questComplete() {
       Игра. Так как во время войны в здании школы располагался военный госпиталь №3777 предлагаю
       вам ощутить на себе оказание первой помощи не стандартными методами, как делалось это раньше, в годы ВОВ.
     </div>
-    <AppButton @click="questComplete" class="bg-dark">Продолжить</AppButton>
+    <AppButton @click="questComplete" class="bg-dark-gray">Продолжить</AppButton>
   </div>
 </template>
 

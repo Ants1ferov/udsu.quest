@@ -1,6 +1,6 @@
 <template>
   <section class="home">
-    <AppButton class="bg-dark" @click="passEvent()">Начать</AppButton>
+    <AppButton class="bg-dark-gray" @click="passEvent()">Начать</AppButton>
   </section>
 </template>
 

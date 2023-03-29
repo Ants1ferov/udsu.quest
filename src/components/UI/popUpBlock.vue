@@ -14,12 +14,11 @@
   flex-direction: column;
   position: fixed;
   width: 90%;
-  height: 600px;
+  height: 400px;
   margin: auto;
   top: 0; left: 0; bottom: 0; right: 0;
   text-align: center;
-  background-color: rgba(0, 0, 0, 0.50);
-  backdrop-filter: blur(10px);
+  background-color: #1e1e1e;
   z-index: 2;
   border-radius: 25px;
   align-items: center;

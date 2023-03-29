@@ -5,7 +5,7 @@
     <div>
       <p class="fz-36 bold">{{ correctAnswers }}/{{ numberOfQuestions }}</p>
     </div>
-    <AppButton @click="questComplete" class="bg-dark">Продолжить</AppButton>
+    <AppButton @click="questComplete" class="bg-dark-gray">Продолжить</AppButton>
   </section>
 </template>
 <script>

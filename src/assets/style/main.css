@@ -66,9 +66,13 @@ button {
     border: 4px black solid;
 }
 .bdr-wht {
-    border: 4px white solid;
+    border: 3px white solid;
 }
-.bg-dark {
+.bg-gray {
+    background-color: #444444;
+    color: white;
+}
+.bg-dark-gray {
     background-color: #1e1e1e;
     color: white;
 }
@@ -170,16 +174,43 @@ button {
 .question-leave-to {
     opacity: 0;
 }
-@media only screen and (max-width: 370px) {
+@media only screen and (max-width: 376px) {
+    .maps {
+        height: 350px !important;
+    }
+    #map {
+        height: 350px !important;
+    }
     .app-button {
         font-size: 20px;
     }
     .logo-text {
         font-size: 16px;
     }
+    .ge5ye {
+        top: 50% !important;
+    }
 }
-@media (max-height: 700px) {
-    .pop-up-block {
-        height: 400px !important;
+@media only screen and (max-width: 340px) {
+    .maps {
+        height: 300px !important;
+    }
+    #map {
+        height: 300px !important;
+    }
+    .quest-title {
+        font-size: 42px;
+    }
+    .quest-description {
+        font-size: 32px;
+    }
+    .crossword-questions {
+        padding-bottom: 150px !important;
+    }
+    .form-input {
+        font-size: 18px !important;
+    }
+    .logo-text {
+        font-size: 16px;
     }
 }
