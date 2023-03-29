@@ -13,12 +13,34 @@ function cameraOpen() {
   setTimeout(() => {
     qrFromCamera()
   }, 1000);
-
 }
-function qrFromCamera () {
+function qrSend(value) {
+  if (value === 'dbn89f32') {
+    emit('qr', 1)
+  }
+  else if (value === 'xd32r3x2') {
+    emit('qr', 2)
+  }
+  else if (value === 'x23fr2qf') {
+    emit('qr', 3)
+  }
+  else if (value === 'v3Ww3r7f') {
+    emit('qr', 4)
+  }
+  else if (value === 'cW4H45V3') {
+    emit('qr', 5)
+  }
+  else if (value === 'vq4TC7f0') {
+    emit('qr', 6)
+  }
+  else {
+    emit('qr', 0)
+  }
+}
+function qrFromCamera() {
   const html5QrCode = new Html5Qrcode("reader");
   const qrCodeSuccessCallback = (decodedText, decodedResult) => {
-    alert(decodedText)
+    qrSend(decodedText)
   };
   const config = { fps: 10, qrbox: { width: 250, height: 250 } };
   html5QrCode.start({ facingMode: "environment" }, config, qrCodeSuccessCallback);
@@ -33,50 +55,33 @@ onMounted(() => {
     const imageFile = e.target.files[0];
     html5QrCode.scanFile(imageFile, true)
         .then(decodedText => {
-          if (decodedText === 'dbn89f32') {
-            emit('qr', 1)
-          }
-          else if (decodedText === 'xd32r3x2') {
-            emit('qr', 2)
-          }
-          else if (decodedText === 'x23fr2qf') {
-            emit('qr', 3)
-          }
-          else if (decodedText === 'v3Ww3r7f') {
-            emit('qr', 4)
-          }
-          else if (decodedText === 'cW4H45V3') {
-            emit('qr', 5)
-          }
-          else if (decodedText === 'vq4TC7f0') {
-            emit('qr', 6)
-          }
-          else {
-            emit('qr', 0)
-          }
+          qrSend(decodedText)
         })
         .catch(err => {
-          emit('qr', 0)
+          qrSend(0)
         });
   });
 })
 </script>
 
 <template>
-  <AppButton class="bg-dark mrg-25" @click="cameraOpen">Сканировать камерой</AppButton>
+  <AppButton class="bg-dark mrg-25" v-if="!cameraScan" @click="cameraOpen">Сканировать камерой</AppButton>
   <div v-if="cameraScan" id="reader" class="reader bdr-wht"></div>
-  <div id="readImage" v-if="!cameraScan"></div>
+  <div v-if="!cameraScan">
+  <div id="readImage"></div>
     <label class="input-file mrg-25">
       <input id="qr-input-file" type="file" name="file">
       <span class="app-button bg-dark">Сканировать из галереи</span>
     </label>
+  </div>
 </template>
 
 <style scoped>
 .reader {
   width: 300px;
-  height: 300px;
+  height: 400px;
   border-radius: 25px;
+  margin: 25px 0;
 }
 .input-file {
   position: relative;
