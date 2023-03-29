@@ -41,6 +41,7 @@ onMounted( () => {
 })
 
 let scanner = ref(false)
+let qrRepeat = ref(false)
 let qrFail = ref(false)
 let qrOk = ref(false)
 let questCompleted = ref(false)
@@ -55,8 +56,6 @@ watch(number, (n) => {
 function qrCheckOK() {
   quest.count += 1
   road.value = ! road.value
-  localStorage.setItem('quest', quest.count)
-  localStorage.setItem('road', road.value)
   scanner.value = !scanner.value
   updateServerValue()
   setTimeout(() => {
@@ -64,25 +63,32 @@ function qrCheckOK() {
   }, 250);
 }
 function qrCheck(count) {
-  if (count === 2 && quest.count === 2) {
+  if (count === 0) {
+    scanner.value = !scanner.value
+    qrFail.value = true
+  }
+  else if (count === 1 && quest.count === 0) {
     qrCheckOK()
   }
-  else if (count === 3 && quest.count < 3) {
+  else if (count === 2 && quest.count === 1) {
     qrCheckOK()
   }
-  else if (count === 4 && quest.count < 4) {
+  else if (count === 3 && quest.count === 2) {
     qrCheckOK()
   }
-  else if (count === 5 && quest.count < 5) {
+  else if (count === 4 && quest.count === 3) {
     qrCheckOK()
   }
-  else if (count === 6 && quest.count < 6) {
+  else if (count === 5 && quest.count === 4) {
+    qrCheckOK()
+  }
+  else if (count === 6 && quest.count === 5) {
     qrCheckOK()
   }
   else {
     scanner.value = false
     setTimeout(() => {
-      qrFail.value = true
+      qrRepeat.value = true
     }, 250);
   }
 }
@@ -119,9 +125,10 @@ function scoreUpdate(count) {
 function cancel() {
   actionFail.value = false
   questCompleted.value = false
-  qrFail.value = false
+  qrRepeat.value = false
   scanner.value = false
   qrOk.value = false
+  qrFail.value = false
 }
 function nextQuest() {
   questCompleted.value = true
@@ -143,8 +150,14 @@ function scanOpen() {
       </ok-pop-up>
     </transition>
     <transition name="ok">
-      <error-pop-up v-if="qrFail" style="z-index: 100">
+      <error-pop-up v-if="qrRepeat">
         <p class="fz-36 white">Вы отсканировали qr-код прошлого задания!</p>
+        <AppButton class="bg-dark bold" type="button" @click="cancel">Ну блин</AppButton>
+      </error-pop-up>
+    </transition>
+    <transition name="ok">
+      <error-pop-up v-if="qrFail">
+        <p class="fz-36 white">Неправильный qr!😔</p>
         <AppButton class="bg-dark bold" type="button" @click="cancel">Ну блин</AppButton>
       </error-pop-up>
     </transition>
@@ -185,7 +198,7 @@ function scanOpen() {
         </AppButton>
         <transition name="ok">
           <pop-up-block v-if="scanner">
-            <scanner @qr-ok="qrCheck"></scanner>
+            <scanner @qr="qrCheck"></scanner>
             <AppButton @click="cancel" class="bdr-wht white bold">Закрыть</AppButton>
           </pop-up-block>
         </transition>

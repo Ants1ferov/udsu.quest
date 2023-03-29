@@ -6,7 +6,7 @@ import router from "@/router";
 
 let cameraScan = ref(false)
 
-const emit = defineEmits(['qrOk', 'qrFail'])
+const emit = defineEmits(['qr'])
 
 function cameraOpen() {
   cameraScan.value = !cameraScan.value
@@ -18,7 +18,7 @@ function cameraOpen() {
 function qrFromCamera () {
   const html5QrCode = new Html5Qrcode("reader");
   const qrCodeSuccessCallback = (decodedText, decodedResult) => {
-    console.log(decodedText)
+    alert(decodedText)
   };
   const config = { fps: 10, qrbox: { width: 250, height: 250 } };
   html5QrCode.start({ facingMode: "environment" }, config, qrCodeSuccessCallback);
@@ -34,29 +34,29 @@ onMounted(() => {
     html5QrCode.scanFile(imageFile, true)
         .then(decodedText => {
           if (decodedText === 'dbn89f32') {
-            emit('qrOk', 1)
+            emit('qr', 1)
           }
           else if (decodedText === 'xd32r3x2') {
-            emit('qrOk', 2)
+            emit('qr', 2)
           }
           else if (decodedText === 'x23fr2qf') {
-            emit('qrOk', 3)
+            emit('qr', 3)
           }
           else if (decodedText === 'v3Ww3r7f') {
-            emit('qrOk', 4)
+            emit('qr', 4)
           }
           else if (decodedText === 'cW4H45V3') {
-            emit('qrOk', 5)
+            emit('qr', 5)
           }
           else if (decodedText === 'vq4TC7f0') {
-            emit('qrOk', 6)
+            emit('qr', 6)
           }
           else {
-
+            emit('qr', 0)
           }
         })
         .catch(err => {
-          console.log(`Error scanning file. Reason: ${err}`)
+          emit('qr', 0)
         });
   });
 })
