@@ -238,7 +238,7 @@ function scanOpen() {
   border: none;
 }
 .ymaps-2-1-79-balloon__content {
-  font-size: 20px !important;
+  font-size: 16px !important;
   font-family: sans-serif !important;
 }
 .ymaps-2-1-79-controls__control_toolbar, .ymaps-2-1-79-copyright.ymaps-2-1-79-copyright_logo_no, .ymaps-2-1-79-map-copyrights-promo {
@@ -256,12 +256,6 @@ function scanOpen() {
 .qr-img {
   width: 64px;
   margin-top: 10px;
-}
-.quest-block {
-  margin: 35px 0 50px 0;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
 }
 .quest-task {
   width: 100%;

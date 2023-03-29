@@ -61,9 +61,9 @@ function logout() {
   <div class="account">
     <transition name="ok">
       <pop-up-block v-if="logoutAlert">
-        <div class="white fz-32 mrg-25">Вы уверены, что хотите выйти из аккаунта?
+        <div class="white fz-32 mrg-25 mrg-s-15">Вы уверены, что хотите выйти из аккаунта?
         </div>
-        <AppButton class="bg-dark pdg-lr-35 bold btn-mn-auto bg-red mrg-25" type="button" @click="logout">Да</AppButton>
+        <AppButton class="bg-dark pdg-lr-35 bold btn-mn-auto bg-red" type="button" @click="logout">Да</AppButton>
         <AppButton class="bdr-wht pdg-lr-35 bold btn-mn-auto white" type="button" @click="logoutAlertAction">Нет</AppButton>
       </pop-up-block>
     </transition>

@@ -54,7 +54,7 @@ function answerCheck() {
     </transition>
     <div class="quest-title bold fz-56 black">Задание 2</div>
     <div class="quest-description fz-24 bold">Прослушайте аудиофайл, и вставьте правильные слова в пропуски</div>
-    <div v-if="!questFailed" class="quest-task fz-24">
+    <div class="quest-task fz-24">
       <audio class="audio" controls>
         <source src="@/../src/assets/audio/pointTwo.mp3"/>
       </audio>
@@ -85,7 +85,7 @@ function answerCheck() {
 }
 .task-text {
   text-align: left;
-  padding: 0 25px;
+  padding: 0 15px 0 25px;
 }
 .text {
   height: 28px;

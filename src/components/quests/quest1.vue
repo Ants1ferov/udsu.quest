@@ -113,16 +113,16 @@ function taskComplete() {
         <div class="white bold fz-36">Вы уже вводили это слово!</div>
       </fast-pop-up>
     </transition>
-    <transition name="lfrt">
+    <transition name="top-dynamic">
       <div class="fast-pop-up-mini" v-if="wrongAns">
-        <svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width="64" height="64" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M64 69.6L36 97.6C35.2 98.4 34.2667 98.8 33.2 98.8C32.1333 98.8 31.2 98.4 30.4 97.6C29.6 96.8 29.2 95.8667 29.2 94.8C29.2 93.7333 29.6 92.8 30.4 92L58.4 64L30.4 36C29.6 35.2 29.2 34.2667 29.2 33.2C29.2 32.1333 29.6 31.2 30.4 30.4C31.2 29.6 32.1333 29.2 33.2 29.2C34.2667 29.2 35.2 29.6 36 30.4L64 58.4L92 30.4C92.8 29.6 93.7333 29.2 94.8 29.2C95.8667 29.2 96.8 29.6 97.6 30.4C98.4 31.2 98.8 32.1333 98.8 33.2C98.8 34.2667 98.4 35.2 97.6 36L69.6 64L97.6 92C98.4 92.8 98.8 93.7333 98.8 94.8C98.8 95.8667 98.4 96.8 97.6 97.6C96.8 98.4 95.8667 98.8 94.8 98.8C93.7333 98.8 92.8 98.4 92 97.6L64 69.6Z" fill="#FF0000"/>
         </svg>
       </div>
     </transition>
-    <transition name="lfrt">
+    <transition name="top-dynamic">
       <div class="fast-pop-up-mini" v-if="answerOk">
-        <svg xmlns="http://www.w3.org/2000/svg" height="128" width="128" viewBox="0 0 48 48"><path d="M18.9 35.1q-.3 0-.55-.1-.25-.1-.5-.35L8.8 25.6q-.45-.45-.45-1.1 0-.65.45-1.1.45-.45 1.05-.45.6 0 1.05.45l8 8 18.15-18.15q.45-.45 1.075-.45t1.075.45q.45.45.45 1.075T39.2 15.4L19.95 34.65q-.25.25-.5.35-.25.1-.55.1Z" fill="#adff00"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" height="64" width="64" viewBox="0 0 48 48"><path d="M18.9 35.1q-.3 0-.55-.1-.25-.1-.5-.35L8.8 25.6q-.45-.45-.45-1.1 0-.65.45-1.1.45-.45 1.05-.45.6 0 1.05.45l8 8 18.15-18.15q.45-.45 1.075-.45t1.075.45q.45.45.45 1.075T39.2 15.4L19.95 34.65q-.25.25-.5.35-.25.1-.55.1Z" fill="#adff00"/></svg>
       </div>
     </transition>
     <div class="quest-title bold fz-56 black">Задание 1</div>
@@ -273,15 +273,15 @@ function taskComplete() {
 }
 .fast-pop-up-mini {
   position: fixed;
-  width: max-content;
-  height: max-content;
-  padding: 20px;
-  background-color: #1e1e1e;
-  bottom: 300px;
+  width: 64px;
+  height: 64px;
+  padding: 10px;
+  background-color: #000;
+  top: 150px;
   border-radius: 25px;
   z-index: 15;
 }
 .k9fc {
-    box-shadow: 0px 0px 39px 17px #ADFF00;
+    box-shadow: 0 0 30px 15px #ADFF00;
   }
 </style>

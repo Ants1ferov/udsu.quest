@@ -12,7 +12,7 @@
 .pop-up-block {
   display: flex;
   flex-direction: column;
-  position: absolute;
+  position: fixed;
   width: 90%;
   height: 600px;
   margin: auto;

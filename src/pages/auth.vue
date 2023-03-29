@@ -31,7 +31,8 @@ onMounted(() => {
       <register v-if="regLog"></register>
       <login v-if="!regLog"></login>
       <div class="button-block">
-        <AppButton @click="regLog = !regLog" class="bdr-blk bold fz-16 btn-mn-auto">Уже есть аккаунт?</AppButton>
+        <AppButton @click="regLog = !regLog" v-if="regLog" class="bdr-blk bold fz-16 btn-mn-auto">Уже есть аккаунт?</AppButton>
+        <AppButton @click="regLog = !regLog" v-if="!regLog" class="bdr-blk bold fz-16 btn-mn-auto">Еще нет аккаунта?</AppButton>
       </div>
     </div>
     <div class="logo-btm">

@@ -6,6 +6,7 @@ import router from "@/router";
 import ErrorPopUp from "@/components/UI/errorPopUp.vue";
 import OkPopUp from "@/components/UI/okPopUp.vue";
 import PopUpBlock from "@/components/UI/popUpBlock.vue";
+import App from "@/App.vue";
 
 let email = ''
 let password = ''
@@ -79,7 +80,7 @@ function login() {
 </script>
 
 <template>
-  <div class="register">
+  <div class="login">
     <transition name="ok">
       <error-pop-up v-if="actionFail">
         <AppButton class="bg-dark bold btn-mn-auto" type="button" @click="cancel">Закрыть</AppButton>
@@ -87,10 +88,10 @@ function login() {
     </transition>
     <transition name="ok">
       <pop-up-block v-if="openRec">
-        <form @submit.prevent="recovery">
+        <form class="recovery" @submit.prevent="recovery">
           <input type="email" placeholder="Email" autocomplete="email" class="form-input" v-model="email">
           <input type="password" placeholder="Новый пароль" autocomplete="new-password" class="form-input" v-model="password">
-          <button class="bg-dark">Изменить</button>
+          <AppButton @submit.prevent @click="recovery" class="bg-dark">Изменить</AppButton>
         </form>
       </pop-up-block>
     </transition>
@@ -102,10 +103,20 @@ function login() {
       <input type="password" placeholder="Пароль" autocomplete="password" class="form-input" v-model="password">
       <AppButton @click="login" @submit.prevent class="bg-dark fz-24">Вход</AppButton>
     </form>
-    <AppButton @click="openRecovery" class="bdr-blk">Забыли пароль?</AppButton>
+    <AppButton @click="openRecovery" class="">Забыли пароль?</AppButton>
   </div>
 </template>
 
 <style scoped>
-
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 75px;
+}
+.recovery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 </style>
