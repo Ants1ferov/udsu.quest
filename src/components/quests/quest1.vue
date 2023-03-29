@@ -4,7 +4,7 @@ import {defineEmits, reactive, ref} from "vue";
 import FastPopUp from "@/components/UI/fastPopUp.vue";
 const answers = [
   'гимнастерка',
-  'пуск',
+  'огонь',
   'погоны',
   'госпиталь',
   'орден',
@@ -59,13 +59,17 @@ function answerCheck() {
   for (let i in answers) {
     countFor.value += 1
     if (answer.count.toLowerCase() === answers[i]) {
-      if (count.count === 15) {
+      if (count.count === 16) {
         count.count += 1
         setTimeout(() => {
           words[i].value = !words[i].value
         }, 1150)
         answer.count = ''
         taskOk.value = true
+        answerOk.value = true
+        setTimeout(() => {
+          answerOk.value = false
+        }, 900)
       } else {
         if (words[i].value === true) {
           answerRepeatOpen.value = true
@@ -172,14 +176,14 @@ function taskComplete() {
         </div>
       </transition>
     </div>
-    <div class="fixed-check">
+    <div class="fixed-check" v-if="!taskOk">
       <div class="block-input-flex">
         <input type="text" class="form-input" placeholder="Слово" :class="{ red: wrongAns }" v-model="answer.count">
       </div>
       <AppButton @click="answerCheck" class="answer-check bg-dark fz-24 bold"
                  :class="{ shake: wrongAns }">Проверить</AppButton>
     </div>
-    <AppButton @click="taskComplete" v-if="taskOk" class="bg-dark">Отправить</AppButton>
+    <AppButton @click="taskComplete" v-if="taskOk" class="bg-dark k9fc">Отправить</AppButton>
   </div>
 </template>
 
@@ -277,4 +281,7 @@ function taskComplete() {
   border-radius: 25px;
   z-index: 15;
 }
+.k9fc {
+    box-shadow: 0px 0px 39px 17px #ADFF00;
+  }
 </style>

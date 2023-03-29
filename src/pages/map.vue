@@ -245,7 +245,7 @@ function scanOpen() {
   margin-top: 10px;
 }
 .quest-block {
-  margin: 35px 0;
+  margin: 35px 0 50px 0;
   align-items: center;
   justify-content: center;
   text-align: center;
