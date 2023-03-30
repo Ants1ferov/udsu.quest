@@ -2,8 +2,8 @@
 import AppButton from "@/components/UI/AppButton.vue";
 const emit = defineEmits(['questComplete', 'score'])
 function questComplete() {
-  emit('questComplete', true)
   emit('score', 150)
+  emit('questComplete', true)
 }
 </script>
 

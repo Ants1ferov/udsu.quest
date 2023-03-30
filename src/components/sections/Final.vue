@@ -58,16 +58,16 @@ export default {
         this.correctAnswersPercentage < 80
       ) {
         this.message = "Хорошо!";
-        this.result = `Вы ответили на ${this.correctAnswersPercentage}% всех вопросов правильно. Хороший результат, но можно лучше 🐢`;
+        this.result = `Вы ответили на ${this.correctAnswersPercentage}% всех вопросов правильно. Хороший результат, но можно лучше`;
       } else if (
         this.correctAnswersPercentage >= 80 &&
         this.correctAnswersPercentage < 95
       ) {
         this.message = "Замечательно!";
-        this.result = `Вы ответили на ${this.correctAnswersPercentage}% всех вопросов правильно, поздравляем! 🐢`;
+        this.result = `Вы ответили на ${this.correctAnswersPercentage}% всех вопросов правильно, поздравляем!`;
       } else if (this.correctAnswersPercentage >= 95) {
         this.message = "Идеально!";
-        this.result = `Вы ответили на ${this.correctAnswersPercentage}% всех вопросов правильно, поздравляем! 🐢`;
+        this.result = `Вы ответили на ${this.correctAnswersPercentage}% всех вопросов правильно, поздравляем!`;
       }
     },
   },

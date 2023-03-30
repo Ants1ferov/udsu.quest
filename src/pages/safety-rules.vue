@@ -19,7 +19,7 @@
       </ol>
     </div>
     <div class="continue">
-      <RouterLink class="app-button fz-36 bg-dark" to="/">Далее</RouterLink>
+      <RouterLink class="app-button fz-36 bg-dark-gray" to="/">Далее</RouterLink>
     </div>
   </div>
 </template>

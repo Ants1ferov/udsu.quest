@@ -121,8 +121,6 @@ function questEnd() {
 }
 function scoreUpdate(count) {
   number.value += count
-  let num = number.value
-  localStorage.setItem('score', num)
 }
 function cancel() {
   actionFail.value = false
@@ -133,6 +131,8 @@ function cancel() {
   qrFail.value = false
 }
 function nextQuest() {
+  let num = number.value
+  localStorage.setItem('score', num)
   questCompleted.value = true
   road.value = true
   updateServerValue()

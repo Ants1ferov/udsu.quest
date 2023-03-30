@@ -36,8 +36,8 @@ function answerCheck() {
       count += 1
   }
   if (count === 9) {
-    emit('questComplete', true)
     emit('score', 135)
+    emit('questComplete', true)
   } else {
     questFailed.value = true
   }

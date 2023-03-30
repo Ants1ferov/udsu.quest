@@ -44,13 +44,15 @@
         <p class="fz-24 f43fsa">
           {{ message }}
         </p>
-        <AppButton
-            class="bg-dark-gray fz-28 "
-            @click="goToNextQuestion"
-            v-html="[
+        <transition name="ok">
+          <AppButton
+              class="bg-dark-gray fz-28 "
+              @click="goToNextQuestion"
+              v-html="[
           index == numberOfQuestions - 1 ? 'Посмотреть результаты!' : 'Следующий вопрос',
         ]">
-        </AppButton>
+          </AppButton>
+        </transition>
       </div>
   </section>
 </template>
@@ -136,7 +138,7 @@ export default {
           this.$emit('score', true)
         }
         this.message = this.isUserAnswerCorrect
-          ? "Молодец! 🐢"
+          ? "Молодец!"
           : "Не правильно, будь внимательнее";
         if (this.isUserAnswerCorrect) this.correctAnswers++;
         setTimeout(() => {
@@ -187,6 +189,18 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+  animation: fadeIn 750ms;
+}
+.answers {
+  animation: fadeIn 1000ms;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 .f43fsa {
   width: 240px;
