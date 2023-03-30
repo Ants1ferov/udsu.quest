@@ -15,7 +15,6 @@ import Quest4 from "@/components/quests/quest4.vue";
 import Quest5 from "@/components/quests/quest5.vue";
 import Quest6 from "@/components/quests/quest6.vue";
 import CountScore from "@/components/UI/countScore.vue";
-import {gsap} from "gsap";
 import PointOne from "@/components/maps/points/pointOne.vue";
 import ErrorPopUp from "@/components/UI/errorPopUp.vue";
 import OkPopUp from "@/components/UI/okPopUp.vue";
@@ -50,6 +49,7 @@ let questCompleted = ref(false)
 let actionFail = ref(false)
 let road = ref(JSON.parse(localStorage.getItem('road')))
 let quest = ({count: parseInt(localStorage.getItem('quest'))})
+
 const score = reactive({number: parseInt(localStorage.getItem('score'))})
 const number = ref(parseInt(localStorage.getItem('score')))
 watch(number, (n) => {
@@ -209,7 +209,7 @@ function scanOpen() {
         </transition>
       </div>
       <div v-if="quest.count === 6 && road || quest.count === 2 && road">
-        <AppButton class="bg-dark fz-42" @click="questEnd">Я на месте</AppButton>
+        <AppButton class="bg-dark-gray fz-42" @click="questEnd">Я на месте</AppButton>
       </div>
     </div>
     <div class="quests">
