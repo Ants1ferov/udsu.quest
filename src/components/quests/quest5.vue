@@ -24,8 +24,8 @@ const answers = reactive([
 ])
 const answer = [
     2,
-    8,
     4,
+    8,
     0,
     3,
     9,
