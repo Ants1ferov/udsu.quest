@@ -24,7 +24,8 @@ button {
     font-family: "Nunito";
     font-style: normal;
     font-weight: 400;
-    src: url("@/assets/fonts/Nunito-Regular.ttf")
+    src: url("@/assets/fonts/Nunito-Regular.ttf");
+    font-display: swap;
 }
 .mrg-25 {
     margin: 25px 0;

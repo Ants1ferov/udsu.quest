@@ -97,7 +97,4 @@ function answerCheck() {
   width: 50px;
   margin: 0;
 }
-.d3ed2f3 {
-  display: flex;
-}
 </style>
