@@ -11,34 +11,6 @@ localStorage.getItem('surname')
 
 let logoutAlert = ref(false)
 
-function setQuest1() {
-  localStorage.setItem('quest', '1')
-  router.push({path: '/'})
-}
-function setQuest2() {
-  localStorage.setItem('quest', '2')
-  router.push({path: '/'})
-}
-function setQuest3() {
-  localStorage.setItem('quest', '3')
-  router.push({path: '/'})
-}
-function setQuest4() {
-  localStorage.setItem('quest', '4')
-  router.push({path: '/'})
-}
-function setQuest5() {
-  localStorage.setItem('quest', '5')
-  router.push({path: '/'})
-}
-function setQuest6() {
-  localStorage.setItem('quest', '6')
-  router.push({path: '/'})
-}
-function setQuest7() {
-  localStorage.setItem('quest', '7')
-  router.push({path: '/'})
-}
 function logoutAlertAction() {
   logoutAlert.value = !logoutAlert.value
 }
@@ -83,15 +55,11 @@ function logout() {
   text-align: center;
   z-index: 8000;
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   background-color: #000000C0;
 }
 .name {
   line-height: 1.15;
-}
-.testing {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 .account-enter-active {
   transition: all 1000ms cubic-bezier(0, 1, .15, 1);
