@@ -272,16 +272,6 @@ function taskComplete() {
     transform: translate3d(4px, 0, 0);
   }
 }
-.fast-pop-up-mini {
-  position: fixed;
-  width: 64px;
-  height: 64px;
-  padding: 10px;
-  background-color: #000;
-  top: 150px;
-  border-radius: 25px;
-  z-index: 15;
-}
 .k9fc {
     box-shadow: 0 0 30px 15px #ADFF00;
   }

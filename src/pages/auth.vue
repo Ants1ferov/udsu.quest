@@ -28,11 +28,13 @@ onMounted(() => {
       ИЖТРУДФРОНТ
     </div>
     <div class="auth-block">
-      <register v-if="regLog"></register>
-      <login v-if="!regLog"></login>
+      <transition name="auth" mode="out-in">
+        <register v-if="regLog"></register>
+        <login v-else-if="!regLog"></login>
+      </transition>
       <div class="button-block">
-        <AppButton @click="regLog = !regLog" v-if="regLog" class="bdr-blk bold fz-16 btn-mn-auto">Уже есть аккаунт?</AppButton>
-        <AppButton @click="regLog = !regLog" v-if="!regLog" class="bdr-blk bold fz-16 btn-mn-auto">Еще нет аккаунта?</AppButton>
+          <AppButton @click="regLog = !regLog" v-if="regLog" class="bdr-blk bold fz-16 btn-mn-auto">Уже есть аккаунт?</AppButton>
+          <AppButton @click="regLog = !regLog" v-if="!regLog" class="bdr-blk bold fz-16 btn-mn-auto">Еще нет аккаунта?</AppButton>
       </div>
     </div>
     <div class="logo-btm">
@@ -73,5 +75,19 @@ onMounted(() => {
 .logo-leafs {
   width: 50%;
   margin: 0 auto;
+}
+.auth-enter-active {
+  transition: all 500ms cubic-bezier(.2, 1, .15, 1);
+}
+.auth-leave-active {
+  transition: all 500ms cubic-bezier(1, 1, .15, 1);
+}
+.auth-enter-from {
+  opacity: 1;
+  transform: translateX(-150%);
+}
+.auth-leave-to {
+  opacity: 0;
+  transform: translateX(+150%);
 }
 </style>

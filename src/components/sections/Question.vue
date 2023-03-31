@@ -9,6 +9,7 @@
       <p class="fz-20 bold">0:{{ secondsLeft }}</p>
     </div>
       <div class="answers">
+        <transition-group name="crossword">
         <AppButton
             class="bdr-blk fz-24 e3x3"
             @click="checkAnswer($event)"
@@ -37,6 +38,7 @@
             v-html="question4"
             v-if="question4 !== ''"
         ></AppButton>
+        </transition-group>z
       </div>
       <div
           class="post-answer"

@@ -175,6 +175,29 @@ button {
 .question-leave-to {
     opacity: 0;
 }
+.fast-pop-up-mini {
+    position: fixed;
+    width: 64px;
+    height: 64px;
+    padding: 10px;
+    background-color: #000;
+    top: 150px;
+    border-radius: 25px;
+    z-index: 15;
+}
+.crossword-move,
+.crossword-enter-active,
+.crossword-leave-active {
+    transition: all 0.5s ease;
+}
+.crossword-enter-from,
+.crossword-leave-to {
+    opacity: 0;
+    transform: translateX(30px);
+}
+.crossword-leave-active {
+    position: absolute;
+}
 @media only screen and (max-width: 376px) {
     .maps {
         height: 350px !important;

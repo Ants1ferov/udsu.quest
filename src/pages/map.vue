@@ -204,7 +204,7 @@ function roadTrueFalse() {
     <transition name="ok">
       <div class="testing" v-if="test">
         <p class="fz-42 white">Читы:</p>
-        <app-button @click="roadTrueFalse" class="bg-dark-gray">road: {{ road }}</app-button>
+        <app-button @click="roadTrueFalse" class="bg-gray">road: {{ road }}</app-button>
         <app-button @click="setQuest1" class="bg-gray">1 задание</app-button>
         <app-button @click="setQuest2" class="bg-gray">2 задание</app-button>
         <app-button @click="setQuest3" class="bg-gray">3 задание</app-button>
@@ -306,7 +306,7 @@ function roadTrueFalse() {
 .testing {
   padding: 25px;
   border-radius: 35px;
-  position: absolute;
+  position: fixed;
   height: max-content;
   background-color: #1e1e1e;
   display: flex;
