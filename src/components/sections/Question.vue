@@ -38,7 +38,7 @@
             v-html="question4"
             v-if="question4 !== ''"
         ></AppButton>
-        </transition-group>z
+        </transition-group>
       </div>
       <div
           class="post-answer"
