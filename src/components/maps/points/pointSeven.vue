@@ -2,7 +2,7 @@
 ymaps.ready(init);
 
 function init() {
-  var myMap = new ymaps.Map("map", {
+  let myMap = new ymaps.Map("map", {
     center: [56.853858, 53.219066],
     zoom: 16
   });
@@ -20,7 +20,7 @@ function init() {
 </script>
 
 <template>
-  <div className="ya-img">
+  <div>
     <div id="map" style="width: 100%; height: 400px"></div>
   </div>
 </template>

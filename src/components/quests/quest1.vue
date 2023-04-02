@@ -212,19 +212,6 @@ function taskComplete() {
   opacity: 0;
   transform: translateX(+50%);
 }
-.crossword-move,
-.crossword-enter-active,
-.crossword-leave-active {
-  transition: all 0.5s ease;
-}
-.crossword-enter-from,
-.crossword-leave-to {
-  opacity: 0;
-  transform: translateX(30px);
-}
-.crossword-leave-active {
-  position: absolute;
-}
 .fixed-check {
   position: fixed;
   bottom: 5%;

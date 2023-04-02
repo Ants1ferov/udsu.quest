@@ -58,19 +58,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.ya-img {
-}
-.ymaps-2-1-79-controls__control_toolbar, .ymaps-2-1-79-copyright.ymaps-2-1-79-copyright_logo_no, .ymaps-2-1-79-map-copyrights-promo {
-  display: none !important;
-}
-.ymaps-2-1-79-balloon__layout {
-  border-radius: 15px;
-  border: none;
-}
-.ymaps-2-1-79-balloon__content {
-  font-size: 20px !important;
-  font-family: sans-serif !important;
-}
-</style>

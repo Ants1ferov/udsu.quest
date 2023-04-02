@@ -1,9 +1,7 @@
 <script setup>
-import {Html5Qrcode, Html5QrcodeScanner} from "html5-qrcode";
+import {Html5Qrcode} from "html5-qrcode";
 import {onMounted, ref} from "vue";
 import AppButton from "@/components/UI/AppButton.vue";
-import router from "@/router";
-
 let cameraScan = ref(false)
 
 const emit = defineEmits(['qr'])
@@ -39,7 +37,7 @@ function qrSend(value) {
 }
 function qrFromCamera() {
   const html5QrCode = new Html5Qrcode("reader");
-  const qrCodeSuccessCallback = (decodedText, decodedResult) => {
+  const qrCodeSuccessCallback = (decodedText) => {
     qrSend(decodedText)
   };
   const config = { fps: 10, qrbox: { width: 250, height: 250 } };
@@ -57,7 +55,7 @@ onMounted(() => {
         .then(decodedText => {
           qrSend(decodedText)
         })
-        .catch(err => {
+        .catch(() => {
           qrSend(0)
         });
   });

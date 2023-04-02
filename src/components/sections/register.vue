@@ -41,13 +41,13 @@ function register() {
           quest: 1,
           road: false
         })
-        .then((response) => {
+        .then(() => {
           localStorage.setItem('email', email)
           localStorage.setItem('name', userName)
           localStorage.setItem('surname', userSurname)
-          localStorage.setItem('quest', '1')
+          localStorage.setItem('quest', '0')
           localStorage.setItem('score', '0')
-          localStorage.road = JSON.stringify(false)
+          localStorage.road = JSON.stringify(true)
           actionOk.value = !actionOk.value
           setTimeout(() => {
             router.push({path: "/safety-rules"})

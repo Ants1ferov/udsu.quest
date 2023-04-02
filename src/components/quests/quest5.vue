@@ -1,7 +1,6 @@
 <script setup>
 import AppButton from "@/components/UI/AppButton.vue";
 import {reactive, ref} from "vue";
-import PopUpBlock from "@/components/UI/popUpBlock.vue";
 import ErrorPopUp from "@/components/UI/errorPopUp.vue";
 const emit = defineEmits(['questComplete', 'score'])
 const questOk = ref(false)
@@ -126,18 +125,5 @@ function selectWord(id) {
 }
 .f3ct4 {
   margin: 0 5px;
-}
-.crossword-move,
-.crossword-enter-active,
-.crossword-leave-active {
-  transition: all 0.5s ease;
-}
-.crossword-enter-from,
-.crossword-leave-to {
-  opacity: 0;
-  transform: translateX(30px);
-}
-.crossword-leave-active {
-  position: absolute;
 }
 </style>

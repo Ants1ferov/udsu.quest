@@ -61,6 +61,7 @@
 
 <script>
 import AppButton from "@/components/UI/AppButton.vue";
+
 export default {
   name: "Question",
   components: {AppButton},
@@ -109,8 +110,7 @@ export default {
     },
     getRandomAnswer() {
       const randomNumber = Math.floor(Math.random() * this.answers.length);
-      let answer = this.answers.splice(randomNumber, 1)[0];
-      return answer;
+      return this.answers.splice(randomNumber, 1)[0];
     },
     countdown() {
       this.secondsLeft = 60;
@@ -134,8 +134,7 @@ export default {
       if (!this.roundEnded) {
         this.userAnswered = true;
         this.roundEnded = true;
-        this.isUserAnswerCorrect =
-          event.target.innerText == this.correctAnswer ? true : false;
+        this.isUserAnswerCorrect = event.target.innerText == this.correctAnswer;
         if (this.isUserAnswerCorrect === true) {
           this.$emit('score', true)
         }

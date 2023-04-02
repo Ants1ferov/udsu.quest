@@ -7,7 +7,7 @@ function init() {
     zoom: 16
   });
   const myPlacemark = new ymaps.Placemark(myMap.getCenter(), {
-    balloonContent: 'Это точка 0'
+    balloonContent: 'Это точка 1, подойдите к ней и сканируйте qr-код'
   }, {
     iconLayout: 'default#image',
     iconImageHref: 'pointB.png',

@@ -1,5 +1,5 @@
 <script setup>
-import {onMounted, ref} from "vue";
+import {ref} from "vue";
 import router from "@/router";
 import AppButton from "@/components/UI/AppButton.vue";
 import PopUpBlock from "@/components/UI/popUpBlock.vue";

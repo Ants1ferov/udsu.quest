@@ -54,12 +54,6 @@ button {
 .fz-56 {
     font-size: 56px;
 }
-.fz-64 {
-    font-size: 64px;
-}
-.fz-72 {
-    font-size: 72px;
-}
 .bold {
     font-weight: bold;
 }
@@ -86,9 +80,6 @@ button {
 .pdg-lr-35 {
     padding-left: 35px;
     padding-right: 35px;
-}
-.bdr-rs-20 {
-    border-radius: 20px;
 }
 .white {
     color: white;
