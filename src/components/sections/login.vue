@@ -13,13 +13,39 @@ let password = ''
 let actionOk = ref(false)
 let actionFail = ref(false)
 let openRec = ref(false)
+let error503 = ref(false)
+let error0 = ref(false)
+let error1 = ref(false)
+let error2 = ref(false)
 
+function error(code, ) {
+  actionFail.value = true
+  if (code === 0) {
+    error0.value = true
+  }
+  else if (code === 1) {
+    error1.value = true
+  }
+  else if (code === 2) {
+    error2.value = true
+  }
+  else if (code === 503) {
+    error503.value = true
+  }
+}
 function cancel() {
-  actionFail.value = !actionFail.value
+  actionOk.value = false
+  actionFail.value = false
+  openRec.value = false
+  error503.value = false
+  error0.value =  false
+  error1.value =  false
+  error2.value =  false
 }
 function recovery() {
+  openRec.value = false
   if (password === '' && email === '') {
-
+    error(0)
   } else {
     axios
         .post('https://api.udgu.suslovd.ru:9443/api/change', {
@@ -27,9 +53,7 @@ function recovery() {
           password: password
         })
         .then((response) => {
-          console.log(response)
           openRec.value = false
-          console.log('Пароль изменен')
           setTimeout(() => {
             actionOk.value = true
             setTimeout(() => {
@@ -38,8 +62,12 @@ function recovery() {
           }, 1000);
         })
         .catch((reason) => {
-          console.log(reason)
-          actionFail.value = !actionFail.value
+          if (reason.response.data.code === 2) {
+            error(2)
+          }
+          else if (reason.response.status === 503) {
+            error(503)
+          }
         })
   }
 }
@@ -52,7 +80,6 @@ function login() {
         })
         .then((response) => {
           const {firstname, secondname, quest, road} = response.data
-          console.log(response.data)
           localStorage.setItem('email', email)
           localStorage.setItem('name', firstname)
           localStorage.setItem('surname', secondname)
@@ -65,11 +92,18 @@ function login() {
           }, 1500);
         })
         .catch((reason) => {
-          actionFail.value = !actionFail.value
+          if (reason.response.data.code === 1) {
+            error(1)
+          }
+          else if (reason.response.data.code === 2) {
+            error(2)
+          }
+          else if (reason.response.status === 503) {
+            error(503)
+          }
         })
   } else {
-    actionFail.value = !actionFail.value
-    console.log('false')
+      error(0)
   }
 }
 </script>
@@ -77,8 +111,12 @@ function login() {
 <template>
   <div class="login">
     <transition name="ok">
-      <error-pop-up v-if="actionFail">
-        <AppButton class="bg-dark-gray bold btn-mn-auto" type="button" @click="cancel">Закрыть</AppButton>
+      <error-pop-up v-if="actionFail" class="white">
+        <p class="fz-24" v-if="error0">Вы заполнили не<br>все поля</p>
+        <p class="fz-24" v-if="error1">Неверный логин<br>или пароль</p>
+        <p class="fz-24" v-if="error2">Такого аккаунта<br>не существует</p>
+        <p class="fz-24" v-if="error503">Сервер не отвечает</p>
+        <AppButton class="bg-gray bold btn-mn-auto" type="button" @click="cancel">Закрыть</AppButton>
       </error-pop-up>
     </transition>
     <transition name="ok">

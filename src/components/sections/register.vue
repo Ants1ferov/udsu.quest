@@ -12,6 +12,21 @@ let email = ''
 let password = ''
 let actionOk = ref(false)
 let actionFail = ref(false)
+let error0 = ref(false)
+let error409 = ref(false)
+let error503 = ref(false)
+function error(code) {
+  actionFail.value = true
+  if (code === 0) {
+    error0.value = true
+  }
+  else if (code === 409) {
+    error409.value = true
+  }
+  else if (code === 503) {
+    error503.value = true
+  }
+}
 function cancel() {
   actionFail.value = !actionFail.value
 }
@@ -34,18 +49,19 @@ function register() {
           localStorage.setItem('score', '0')
           localStorage.road = JSON.stringify(false)
           actionOk.value = !actionOk.value
-          console.log(response)
           setTimeout(() => {
             router.push({path: "/safety-rules"})
-          }, 1000);
+          }, 1500);
         })
         .catch((reason) => {
-          actionFail.value = !actionFail.value
+          if (reason.response.status === 409) {
+            error(409)
+          } else if (reason.response.status === 503) {
+            error(503)
+          }
         })
   } else {
-    actionFail.value = !actionFail.value
-
-    console.log('false')
+    error(0)
   }
 }
 
@@ -54,7 +70,10 @@ function register() {
 <template>
   <div class="register">
     <transition name="ok">
-      <error-pop-up v-if="actionFail">
+      <error-pop-up v-if="actionFail" class="white">
+        <p class="fz-24" v-if="error0">Вы заполнили не все поля</p>
+        <p class="fz-24" v-if="error409">Этот email уже занят</p>
+        <p class="fz-24" v-if="error503">Сервер не отвечает</p>
         <AppButton class="bg-gray bold btn-mn-auto" type="button" @click="cancel">Закрыть</AppButton>
       </error-pop-up>
     </transition>
