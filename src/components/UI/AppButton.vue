@@ -17,7 +17,6 @@
     border-radius: 20px;
     font-size: 24px;
     text-align: center;
-    cursor: pointer;
     padding: 10px 20px;
     z-index: 1;
     margin: 10px 0;

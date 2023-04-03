@@ -4,10 +4,6 @@
       <span>{{ index + 1 }}</span>.
       <span v-html="questionText"></span>
     </div>
-    <div class="timer">
-      <span></span>
-      <p class="fz-20 bold">0:{{ secondsLeft }}</p>
-    </div>
       <div class="answers">
         <transition-group name="crossword">
         <AppButton
@@ -73,7 +69,6 @@ export default {
     return {
       gameFinished: false,
       correctAnswers: 0,
-      secondsLeft: 0,
       index: 0,
       numberOfQuestions: 0,
       answers: [],
@@ -106,29 +101,10 @@ export default {
       this.question2 = this.getRandomAnswer();
       this.question3 = this.getRandomAnswer();
       this.question4 = this.getRandomAnswer();
-      this.countdown();
     },
     getRandomAnswer() {
       const randomNumber = Math.floor(Math.random() * this.answers.length);
       return this.answers.splice(randomNumber, 1)[0];
-    },
-    countdown() {
-      this.secondsLeft = 60;
-      this.timer = setInterval(() => {
-        if (!this.userAnswered) {
-          if (this.secondsLeft > 0) this.secondsLeft--;
-          else if (this.secondsLeft <= 0 || this.roundEnded) this.stopTimer();
-          if (this.secondsLeft.toString().length < 2)
-            this.secondsLeft = `0${this.secondsLeft}`;
-        }
-        if (this.secondsLeft <= 0 && !this.userAnswered) {
-          this.message = "Время вышло!";
-          this.roundEnded = true;
-        }
-      }, 1000);
-    },
-    stopTimer() {
-      clearInterval(this.timer);
     },
     checkAnswer(event) {
       if (!this.roundEnded) {
@@ -157,7 +133,6 @@ export default {
         this.userAnswered = false;
         this.isUserAnswerCorrect = undefined;
         this.answers = [];
-        this.stopTimer();
         this.prepareQuestion();
       }
     },

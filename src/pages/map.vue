@@ -201,7 +201,7 @@ function scanOpen() {
           <img class="qr-img" src="@/../src/assets/img/button/qr.svg" alt="qr button">
         </AppButton>
         <transition name="ok">
-          <pop-up-block v-if="scanner">
+          <pop-up-block v-if="scanner" class="scan-block">
             <scanner @qr="qrCheck"></scanner>
             <AppButton @click="cancel" class="bdr-wht white bold">Закрыть</AppButton>
           </pop-up-block>
@@ -232,7 +232,6 @@ function scanOpen() {
 .score-block {
   text-align: center;
   width: 100px;
-
   z-index: 9000;
 }
 .maps {
@@ -266,5 +265,8 @@ function scanOpen() {
 }
 .quest-task {
   width: 100%;
+}
+.scan-block {
+  height: 560px !important;
 }
 </style>
