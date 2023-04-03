@@ -1,11 +1,10 @@
 <template>
   <div class="pop-up-block">
-    <slot></slot>
+      <slot></slot>
   </div>
 </template>
 
 <script setup>
-
 </script>
 
 <style scoped>
@@ -13,7 +12,7 @@
   display: flex;
   flex-direction: column;
   position: fixed;
-  width: 90%;
+  width: 75%;
   height: 400px;
   margin: auto;
   top: 0; left: 0; bottom: 0; right: 0;
@@ -22,6 +21,7 @@
   z-index: 2;
   border-radius: 25px;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  padding: 25px;
 }
 </style>

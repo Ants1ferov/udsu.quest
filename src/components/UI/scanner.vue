@@ -41,7 +41,9 @@ function qrFromCamera() {
     qrSend(decodedText)
   };
   const config = { fps: 10, qrbox: { width: 250, height: 250 } };
-  html5QrCode.start({ facingMode: "environment" }, config, qrCodeSuccessCallback);
+  html5QrCode.start({ facingMode: "environment" }, config, qrCodeSuccessCallback)
+  .catch(() => {
+  })
 }
 onMounted(() => {
   const html5QrCode = new Html5Qrcode("readImage");
@@ -63,22 +65,41 @@ onMounted(() => {
 </script>
 
 <template>
-  <AppButton class="bg-gray mrg-25" v-if="!cameraScan" @click="cameraOpen">Сканировать камерой</AppButton>
-  <div v-if="cameraScan" id="reader" class="reader bdr-wht"></div>
+<div class="scanner">
+  <AppButton class="bg-gray" v-if="!cameraScan" @click="cameraOpen">Сканировать камерой</AppButton>
+  <div v-if="cameraScan" class="reader-block">
+    <p class="white fz-24 permission-request">Предоставьте доступ<br> к камере</p>
+    <div id="reader" class="reader"></div>
+   </div>
   <div v-if="!cameraScan">
   <div id="readImage"></div>
-    <label class="input-file mrg-25">
+    <label class="input-file">
       <input id="qr-input-file" type="file" name="file">
-      <span class="app-button bg-gray">Сканировать из галереи</span>
+      <AppButton class="app-button bg-gray">Сканировать<br> из галереи</AppButton>
     </label>
   </div>
+</div>
 </template>
 
 <style scoped>
+.reader-block {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+.permission-request {
+  position: absolute;
+}
+.scanner {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+}
 .reader {
   width: 300px;
   height: 400px;
-  border-radius: 25px;
   margin: 25px 0;
 }
 .input-file {
