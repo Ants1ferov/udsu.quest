@@ -58,6 +58,7 @@ function answerCheck() {
   let countFor = ref(0)
   for (let i in answers) {
     countFor.value += 1
+    answer.count = answer.count.replace('ё', 'е')
     if (answer.count.toLowerCase() === answers[i]) {
       if (count.count === 16) {
         count.count += 1
