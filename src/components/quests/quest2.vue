@@ -55,8 +55,8 @@ function answerCheck() {
     <div class="quest-title bold fz-56 black">Задание 2</div>
     <div class="quest-description fz-24 bold">Прослушайте аудиофайл, и вставьте правильные слова в пропуски</div>
     <div class="quest-task fz-24">
-      <audio class="audio" controls>
-        <source src="@/../src/assets/audio/pointTwo.mp3"/>
+      <audio class="audio" controls preload="auto" type="audio/mpeg">
+        <source src="@/assets/audio/pointTwo.mp3"/>
       </audio>
       <div class="task-text non-copy">
         <input class="form-input text" v-model="answer[0]"> Черезов является выпускником школы №24.
@@ -71,7 +71,7 @@ function answerCheck() {
         на втором лежали самые тяжелые больные, а на третьем и четвертом – те, кто уже шел на поправку.
         Одновременно в госпитале могло лечиться около <input class="form-input number" v-model="answer[6]"> человек.<br><br>
         В годы войны здесь проводили уникальные операции для заживления
-        черепа после трепанации и ранений головы. В стенах лицея <input class="form-input number" v-model="answer[7]">
+        черепа после трепанации и ранений головы. В стенах лицея № <input class="form-input number" v-model="answer[7]">
         было проведено около <input type="text" class="form-input number" v-model="answer[8]"> таких операций
       </div>
     </div>

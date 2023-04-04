@@ -16,8 +16,8 @@ function score() {
     <div class="quest-title bold fz-56 black">Задание 4</div>
     <div class="quest-description fz-24 bold">Прослушайте аудиофайл, и пройдите тест</div>
     <div class="quest-task fz-24">
-      <audio class="audio mrg-25" controls>
-        <source src="@/../src/assets/audio/pointFour.mp3"/>
+      <audio class="audio mrg-25" controls preload="auto">
+        <source src="@/assets/audio/pointFour.mp3" type="audio/mpeg"/>
       </audio>
     <div class="test-block">
       <quiz v-bind:json="json" @questComplete="questComplete" @score="score"></quiz>

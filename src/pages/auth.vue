@@ -1,4 +1,5 @@
 <script setup>
+import {reactive, watch} from "vue";
 import AppButton from "@/components/UI/AppButton.vue";
 import Register from "@/components/sections/register.vue";
 import Login from "@/components/sections/login.vue";
@@ -9,11 +10,14 @@ const regLog = ref(true)
 
 onMounted(() => {
   if (localStorage.getItem('email') === null) {
-    console.log('не авторизован', localStorage.getItem('email'))
   } else {
-    console.log('авторизован', localStorage.getItem('email'))
     router.push({path: "/"})
   }
+})
+const score = reactive({number: 750})
+const number = ref(750)
+watch(number, (n) => {
+  gsap.to(score, { duration: 1.5, number: Number(n) || 0})
 })
 </script>
 
@@ -26,6 +30,7 @@ onMounted(() => {
       ИЖТРУДФРОНТ
       <img class="logo-cycle" src="./../assets/img/design/circle.svg" alt="">
       ИЖТРУДФРОНТ
+      <p class="fz-20">Зарегистрировано<br>пользователей: {{ score.number.toFixed(0) }}</p>
     </div>
     <div class="auth-block">
       <transition name="auth" mode="out-in">
