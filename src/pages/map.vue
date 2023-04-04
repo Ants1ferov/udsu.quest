@@ -33,13 +33,17 @@ import Account from "@/components/sections/account.vue";
 
 onMounted( () => {
   if (localStorage.getItem('email') === null) {
-    console.log('не авторизован', localStorage.getItem('email'))
     router.push({path: "auth"})
-  } else {
-    console.log('авторизован', localStorage.getItem('email'))
+  }
+  else {
+    if (localStorage.getItem('email') === 'udsu.test@list.ru') {
+      test.value = true
+    } else {
+
+    }
   }
 })
-
+const test = ref(false)
 const account = ref(false)
 let scanner = ref(false)
 let qrRepeat = ref(false)
@@ -139,34 +143,9 @@ function nextQuest() {
 function scanOpen() {
   scanner.value = !scanner.value
 }
-// --------------------------------------------
-const test = ref(false)
-function setQuest1() {
-  localStorage.setItem('quest', '1')
-  router.push({path: '/auth'})
-}
-function setQuest2() {
-  localStorage.setItem('quest', '2')
-  router.push({path: '/auth'})
-}
-function setQuest3() {
-  localStorage.setItem('quest', '3')
-  router.push({path: '/auth'})
-}
-function setQuest4() {
-  localStorage.setItem('quest', '4')
-  router.push({path: '/auth'})
-}
-function setQuest5() {
-  localStorage.setItem('quest', '5')
-  router.push({path: '/auth'})
-}
-function setQuest6() {
-  localStorage.setItem('quest', '6')
-  router.push({path: '/auth'})
-}
-function setQuest7() {
-  localStorage.setItem('quest', '7')
+const tools = ref(false)
+function setQuest(val) {
+  localStorage.setItem('quest', val)
   router.push({path: '/auth'})
 }
 function roadTrueFalse() {
@@ -174,14 +153,11 @@ function roadTrueFalse() {
   localStorage.setItem('road', road.value)
   router.push({path: '/'})
 }
-// --------------------------------------------
-
 </script>
 
 <template>
   <div class="map">
-      <!--  -------------------------------------------  -->
-    <div @click="test = !test" class="test">
+    <div @click="tools = !tools" class="tools" v-if="test">
       <svg xmlns="http://www.w3.org/2000/svg" height="48" width="48">
         <path d="M27.3 44h-6.6q-.55 0-.975-.35-.425-.35-.525-.9l-.8-5.05q-.95-.35-2-.95t-1.85-1.25L9.9
          37.65q-.55.25-1.1.075T7.95 37l-3.3-5.85q-.3-.5-.15-1.05t.6-.9l4.3-3.15q-.1-.45-.125-1.025Q9.25
@@ -202,18 +178,17 @@ function roadTrueFalse() {
       </svg>
     </div>
     <transition name="ok">
-      <div class="testing" v-if="test">
+      <div class="testing" v-if="tools">
         <app-button @click="roadTrueFalse" class="bg-gray">road: {{ road }}</app-button>
-        <app-button @click="setQuest1" class="bg-gray">1 задание</app-button>
-        <app-button @click="setQuest2" class="bg-gray">2 задание</app-button>
-        <app-button @click="setQuest3" class="bg-gray">3 задание</app-button>
-        <app-button @click="setQuest4" class="bg-gray">4 задание</app-button>
-        <app-button @click="setQuest5" class="bg-gray">5 задание</app-button>
-        <app-button @click="setQuest6" class="bg-gray">6 задание</app-button>
-        <app-button @click="setQuest7" class="bg-gray">7 задание</app-button>
+        <app-button @click="setQuest(1)" class="bg-gray">1 задание</app-button>
+        <app-button @click="setQuest(2)" class="bg-gray">2 задание</app-button>
+        <app-button @click="setQuest(3)" class="bg-gray">3 задание</app-button>
+        <app-button @click="setQuest(4)" class="bg-gray">4 задание</app-button>
+        <app-button @click="setQuest(5)" class="bg-gray">5 задание</app-button>
+        <app-button @click="setQuest(6)" class="bg-gray">6 задание</app-button>
+        <app-button @click="setQuest(7)" class="bg-gray">7 задание</app-button>
       </div>
     </transition>
-    <!--  -------------------------------------------  -->
     <transition name="account">
       <account v-if="account"></account>
     </transition>
@@ -296,10 +271,10 @@ function roadTrueFalse() {
 
 <style>
 /* ------------------------------------- */
-.test {
+.tools {
   position: fixed;
   top: 40px;
-  left: 15px;
+  left: 25px;
   z-index: 10000;
 }
 .testing {

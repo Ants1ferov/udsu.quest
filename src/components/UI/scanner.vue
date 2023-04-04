@@ -96,6 +96,7 @@ onMounted(() => {
   height: 100%;
   flex-direction: column;
   justify-content: center;
+  margin-top: 30px;
 }
 .reader {
   width: 300px;
