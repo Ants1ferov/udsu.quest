@@ -5,19 +5,34 @@ import Register from "@/components/sections/register.vue";
 import Login from "@/components/sections/login.vue";
 import {onMounted, ref} from "vue";
 import router from "@/router";
+import axios from "axios";
 
 const regLog = ref(true)
 
 onMounted(() => {
   if (localStorage.getItem('email') === null) {
+      axios
+          .get('https://api.udgu.suslovd.ru:9443/api/getusercount', {
+          })
+          .then((response) => {
+              number.value += response.data.number
+              console.log(response.data)
+              if (response.status === 200) {
+              }
+              else if (response.status === 409) {
+              }
+          })
+          .catch((reason) => {
+
+          })
   } else {
     router.push({path: "/"})
   }
 })
-const score = reactive({number: 750})
-const number = ref(750)
+let score = reactive({number: 0})
+const number = ref(0)
 watch(number, (n) => {
-  gsap.to(score, { duration: 1.5, number: Number(n) || 0})
+  gsap.to(score, { duration: 2, number: Number(n) || 0})
 })
 </script>
 
@@ -26,11 +41,8 @@ watch(number, (n) => {
     <div class="logo-block">
       <img class="block-logo-image" src="./../assets/img/design/logo.png" alt="">
     </div>
-    <div class="logo-text fz-20 bold">
-      ИЖТРУДФРОНТ
-      <img class="logo-cycle" src="./../assets/img/design/circle.svg" alt="">
-      ИЖТРУДФРОНТ
-      <p class="fz-20">Зарегистрировано<br>пользователей: {{ score.number.toFixed(0) }}</p>
+    <div class="logo-text">
+      <p class="fz-20 bold">Зарегистрировано<br>пользователей: {{ score.number.toFixed(0) }}</p>
     </div>
     <div class="auth-block">
       <transition name="auth" mode="out-in">
@@ -43,7 +55,7 @@ watch(number, (n) => {
       </div>
     </div>
     <div class="logo-btm">
-      <img class="logo-leafs" src="./../assets/img/design/double-leaf.png" alt="">
+      <img class="logo-leafs" src="@/assets/img/design/double-leaf.png" alt="">
     </div>
   </div>
 </template>
@@ -58,16 +70,11 @@ watch(number, (n) => {
 }
 .logo-block {
   margin: 0 auto;
-  padding: 50px 0 30px 0;
+  padding: 15px 0 15px 0;
 }
 .block-logo-image {
   width: 256px;
   height: 256px;
-}
-.logo-cycle {
-  position: relative;
-  width: 24px;
-  top: 4px;
 }
 .btn-mn-auto {
   margin: 0 auto;
@@ -76,6 +83,9 @@ watch(number, (n) => {
   display: flex;
   padding: 35px 0 50px 0;
   justify-content: center;
+}
+.logo-text {
+    text-align: center;
 }
 .logo-leafs {
   width: 50%;
