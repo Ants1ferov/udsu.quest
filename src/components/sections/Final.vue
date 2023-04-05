@@ -46,7 +46,7 @@ export default {
         this.correctAnswersPercentage <= 30
       ) {
         this.message = "Вы читали задание?";
-        this.result = `Вы ответили на ${this.correctAnswersPercentage}% всех вопросов правильно. Может попробуйте еще раз? (так нельзя)`;
+        this.result = `Вы ответили на ${this.correctAnswersPercentage}% всех вопросов правильно`;
       } else if (
         this.correctAnswersPercentage > 30 &&
         this.correctAnswersPercentage < 60

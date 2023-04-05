@@ -40,6 +40,7 @@ let words = [
   ref(false),
   ref(false)
 ]
+const focus = ref(false)
 const answerRepeatOpen = ref(false)
 let answer = reactive({count: ''})
 let taskOk = ref(false)
@@ -179,7 +180,7 @@ function taskComplete() {
     </div>
     <div class="fixed-check" v-if="!taskOk">
       <div class="block-input-flex">
-        <input type="text" class="form-input" placeholder="Слово" :class="{ red: wrongAns }" v-model="answer.count">
+        <input type="text" class="form-input input-flex" placeholder="Слово" :class="{ red: wrongAns, inputFocus: focus }" @click="focus = !focus" v-model="answer.count">
       </div>
       <AppButton @click="answerCheck" class="answer-check bg-dark-gray fz-24 bold"
                  :class="{ shake: wrongAns }">Проверить</AppButton>
@@ -227,6 +228,13 @@ function taskComplete() {
 }
 .form-input::placeholder {
   color: #dadada;
+}
+.inputFocus {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 .answer-check {
   margin: 10px auto;

@@ -91,5 +91,4 @@ function register() {
 </template>
 
 <style scoped>
-
 </style>

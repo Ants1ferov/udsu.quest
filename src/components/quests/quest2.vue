@@ -53,9 +53,9 @@ function answerCheck() {
       </error-pop-up>
     </transition>
     <div class="quest-title bold fz-56 black">Задание 2</div>
-    <div class="quest-description fz-24 bold">Прослушайте аудиофайл, и вставьте правильные слова в пропуски</div>
+    <div class="quest-description fz-24 bold">Прослушайте аудиофайл и вставьте правильные слова в пропуски</div>
     <div class="quest-task fz-24">
-      <audio class="audio" controls preload="auto" type="audio/mpeg">
+      <audio class="audio" controls preload="auto">
         <source src="@/assets/audio/pointTwo.mp3"/>
       </audio>
       <div class="task-text non-copy">
@@ -64,8 +64,8 @@ function answerCheck() {
         Окончив семилетку, будущий лётчик перебрался в Ижевск, где продолжил учиться в школе № 24.
         Параллельно посещал <input class="form-input text" v-model="answer[2]">,
         который окончил с отличием в <input class="form-input number" v-model="answer[3]"> году.
-        Затем Черезов поступил в Балашовскую <input class="form-input text" v-model="answer[4]"> школу.<br><br>
-        Врачи госпиталя <input class="form-input number" v-model="answer[5]"> специализировались
+        Затем Черезов поступил в Балашовскую <input class="form-input long-text" v-model="answer[4]"> школу.<br><br>
+        Врачи госпиталя № <input class="form-input number" v-model="answer[5]"> специализировались
         на черепно-мозговых травмах и повреждениях позвоночника.
         На первом этаже расположились перевязочная, процедурная, столовая, физиокабинет и кабинет рентгена,
         на втором лежали самые тяжелые больные, а на третьем и четвертом – те, кто уже шел на поправку.
@@ -83,18 +83,22 @@ function answerCheck() {
 .audio {
   margin: 25px 0;
 }
+.form-input {
+  height: 28px;
+  margin: 0;
+  text-align: center;
+}
 .task-text {
   text-align: left;
   padding: 0 15px 0 25px;
 }
 .text {
-  height: 28px;
   width: 90px;
-  margin: 0;
 }
 .number {
-  height: 28px;
   width: 50px;
-  margin: 0;
+}
+.long-text {
+  width: 130px;
 }
 </style>
