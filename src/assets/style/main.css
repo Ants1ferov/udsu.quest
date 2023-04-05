@@ -205,6 +205,9 @@ button {
     .ge5ye {
         top: 50% !important;
     }
+    .fz-36 {
+        font-size: 32px;
+    }
 }
 @media only screen and (max-width: 340px) {
     .maps {
