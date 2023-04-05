@@ -1,6 +1,8 @@
 <script setup>
 import AppButton from "@/components/UI/AppButton.vue";
+
 const emit = defineEmits(['questComplete', 'score'])
+
 function questComplete() {
   emit('score', 150)
   emit('questComplete', true)
@@ -14,7 +16,7 @@ function questComplete() {
       Игра. Так как во время войны в здании школы располагался военный госпиталь №3777, предлагаю
       вам ощутить на себе оказание первой помощи нестандартными методами, как делалось это раньше, в годы ВОВ.
     </div>
-    <AppButton @click="questComplete" class="bg-dark-gray">Продолжить</AppButton>
+    <AppButton class="bg-dark-gray" @click="questComplete">Продолжить</AppButton>
   </div>
 </template>
 

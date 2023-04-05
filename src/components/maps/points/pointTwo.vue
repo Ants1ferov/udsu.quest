@@ -15,7 +15,7 @@ function init() {
     iconImageOffset: [-32, -60]
   });
   myMap.geoObjects
-      .add(myPlacemark)
+    .add(myPlacemark)
 }
 </script>
 

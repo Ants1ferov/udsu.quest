@@ -9,16 +9,17 @@ export default {
   name: "ya-maps-3",
   mounted() {
     ymaps.ready(init);
-    function init(){
+
+    function init() {
       var myMap = new ymaps.Map("map", {
-        center: [56.849242,53.214006],
+        center: [56.849242, 53.214006],
         zoom: 16
       });
       var myGeoObject = new ymaps.GeoObject({
         geometry: {
           type: "LineString",
           coordinates: [
-            [56.849242,53.214006],
+            [56.849242, 53.214006],
             [56.849001, 53.21412],
             [56.849203, 53.216254],
             [56.849552, 53.216200],
@@ -28,7 +29,7 @@ export default {
             [56.850250, 53.216939],
           ]
         },
-        properties:{
+        properties: {
           balloonContent: "Я путь, проложенный яндекс.картами, которому вы должны следовать"
         }
       }, {
@@ -53,9 +54,9 @@ export default {
         iconImageOffset: [-32, -60]
       });
       myMap.geoObjects
-          .add(myGeoObject)
-          .add(myPlacemarkA)
-          .add(myPlacemarkB)
+        .add(myGeoObject)
+        .add(myPlacemarkA)
+        .add(myPlacemarkB)
     }
   }
 }

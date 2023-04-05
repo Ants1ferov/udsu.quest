@@ -3,8 +3,10 @@
 
 <template>
   <div>
-    <label for="1"><slot name="label"/></label>
-    <input type="radio" class="radio-button" id="1">
+    <label for="1">
+      <slot name="label"/>
+    </label>
+    <input id="1" class="radio-button" type="radio">
   </div>
 </template>
 

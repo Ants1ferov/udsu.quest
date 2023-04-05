@@ -9,24 +9,25 @@ export default {
   name: "ya-maps-1",
   mounted() {
     ymaps.ready(init);
-    function init(){
+
+    function init() {
       var myMap = new ymaps.Map("map", {
-        center: [56.844301,53.212378],
+        center: [56.844301, 53.212378],
         zoom: 16
       });
       var myGeoObject = new ymaps.GeoObject({
         geometry: {
           type: "LineString",
           coordinates: [
-            [56.844301,53.212378],
-            [56.844132,53.212413],
-            [56.844335,53.214665],
-            [56.845787,53.214231],
-            [56.846324,53.220463],
-            [56.846625,53.220357]
+            [56.844301, 53.212378],
+            [56.844132, 53.212413],
+            [56.844335, 53.214665],
+            [56.845787, 53.214231],
+            [56.846324, 53.220463],
+            [56.846625, 53.220357]
           ]
         },
-        properties:{
+        properties: {
           balloonContent: "Я путь, проложенный яндекс.картами, которому вы должны следовать"
         }
       }, {
@@ -42,7 +43,7 @@ export default {
         iconImageSize: [64, 64],
         iconImageOffset: [-32, -60]
       });
-      const myPlacemarkB = new ymaps.Placemark([56.846625,53.220357], {
+      const myPlacemarkB = new ymaps.Placemark([56.846625, 53.220357], {
         balloonContent: 'Это точка 2, вам сюда'
       }, {
         iconLayout: 'default#image',
@@ -51,9 +52,9 @@ export default {
         iconImageOffset: [-32, -60]
       });
       myMap.geoObjects
-          .add(myGeoObject)
-          .add(myPlacemarkA)
-          .add(myPlacemarkB)
+        .add(myGeoObject)
+        .add(myPlacemarkA)
+        .add(myPlacemarkB)
     }
   }
 }

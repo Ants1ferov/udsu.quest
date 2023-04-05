@@ -4,54 +4,54 @@
       <span>{{ index + 1 }}</span>.
       <span v-html="questionText"></span>
     </div>
-      <div class="answers">
-        <transition-group name="crossword">
+    <div class="answers">
+      <transition-group name="crossword">
         <AppButton
-            class="bdr-blk fz-24 e3x3"
-            @click="checkAnswer($event)"
-            :style="[roundEnded ? '' : { background: '#fff' }]"
-            v-html="question1"
             v-if="question1 !== ''"
-        ></AppButton>
-        <AppButton
+            :style="[roundEnded ? '' : { background: '#fff' }]"
             class="bdr-blk fz-24 e3x3"
             @click="checkAnswer($event)"
-            :style="[roundEnded ? '' : { background: '#fff' }]"
-            v-html="question2"
+            v-html="question1"
+        ></AppButton>
+        <AppButton
             v-if="question2 !== ''"
-        ></AppButton>
-        <AppButton
+            :style="[roundEnded ? '' : { background: '#fff' }]"
             class="bdr-blk fz-24 e3x3"
             @click="checkAnswer($event)"
-            :style="[roundEnded ? '' : { background: '#fff' }]"
-            v-html="question3"
+            v-html="question2"
+        ></AppButton>
+        <AppButton
             v-if="question3 !== ''"
-        ></AppButton>
-        <AppButton
+            :style="[roundEnded ? '' : { background: '#fff' }]"
             class="bdr-blk fz-24 e3x3"
             @click="checkAnswer($event)"
-            :style="[roundEnded ? '' : { background: '#fff' }]"
-            v-html="question4"
-            v-if="question4 !== ''"
+            v-html="question3"
         ></AppButton>
-        </transition-group>
-      </div>
-      <div
-          class="post-answer"
-          :style="[roundEnded ? { display: 'flex' } : { display: 'none' }]">
-        <p class="fz-24 f43fsa">
-          {{ message }}
-        </p>
-        <transition name="ok">
-          <AppButton
-              class="bg-dark-gray fz-28 "
-              @click="goToNextQuestion"
-              v-html="[
+        <AppButton
+            v-if="question4 !== ''"
+            :style="[roundEnded ? '' : { background: '#fff' }]"
+            class="bdr-blk fz-24 e3x3"
+            @click="checkAnswer($event)"
+            v-html="question4"
+        ></AppButton>
+      </transition-group>
+    </div>
+    <div
+        :style="[roundEnded ? { display: 'flex' } : { display: 'none' }]"
+        class="post-answer">
+      <p class="fz-24 f43fsa">
+        {{ message }}
+      </p>
+      <transition name="ok">
+        <AppButton
+            class="bg-dark-gray fz-28 "
+            @click="goToNextQuestion"
+            v-html="[
           index == numberOfQuestions - 1 ? 'Посмотреть результаты!' : 'Следующий вопрос',
         ]">
-          </AppButton>
-        </transition>
-      </div>
+        </AppButton>
+      </transition>
+    </div>
   </section>
 </template>
 
@@ -155,21 +155,25 @@ export default {
   flex-direction: column;
   align-items: center;
 }
+
 .answers {
   display: flex;
   flex-direction: column;
   padding: 0 25px;
   align-items: center;
 }
+
 .post-answer {
   display: flex;
   flex-direction: column;
   align-items: center;
   animation: fadeIn 750ms;
 }
+
 .answers {
   animation: fadeIn 1000ms;
 }
+
 @keyframes fadeIn {
   0% {
     opacity: 0;
@@ -178,12 +182,15 @@ export default {
     opacity: 1;
   }
 }
+
 .f43fsa {
   width: 240px;
 }
+
 .e3x3 {
   width: 260px;
 }
+
 .app-button {
   padding: 7px 10px;
   margin: 5px;

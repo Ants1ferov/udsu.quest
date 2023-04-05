@@ -2,6 +2,7 @@
 import AppButton from "@/components/UI/AppButton.vue";
 import {reactive, ref} from "vue";
 import ErrorPopUp from "@/components/UI/errorPopUp.vue";
+
 const emit = defineEmits(['questComplete', 'score'])
 const questOk = ref(false)
 const questFail = ref(false)
@@ -19,29 +20,31 @@ let words = reactive([
   {show: true, id: 10, value: 'Отечества'},
   {show: true, id: 11, value: 'а'},
 ])
-const answers = reactive([
-])
+const answers = reactive([])
 const answer = [
-    2,
-    4,
-    8,
-    0,
-    3,
-    9,
-    5,
-    11,
-    7,
-    1,
-    6,
-    10
+  2,
+  4,
+  8,
+  0,
+  3,
+  9,
+  5,
+  11,
+  7,
+  1,
+  6,
+  10
 ]
+
 function questComplete() {
   emit('score', 100)
   emit('questComplete', true)
 }
+
 function wrongAnswer() {
   questFail.value = !questFail.value
 }
+
 function questCheck() {
   let count = 0
   for (let i in answers) {
@@ -56,6 +59,7 @@ function questCheck() {
     wrongAnswer()
   }
 }
+
 function unselectWord(id) {
   for (let i in answers) {
     if (answers[i].id === id) {
@@ -64,8 +68,9 @@ function unselectWord(id) {
   }
   words[id].show = true
 }
+
 function selectWord(id) {
-  answers.push({id: id,value: words[id].value})
+  answers.push({id: id, value: words[id].value})
   words[id].show = false
   if (answers.length === 12) {
     console.log('все')
@@ -86,17 +91,18 @@ function selectWord(id) {
     <div class="quest-description fz-36">Правильно собрать известную фразу<br>М. Т. Калашникова</div>
     <div class="quest-block">
       <div class="for">
-        <div class="fz-36" v-if="answers.length > 0">&#171;</div>
+        <div v-if="answers.length > 0" class="fz-36">&#171;</div>
         <transition-group name="crossword">
           <div
-              class="f3ct4 fz-36 bold"
-              @click="unselectWord(answer.id)"
               v-for="answer in answers"
               key="id"
+              class="f3ct4 fz-36 bold"
+              @click="unselectWord(answer.id)"
           >
-            {{ answer.value }}</div>
+            {{ answer.value }}
+          </div>
         </transition-group>
-        <div class="fz-36" v-if="answers.length > 0">&#187;</div>
+        <div v-if="answers.length > 0" class="fz-36">&#187;</div>
       </div>
       <div class="for">
         <transition-group name="crossword">
@@ -104,12 +110,15 @@ function selectWord(id) {
               v-for="word in words"
               key="id"
           >
-            <AppButton @click="selectWord(word.id)" class="bg-dark-gray f5yac" v-if="word.show">{{ word.value }}</AppButton>
+            <AppButton v-if="word.show" class="bg-dark-gray f5yac" @click="selectWord(word.id)">{{
+                word.value
+              }}
+            </AppButton>
           </div>
         </transition-group>
       </div>
     </div>
-    <AppButton @click="questCheck" class="bg-dark-gray" v-if="questOk">Отправить</AppButton>
+    <AppButton v-if="questOk" class="bg-dark-gray" @click="questCheck">Отправить</AppButton>
   </div>
 </template>
 
@@ -120,9 +129,11 @@ function selectWord(id) {
   justify-content: center;
   margin: 25px 0;
 }
+
 .f5yac {
   margin: 5px 5px;
 }
+
 .f3ct4 {
   margin: 0 5px;
 }

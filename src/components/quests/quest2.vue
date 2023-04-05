@@ -1,7 +1,8 @@
 <script setup>
 import AppButton from "@/components/UI/AppButton.vue";
-import {ref, defineEmits} from 'vue';
+import {defineEmits, ref} from 'vue';
 import ErrorPopUp from "@/components/UI/errorPopUp.vue";
+
 let answer = [
   '',
   '',
@@ -26,9 +27,11 @@ const answers = [
 ]
 const emit = defineEmits(['questComplete', 'score'])
 let questFailed = ref(false)
+
 function cancel() {
   questFailed.value = false
 }
+
 function answerCheck() {
   let count = 0
   for (let i in answers) {
@@ -59,23 +62,23 @@ function answerCheck() {
         <source src="@/assets/audio/pointTwo.mp3"/>
       </audio>
       <div class="task-text non-copy">
-        <input class="form-input text" v-model="answer[0]"> Черезов является выпускником школы №24.
-        Родился он в <input class="form-input number" v-model="answer[1]"> году в посёлке Валамаз.
+        <input v-model="answer[0]" class="form-input text"> Черезов является выпускником школы №24.
+        Родился он в <input v-model="answer[1]" class="form-input number"> году в посёлке Валамаз.
         Окончив семилетку, будущий лётчик перебрался в Ижевск, где продолжил учиться в школе № 24.
-        Параллельно посещал <input class="form-input text" v-model="answer[2]">,
-        который окончил с отличием в <input class="form-input number" v-model="answer[3]"> году.
-        Затем Черезов поступил в Балашовскую <input class="form-input long-text" v-model="answer[4]"> школу.<br><br>
-        Врачи госпиталя № <input class="form-input number" v-model="answer[5]"> специализировались
+        Параллельно посещал <input v-model="answer[2]" class="form-input text">,
+        который окончил с отличием в <input v-model="answer[3]" class="form-input number"> году.
+        Затем Черезов поступил в Балашовскую <input v-model="answer[4]" class="form-input long-text"> школу.<br><br>
+        Врачи госпиталя № <input v-model="answer[5]" class="form-input number"> специализировались
         на черепно-мозговых травмах и повреждениях позвоночника.
         На первом этаже расположились перевязочная, процедурная, столовая, физиокабинет и кабинет рентгена,
         на втором лежали самые тяжелые больные, а на третьем и четвертом – те, кто уже шел на поправку.
-        Одновременно в госпитале могло лечиться около <input class="form-input number" v-model="answer[6]"> человек.<br><br>
+        Одновременно в госпитале могло лечиться около <input v-model="answer[6]" class="form-input number"> человек.<br><br>
         В годы войны здесь проводили уникальные операции для заживления
-        черепа после трепанации и ранений головы. В стенах лицея № <input class="form-input number" v-model="answer[7]">
-        было проведено около <input type="text" class="form-input number" v-model="answer[8]"> таких операций
+        черепа после трепанации и ранений головы. В стенах лицея № <input v-model="answer[7]" class="form-input number">
+        было проведено около <input v-model="answer[8]" class="form-input number" type="text"> таких операций
       </div>
     </div>
-    <AppButton @click="answerCheck" class="bg-dark-gray">Отправить</AppButton>
+    <AppButton class="bg-dark-gray" @click="answerCheck">Отправить</AppButton>
   </div>
 </template>
 
@@ -83,21 +86,26 @@ function answerCheck() {
 .audio {
   margin: 25px 0;
 }
+
 .form-input {
   height: 28px;
   margin: 0;
   text-align: center;
 }
+
 .task-text {
   text-align: left;
   padding: 0 15px 0 25px;
 }
+
 .text {
   width: 90px;
 }
+
 .number {
   width: 50px;
 }
+
 .long-text {
   width: 130px;
 }
