@@ -1,11 +1,14 @@
 <script setup>
 import Quiz from "@/components/sections/quiz.vue";
 import qwe from "@/components/quests/quizzes/quest6.json"
+
 const json = qwe
 const emit = defineEmits(['questComplete', 'score'])
+
 function questComplete() {
   emit('questComplete', true)
 }
+
 function score() {
   emit('score', 35)
 }

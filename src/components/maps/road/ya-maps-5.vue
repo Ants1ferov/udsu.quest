@@ -9,6 +9,7 @@ export default {
   name: "ya-maps-5",
   mounted() {
     ymaps.ready(init);
+
     function init() {
       let myMap = new ymaps.Map("map", {
         center: [56.850453, 53.206431],
@@ -29,7 +30,7 @@ export default {
             [56.852765, 53.207936],
           ]
         },
-        properties:{
+        properties: {
           balloonContent: "Я путь, проложенный яндекс.картами, которому вы должны следовать"
         }
       }, {
@@ -54,9 +55,9 @@ export default {
         iconImageOffset: [-32, -60]
       });
       myMap.geoObjects
-          .add(myGeoObject)
-          .add(myPlacemarkA)
-          .add(myPlacemarkB)
+        .add(myGeoObject)
+        .add(myPlacemarkA)
+        .add(myPlacemarkB)
     }
   }
 }

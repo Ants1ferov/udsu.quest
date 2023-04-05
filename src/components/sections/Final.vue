@@ -5,7 +5,7 @@
     <div>
       <p class="fz-36 bold">{{ correctAnswers }}/{{ numberOfQuestions }}</p>
     </div>
-    <AppButton @click="questComplete" class="bg-dark-gray">Продолжить</AppButton>
+    <AppButton class="bg-dark-gray" @click="questComplete">Продолжить</AppButton>
   </section>
 </template>
 <script>
@@ -46,7 +46,7 @@ export default {
         this.correctAnswersPercentage <= 30
       ) {
         this.message = "Вы читали задание?";
-        this.result = `Вы ответили на ${this.correctAnswersPercentage}% всех вопросов правильно. Может попробуйте еще раз? (так нельзя)`;
+        this.result = `Вы ответили на ${this.correctAnswersPercentage}% всех вопросов правильно`;
       } else if (
         this.correctAnswersPercentage > 30 &&
         this.correctAnswersPercentage < 60

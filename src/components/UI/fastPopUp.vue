@@ -11,7 +11,7 @@ export default {
 </script>
 
 <style scoped>
-.fast-pop-up{
+.fast-pop-up {
   display: flex;
   align-items: center;
   position: fixed;

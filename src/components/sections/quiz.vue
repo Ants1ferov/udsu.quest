@@ -1,6 +1,6 @@
 <template>
   <main class="non-copy">
-    <Home @startTheGame="startTheGame" v-if="showHome" />
+    <Home v-if="showHome" @startTheGame="startTheGame"/>
     <transition name="question">
       <Question
           v-if="gameStarted && quizData && !gameFinished"
@@ -10,11 +10,11 @@
       />
     </transition>
     <Final
+        v-if="gameFinished"
+        :correctAnswers="correctAnswers"
+        :numberOfQuestions="numberOfQuestions"
         class="mrg-25"
-      @questComplete="questComplete"
-      v-if="gameFinished"
-      :correctAnswers="correctAnswers"
-      :numberOfQuestions="numberOfQuestions"
+        @questComplete="questComplete"
     />
   </main>
 </template>
@@ -36,7 +36,7 @@ export default {
     json: {
       type: Object,
       default() {
-        return{}
+        return {}
       }
     }
 
@@ -57,7 +57,7 @@ export default {
     score() {
       this.$emit('score', true)
     },
-    startTheGame({ difficulty, categoryId, questions }) {
+    startTheGame({difficulty, categoryId, questions}) {
       this.makeRequest(difficulty, categoryId, questions);
       this.showHome = false;
       this.gameStarted = true;
@@ -70,7 +70,7 @@ export default {
         console.error(error);
       }
     },
-    endGame({ numberOfQuestions, correctAnswers }) {
+    endGame({numberOfQuestions, correctAnswers}) {
       this.numberOfQuestions = numberOfQuestions;
       this.correctAnswers = correctAnswers;
       this.gameFinished = true;

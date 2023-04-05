@@ -18,11 +18,13 @@
   z-index: 8000;
   margin: 0 auto;
 }
+
 .count-score-block {
   background-color: black;
-  padding: 7px;
+  padding: 9px 5px;
   border-radius: 25px;
 }
+
 .score-count {
   color: #ffffff;
   font-family: sans-serif;

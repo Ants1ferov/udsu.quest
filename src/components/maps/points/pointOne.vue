@@ -1,5 +1,6 @@
 <script setup>
 ymaps.ready(init);
+
 function init() {
   var myMap = new ymaps.Map("map", {
     center: [56.844301, 53.212378],
@@ -14,7 +15,7 @@ function init() {
     iconImageOffset: [-32, -60]
   });
   myMap.geoObjects
-      .add(myPlacemark)
+    .add(myPlacemark)
 }
 </script>
 <template>

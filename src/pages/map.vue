@@ -31,11 +31,10 @@ import Scanner from "@/components/UI/scanner.vue";
 import Quest7 from "@/components/quests/quest7.vue";
 import Account from "@/components/sections/account.vue";
 
-onMounted( () => {
+onMounted(() => {
   if (localStorage.getItem('email') === null) {
     router.push({path: "auth"})
-  }
-  else {
+  } else {
     if (localStorage.getItem('email') === 'udsu.test@list.ru') {
       test.value = true
     } else {
@@ -57,75 +56,73 @@ let quest = ({count: parseInt(localStorage.getItem('quest'))})
 const score = reactive({number: parseInt(localStorage.getItem('score'))})
 const number = ref(parseInt(localStorage.getItem('score')))
 watch(number, (n) => {
-  gsap.to(score, { duration: 1.5, number: Number(n) || 0})
+  gsap.to(score, {duration: 1.5, number: Number(n) || 0})
 })
+
 function qrCheckOK() {
   quest.count += 1
-  road.value = ! road.value
+  road.value = !road.value
   scanner.value = !scanner.value
   updateServerValue()
   setTimeout(() => {
     qrOk.value = true
   }, 250);
 }
+
 function qrCheck(count) {
   if (count === 0) {
     scanner.value = !scanner.value
     qrFail.value = true
-  }
-  else if (count === 1 && quest.count === 0) {
+  } else if (count === 1 && quest.count === 0) {
     qrCheckOK()
-  }
-  else if (count === 2 && quest.count === 1) {
+  } else if (count === 2 && quest.count === 1) {
     qrCheckOK()
-  }
-  else if (count === 3 && quest.count === 2) {
+  } else if (count === 3 && quest.count === 2) {
     qrCheckOK()
-  }
-  else if (count === 4 && quest.count === 3) {
+  } else if (count === 4 && quest.count === 3) {
     qrCheckOK()
-  }
-  else if (count === 5 && quest.count === 4) {
+  } else if (count === 5 && quest.count === 4) {
     qrCheckOK()
-  }
-  else if (count === 6 && quest.count === 5) {
+  } else if (count === 6 && quest.count === 5) {
     qrCheckOK()
-  }
-  else {
+  } else {
     scanner.value = false
     setTimeout(() => {
       qrRepeat.value = true
     }, 250);
   }
 }
+
 function updateServerValue() {
   localStorage.setItem('quest', quest.count)
   localStorage.setItem('road', road.value)
   axios
-      .post('https://api.udgu.suslovd.ru:9443/api/complete', {
-        email: localStorage.getItem('email'),
-        quest: quest.count,
-        road: road.value
-      })
-      .then((response) => {
-        console.log(response.status)
-        if (response.status === 200) {
-          console.log('данные сохранены')
-        }
-        else if (response.status === 409) {
-        }
-      })
-      .catch((reason) => {
-      })
+    .post('https://api.udgu.suslovd.ru:9443/api/complete', {
+      email: localStorage.getItem('email'),
+      quest: quest.count,
+      road: road.value
+    })
+    .then((response) => {
+      console.log(response.status)
+      if (response.status === 200) {
+        console.log('данные сохранены')
+      } else if (response.status === 409) {
+      }
+    })
+    .catch((reason) => {
+    })
 }
+
 function questEnd() {
   quest.count += 1
   road.value = false
   updateServerValue()
 }
+
 function scoreUpdate(count) {
   number.value += count
 }
+
 function cancel() {
   actionFail.value = false
   questCompleted.value = false
@@ -134,20 +131,25 @@ function cancel() {
   qrOk.value = false
   qrFail.value = false
 }
+
 function nextQuest() {
   localStorage.setItem('score', number.value)
   questCompleted.value = true
   road.value = true
   updateServerValue()
 }
+
 function scanOpen() {
   scanner.value = !scanner.value
 }
+
 const tools = ref(false)
+
 function setQuest(val) {
   localStorage.setItem('quest', val)
   router.push({path: '/auth'})
 }
+
 function roadTrueFalse() {
   road.value = !road.value
   localStorage.setItem('road', road.value)
@@ -157,8 +159,8 @@ function roadTrueFalse() {
 
 <template>
   <div class="map">
-    <div @click="tools = !tools" class="tools" v-if="test">
-      <svg xmlns="http://www.w3.org/2000/svg" height="48" width="48">
+    <div v-if="test" class="tools" @click="tools = !tools">
+      <svg height="48" width="48" xmlns="http://www.w3.org/2000/svg">
         <path d="M27.3 44h-6.6q-.55 0-.975-.35-.425-.35-.525-.9l-.8-5.05q-.95-.35-2-.95t-1.85-1.25L9.9
          37.65q-.55.25-1.1.075T7.95 37l-3.3-5.85q-.3-.5-.15-1.05t.6-.9l4.3-3.15q-.1-.45-.125-1.025Q9.25
           24.45 9.25 24q0-.45.025-1.025T9.4 21.95L5.1 18.8q-.45-.35-.6-.9-.15-.55.15-1.05L7.95 11q.3-.55.85-.725.55-.175
@@ -178,15 +180,15 @@ function roadTrueFalse() {
       </svg>
     </div>
     <transition name="ok">
-      <div class="testing" v-if="tools">
-        <app-button @click="roadTrueFalse" class="bg-gray">road: {{ road }}</app-button>
-        <app-button @click="setQuest(1)" class="bg-gray">1 задание</app-button>
-        <app-button @click="setQuest(2)" class="bg-gray">2 задание</app-button>
-        <app-button @click="setQuest(3)" class="bg-gray">3 задание</app-button>
-        <app-button @click="setQuest(4)" class="bg-gray">4 задание</app-button>
-        <app-button @click="setQuest(5)" class="bg-gray">5 задание</app-button>
-        <app-button @click="setQuest(6)" class="bg-gray">6 задание</app-button>
-        <app-button @click="setQuest(7)" class="bg-gray">7 задание</app-button>
+      <div v-if="tools" class="testing">
+        <app-button class="bg-gray" @click="roadTrueFalse">road: {{ road }}</app-button>
+        <app-button class="bg-gray" @click="setQuest(1)">1 задание</app-button>
+        <app-button class="bg-gray" @click="setQuest(2)">2 задание</app-button>
+        <app-button class="bg-gray" @click="setQuest(3)">3 задание</app-button>
+        <app-button class="bg-gray" @click="setQuest(4)">4 задание</app-button>
+        <app-button class="bg-gray" @click="setQuest(5)">5 задание</app-button>
+        <app-button class="bg-gray" @click="setQuest(6)">6 задание</app-button>
+        <app-button class="bg-gray" @click="setQuest(7)">7 задание</app-button>
       </div>
     </transition>
     <transition name="account">
@@ -201,7 +203,7 @@ function roadTrueFalse() {
     </transition>
     <transition name="ok">
       <error-pop-up v-if="qrRepeat">
-        <p class="fz-36 white">Вы отсканировали qr-код прошлого задания!</p>
+        <p class="fz-28 white">Вы отсканировали<br>qr-код прошлого задания!</p>
         <AppButton class="bg-gray bold" type="button" @click="cancel">Ну блин</AppButton>
       </error-pop-up>
     </transition>
@@ -240,16 +242,17 @@ function roadTrueFalse() {
         <yaMaps6 v-if="quest.count === 6 && road"></yaMaps6>
         <point-seven v-if="quest.count === 7"></point-seven>
       </div>
-      <div class="on-the-road" v-if="road && quest.count < 7">
-        <p class="fz-32 mrg-25">Следуйте до точки {{ quest.count + 1}}</p>
-        <AppButton v-if="road && quest.count <= 5 && (quest.count !== 2 && road.value !== true)" class="qr-block bold bdr-blk" @click="scanOpen">
+      <div v-if="road && quest.count < 7" class="on-the-road">
+        <p class="fz-32 mrg-25">Следуйте до точки {{ quest.count + 1 }}</p>
+        <AppButton v-if="road && quest.count <= 5 && (quest.count !== 2 && road.value !== true)"
+                   class="qr-block bold bdr-blk" @click="scanOpen">
           <div>Сканировать</div>
-          <img class="qr-img" src="@/../src/assets/img/button/qr.svg" alt="qr button">
+          <img alt="qr button" class="qr-img" src="@/../src/assets/img/button/qr.svg">
         </AppButton>
         <transition name="ok">
           <pop-up-block v-if="scanner" class="scan-block">
             <scanner @qr="qrCheck"></scanner>
-            <AppButton @click="cancel" class="bdr-wht white bold">Закрыть</AppButton>
+            <AppButton class="bdr-wht white bold" @click="cancel">Закрыть</AppButton>
           </pop-up-block>
         </transition>
       </div>
@@ -258,12 +261,12 @@ function roadTrueFalse() {
       </div>
     </div>
     <div class="quests">
-      <quest1 @questComplete="nextQuest" @score="scoreUpdate" v-if="quest.count === 1 && !road"></quest1>
-      <quest2 @questComplete="nextQuest" @score="scoreUpdate" v-if="quest.count === 2 && !road"></quest2>
-      <quest3 @questComplete="nextQuest" @score="scoreUpdate" v-if="quest.count === 3 && !road"></quest3>
-      <quest4 @questComplete="nextQuest" @score="scoreUpdate" v-if="quest.count === 4 && !road"></quest4>
-      <quest5 @questComplete="nextQuest" @score="scoreUpdate" v-if="quest.count === 5 && !road"></quest5>
-      <quest6 @questComplete="nextQuest" @score="scoreUpdate" v-if="quest.count === 6 && !road"></quest6>
+      <quest1 v-if="quest.count === 1 && !road" @questComplete="nextQuest" @score="scoreUpdate"></quest1>
+      <quest2 v-if="quest.count === 2 && !road" @questComplete="nextQuest" @score="scoreUpdate"></quest2>
+      <quest3 v-if="quest.count === 3 && !road" @questComplete="nextQuest" @score="scoreUpdate"></quest3>
+      <quest4 v-if="quest.count === 4 && !road" @questComplete="nextQuest" @score="scoreUpdate"></quest4>
+      <quest5 v-if="quest.count === 5 && !road" @questComplete="nextQuest" @score="scoreUpdate"></quest5>
+      <quest6 v-if="quest.count === 6 && !road" @questComplete="nextQuest" @score="scoreUpdate"></quest6>
       <quest7 v-if="quest.count === 7"></quest7>
     </div>
   </div>
@@ -277,6 +280,7 @@ function roadTrueFalse() {
   left: 25px;
   z-index: 10000;
 }
+
 .testing {
   padding: 25px;
   border-radius: 35px;
@@ -289,49 +293,60 @@ function roadTrueFalse() {
   z-index: 10000;
   right: 0;
 }
+
 /* ------------------------------------- */
 .block-1 {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
 .score-block {
   text-align: center;
   width: 100px;
   z-index: 9000;
 }
+
 .maps {
   width: 100%;
   height: 50%;
 }
+
 .ymaps-2-1-79-balloon__layout {
   border-radius: 15px;
   border: none;
 }
+
 .ymaps-2-1-79-balloon__content {
   font-size: 16px !important;
   font-family: sans-serif !important;
 }
+
 .ymaps-2-1-79-controls__control_toolbar, .ymaps-2-1-79-copyright.ymaps-2-1-79-copyright_logo_no, .ymaps-2-1-79-map-copyrights-promo {
   display: none !important;
 }
+
 #id_167974419086094789939 {
   text-align: center;
   font-weight: bold;
 }
+
 .on-the-road {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
 }
+
 .qr-img {
   width: 64px;
   margin-top: 10px;
 }
+
 .quest-task {
   width: 100%;
 }
+
 .scan-block {
   height: 560px !important;
 }
