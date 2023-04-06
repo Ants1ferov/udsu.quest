@@ -49,21 +49,13 @@ const emit = defineEmits(['questComplete', 'score'])
 const wrongAns = ref(false)
 const answerOk = ref(false)
 
-function wrongAnswer() {
-  wrongAns.value = true
-  setTimeout(() => {
-    wrongAns.value = false
-  }, 900)
-}
-
 watch(answer, async (newAnswer) => {
-  console.log(newAnswer)
   if (newAnswer.length > 3) {
     let countFor = ref(0)
-    newAnswer = newAnswer.replace('ё', 'е')
-    newAnswer = newAnswer.replace(' ', '')
-    newAnswer = newAnswer.toLocaleLowerCase()
-    console.log(newAnswer)
+    answer.value = answer.value.replace('ё', 'е')
+    answer.value = answer.value.replace(' ', '')
+    answer.value = answer.value.toLocaleLowerCase()
+    console.log(answer.value)
     for (let i in answers) {
       countFor.value += 1
       if (answer.value === answers[i]) {
@@ -72,7 +64,7 @@ watch(answer, async (newAnswer) => {
           setTimeout(() => {
             words[i].value = !words[i].value
           }, 1150)
-          newAnswer = ''
+          answer.value = ''
           taskOk.value = true
           answerOk.value = true
           setTimeout(() => {
