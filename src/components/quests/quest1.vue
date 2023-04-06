@@ -1,6 +1,6 @@
 <script setup>
 import AppButton from "@/components/UI/AppButton.vue";
-import {defineEmits, reactive, ref, watch} from "vue";
+import {computed, defineEmits, reactive, ref, watch} from "vue";
 import FastPopUp from "@/components/UI/fastPopUp.vue";
 
 const answers = [
@@ -41,7 +41,6 @@ let words = [
   ref(false),
   ref(false)
 ]
-const focus = ref(false)
 const answerRepeatOpen = ref(false)
 const answer = ref('')
 let taskOk = ref(false)
@@ -58,12 +57,13 @@ function wrongAnswer() {
 }
 
 watch(answer, async (newAnswer) => {
+  console.log(newAnswer)
   if (newAnswer.length > 3) {
     let countFor = ref(0)
-    answer.value = answer.value.replace('ё', 'е')
-    answer.value = answer.value.replace(' ', '')
-    answer.value = answer.value.toLocaleLowerCase()
-    console.log(answer.value)
+    newAnswer = newAnswer.replace('ё', 'е')
+    newAnswer = newAnswer.replace(' ', '')
+    newAnswer = newAnswer.toLocaleLowerCase()
+    console.log(newAnswer)
     for (let i in answers) {
       countFor.value += 1
       if (answer.value === answers[i]) {
@@ -72,7 +72,7 @@ watch(answer, async (newAnswer) => {
           setTimeout(() => {
             words[i].value = !words[i].value
           }, 1150)
-          answer.value = ''
+          newAnswer = ''
           taskOk.value = true
           answerOk.value = true
           setTimeout(() => {
@@ -99,52 +99,14 @@ watch(answer, async (newAnswer) => {
           }
           break
         }
+      } else {
+        if (countFor > 0) {
+          break
+        }
       }
     }
   }
 })
-
-function answerCheck() {
-  let countFor = ref(0)
-  for (let i in answers) {
-    countFor.value += 1
-    answer.count = answer.count.replace('ё', 'е')
-    if (answer.count.toLowerCase() === answers[i]) {
-      if (count.count === 16) {
-        count.count += 1
-        setTimeout(() => {
-          words[i].value = !words[i].value
-        }, 1150)
-        answer.count = ''
-        taskOk.value = true
-        answerOk.value = true
-        setTimeout(() => {
-          answerOk.value = false
-        }, 900)
-      } else {
-        if (words[i].value === true) {
-          answerRepeatOpen.value = true
-          setTimeout(() => {
-            answerRepeatOpen.value = false
-          }, 750)
-          answer.count = ''
-        } else {
-          answerOk.value = true
-          setTimeout(() => {
-            answerOk.value = false
-          }, 900)
-          emit('score', 15)
-          count.count += 1
-          setTimeout(() => {
-            words[i].value = !words[i].value
-          }, 1150)
-          answer.count = ''
-        }
-        break
-      }
-    }
-  }
-}
 
 function taskComplete() {
   emit('questComplete', true)
@@ -235,9 +197,13 @@ function taskComplete() {
         </div>
       </transition>
     </div>
-    <input v-if="!taskOk" v-model="answer" :class="{ red: wrongAns, inputFocus: focus }"
+    <input v-if="!taskOk"
+           name="text"
+           id="text"
            class="form-input input-word"
-           placeholder="Слово" type="text">
+           placeholder="Слово"
+           type="text"
+           v-model="answer">
   </div>
 </template>
 
@@ -295,12 +261,13 @@ function taskComplete() {
   width: 70%;
   margin: 0;
   border-radius: 25px;
+  transition: all 300ms ease-in-out;
 }
 
 .input-word:focus {
   bottom: 0;
+  transition: all 300ms ease-in-out;
 }
-
 .k9fc {
   box-shadow: 0 0 15px 10px #ADFF00;
 }
