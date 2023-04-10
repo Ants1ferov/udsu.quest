@@ -37,12 +37,10 @@ onMounted(() => {
   } else {
     if (localStorage.getItem('email') === 'udsu.test@list.ru') {
       test.value = true
-    } else {
-
     }
   }
 })
-const test = ref(false)
+
 const account = ref(false)
 let scanner = ref(false)
 let qrRepeat = ref(false)
@@ -52,6 +50,7 @@ let questCompleted = ref(false)
 let actionFail = ref(false)
 let road = ref(JSON.parse(localStorage.getItem('road')))
 let quest = ({count: parseInt(localStorage.getItem('quest'))})
+let qrPerFail = ref(false)
 
 const score = reactive({number: parseInt(localStorage.getItem('score'))})
 const number = ref(parseInt(localStorage.getItem('score')))
@@ -73,7 +72,12 @@ function qrCheck(count) {
   if (count === 0) {
     scanner.value = !scanner.value
     qrFail.value = true
-  } else if (count === 1 && quest.count === 0) {
+  }
+  if (count === -1) {
+    scanner.value = !scanner.value
+    qrPerFail.value = true
+  }
+  else if (count === 1 && quest.count === 0) {
     qrCheckOK()
   } else if (count === 2 && quest.count === 1) {
     qrCheckOK()
@@ -103,9 +107,7 @@ function updateServerValue() {
       road: road.value
     })
     .then((response) => {
-      console.log(response.status)
       if (response.status === 200) {
-        console.log('данные сохранены')
       } else if (response.status === 409) {
       }
     })
@@ -130,6 +132,7 @@ function cancel() {
   scanner.value = false
   qrOk.value = false
   qrFail.value = false
+  qrPerFail.value = false
 }
 
 function nextQuest() {
@@ -143,6 +146,7 @@ function scanOpen() {
   scanner.value = !scanner.value
 }
 
+const test = ref(false)
 const tools = ref(false)
 
 function setQuest(val) {
@@ -155,6 +159,7 @@ function roadTrueFalse() {
   localStorage.setItem('road', road.value)
   router.push({path: '/'})
 }
+
 </script>
 
 <template>
@@ -196,29 +201,39 @@ function roadTrueFalse() {
     </transition>
     <transition name="ok">
       <ok-pop-up v-if="questCompleted">
-        <div class="white fz-32">Задание №{{ quest.count }} выполнено
-        </div>
+        <template v-slot:val>
+          <div class="white fz-32">Задание №{{ quest.count }} выполнено</div>
+        </template>
         <AppButton class="white bdr-wht bold" type="button" @click="cancel">Прекрасно</AppButton>
       </ok-pop-up>
-    </transition>
-    <transition name="ok">
-      <error-pop-up v-if="qrRepeat">
-        <p class="fz-28 white">Вы отсканировали<br>qr-код прошлого задания!</p>
+      <error-pop-up v-else-if="qrRepeat">
+        <template v-slot:val>
+          <p class="fz-28 white">Вы отсканировали<br>qr-код прошлого задания!</p>
+        </template>
+        <AppButton class="bg-gray bold" type="button" @click="cancel">Эххх</AppButton>
+      </error-pop-up>
+      <error-pop-up v-else-if="qrFail">
+        <template v-slot:val>
+          <p class="fz-36 white">Неправильный qr!😔</p>
+        </template>
         <AppButton class="bg-gray bold" type="button" @click="cancel">Ну блин</AppButton>
       </error-pop-up>
-    </transition>
-    <transition name="ok">
-      <error-pop-up v-if="qrFail">
-        <p class="fz-36 white">Неправильный qr!😔</p>
-        <AppButton class="bg-gray bold" type="button" @click="cancel">Ну блин</AppButton>
+      <error-pop-up v-else-if="qrPerFail">
+        <template v-slot:val>
+          <p class="fz-36 white">Не выдан доступ к камере</p>
+        </template>
+        <AppButton class="bg-gray bold" type="button" @click="cancel">Ну вот</AppButton>
       </error-pop-up>
-    </transition>
-    <transition name="ok">
-      <ok-pop-up v-if="qrOk">
-        <div class="white fz-32">QR-код успешно отсканирован
-        </div>
+      <ok-pop-up v-else-if="qrOk">
+        <template v-slot:val>
+          <div class="white fz-32">QR-код успешно отсканирован</div>
+        </template>
         <AppButton class="bg-gray bold" type="button" @click="cancel">Прекрасно</AppButton>
       </ok-pop-up>
+      <pop-up-block v-else-if="scanner" class="scan-block">
+        <scanner @qr="qrCheck"></scanner>
+        <AppButton class="bdr-wht white bold" @click="cancel">Закрыть</AppButton>
+      </pop-up-block>
     </transition>
     <div class="block-1">
       <count-score>
@@ -250,10 +265,7 @@ function roadTrueFalse() {
           <img alt="qr button" class="qr-img" src="@/../src/assets/img/button/qr.svg">
         </AppButton>
         <transition name="ok">
-          <pop-up-block v-if="scanner" class="scan-block">
-            <scanner @qr="qrCheck"></scanner>
-            <AppButton class="bdr-wht white bold" @click="cancel">Закрыть</AppButton>
-          </pop-up-block>
+
         </transition>
       </div>
       <div v-if="quest.count === 6 && road || quest.count === 2 && road">

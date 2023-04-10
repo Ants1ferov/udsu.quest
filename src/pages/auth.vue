@@ -9,20 +9,22 @@ import axios from "axios";
 const regLog = ref(true)
 
 onMounted(() => {
-  if (localStorage.getItem('email') === null) {
-    axios
-      .get('https://api.udgu.suslovd.ru:9443/api/getusercount', {})
-      .then((response) => {
-        number.value += response.data.number
-        console.log(response.data)
-        if (response.status === 200) {
-        } else if (response.status === 409) {
-        }
-      })
-      .catch((reason) => {
+  axios
+    .get('https://api.udgu.suslovd.ru:9443/api/getusercount', {})
+    .then((response) => {
+      number.value += response.data.number
+      console.log(response.data)
+      if (response.status === 200) {
+      } else if (response.status === 409) {
+      }
+    })
+    .catch(() => {
 
-      })
-  } else {
+    })
+  if (localStorage.getItem('email') === null) {
+
+  }
+  else {
     router.push({path: "/"})
   }
 })

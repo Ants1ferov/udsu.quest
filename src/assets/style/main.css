@@ -130,6 +130,11 @@ button {
   max-width: 500px;
 }
 
+.pop-flex {
+  position: relative;
+  top: 50px;
+}
+
 .form-input::placeholder {
   color: #888888;
   font-weight: bold;
@@ -242,10 +247,6 @@ button {
 
   #map {
     height: 350px !important;
-  }
-
-  .app-button {
-    font-size: 20px;
   }
 
   .logo-text {

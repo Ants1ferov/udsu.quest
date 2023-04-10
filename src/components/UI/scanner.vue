@@ -27,6 +27,8 @@ function qrSend(value) {
     emit('qr', 5)
   } else if (value === 'vq4TC7f0') {
     emit('qr', 6)
+  } else if (value === -1){
+    emit('qr', -1)
   } else {
     emit('qr', 0)
   }
@@ -35,11 +37,13 @@ function qrSend(value) {
 function qrFromCamera() {
   const html5QrCode = new Html5Qrcode("reader");
   const qrCodeSuccessCallback = (decodedText) => {
+    html5QrCode.stop()
     qrSend(decodedText)
   };
   const config = {fps: 10, qrbox: {width: 250, height: 250}};
   html5QrCode.start({facingMode: "environment"}, config, qrCodeSuccessCallback)
     .catch(() => {
+      qrSend(-1)
     })
 }
 

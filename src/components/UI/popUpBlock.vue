@@ -1,9 +1,8 @@
 <template>
   <div class="pop-up-block">
-    <slot></slot>
+    <slot/>
   </div>
 </template>
-
 <script setup>
 </script>
 
