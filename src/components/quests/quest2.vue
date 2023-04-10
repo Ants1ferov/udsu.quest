@@ -58,8 +58,9 @@ function answerCheck() {
     <div class="quest-title bold fz-56 black">Задание 2</div>
     <div class="quest-description fz-24 bold">Прослушайте аудиофайл и вставьте правильные слова в пропуски</div>
     <div class="quest-task fz-24">
-      <audio class="audio" controls preload="auto">
-        <source src="@/assets/audio/pointTwo.mp3"/>
+      <audio class="audio" controls preload="auto" style="width: 90%;">
+        <source src="@/assets/audio/pointTwo.mp3" type="audio/mpeg"/>
+        Your browser does not support the audio element.
       </audio>
       <div class="task-text non-copy">
         <input v-model="answer[0]" class="form-input text"> Черезов является выпускником школы №24.
