@@ -1,6 +1,6 @@
-<script setup>
+<script setup xmlns="http://www.w3.org/1999/html">
 import AppButton from "@/components/UI/AppButton.vue";
-import {computed, defineEmits, reactive, ref, watch} from "vue";
+import {defineEmits, reactive, ref} from "vue";
 import FastPopUp from "@/components/UI/fastPopUp.vue";
 
 const answers = [
@@ -48,9 +48,8 @@ let count = reactive({count: 0})
 const emit = defineEmits(['questComplete', 'score'])
 const wrongAns = ref(false)
 const answerOk = ref(false)
-
-watch(answer, async (newAnswer) => {
-  if (newAnswer.length > 3) {
+function checkAnswer() {
+  if (answer.value.length > 3) {
     let countFor = ref(0)
     answer.value = answer.value.replace('ё', 'е')
     answer.value = answer.value.replace(' ', '')
@@ -95,11 +94,19 @@ watch(answer, async (newAnswer) => {
         if (countFor > 0) {
           break
         }
+        else if (countFor.value > 16) {
+          wrongAnswer()
+        }
       }
     }
   }
-})
-
+}
+function wrongAnswer() {
+  wrongAns.value = true
+  setTimeout(() => {
+    wrongAns.value = false
+  }, 900)
+}
 function taskComplete() {
   emit('questComplete', true)
 }
@@ -158,6 +165,15 @@ function taskComplete() {
         <img v-if="words[15].value" alt="" class="cross" src="@/assets/img/crossword/16.svg">
         <img v-if="words[16].value" alt="" class="cross" src="@/assets/img/crossword/17.svg">
       </div>
+      <div class="answer-check" v-if="!taskOk">
+        <div class="block-input-flex">
+          <input type="text" class="form-input input-flex" placeholder="Слово" :class="{ red: wrongAns }" v-model="answer">
+        </div>
+        <AppButton @click="checkAnswer"
+                   class="answer-check bg-dark-gray fz-24 bold"
+                   :class="{ shake: wrongAns }">Проверить</AppButton>
+      </div>
+      <AppButton @click="taskComplete" v-if="taskOk" class="bg-dark-gray k9fc">Отправить</AppButton>
       <transition mode="out-in" name="adf">
         <div v-if="!taskOk">
           <div class="crossword-questions fz-24 non-copy">
@@ -189,13 +205,6 @@ function taskComplete() {
         </div>
       </transition>
     </div>
-    <input v-if="!taskOk"
-           name="text"
-           id="text"
-           class="form-input input-word"
-           placeholder="Слово"
-           type="text"
-           v-model="answer">
   </div>
 </template>
 
@@ -247,6 +256,11 @@ function taskComplete() {
   color: #dadada;
 }
 
+.answer-check {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .input-word {
   position: fixed;
   bottom: 10%;
@@ -260,6 +274,7 @@ function taskComplete() {
   bottom: 0;
   transition: all 300ms ease-in-out;
 }
+
 .k9fc {
   box-shadow: 0 0 15px 10px #ADFF00;
 }
@@ -267,5 +282,32 @@ function taskComplete() {
 .zb89f {
   display: flex;
   justify-content: center;
+}
+
+.shake {
+  animation: shake 0.9s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  transform: translate3d(0, 0, 0);
+}
+.red {
+  color: orangered;
+}
+@keyframes shake {
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
 }
 </style>
