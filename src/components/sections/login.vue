@@ -108,15 +108,15 @@ function login() {
         <p v-if="error503" class="fz-24">Сервер не отвечает</p>
         <AppButton class="bg-gray bold btn-mn-auto" type="button" @click="cancel">Закрыть</AppButton>
       </error-pop-up>
-    </transition>
-    <transition name="ok">
-      <pop-up-block v-if="openRec">
-        <form class="recovery" @submit.prevent="recovery">
-          <input v-model="email" autocomplete="email" class="form-input" placeholder="Email" type="email">
-          <input v-model="password" autocomplete="new-password" class="form-input" placeholder="Новый пароль"
-                 type="password">
-          <AppButton class="bg-gray" @click="recovery" @submit.prevent>Изменить</AppButton>
-        </form>
+      <pop-up-block v-else-if="openRec">
+          <form class="recovery" style="position: relative; top: 50px">
+            <p class="white fz-28">Смена пароля</p>
+            <input v-model="email" autocomplete="email" class="form-input" placeholder="Email" type="email">
+            <input v-model="password" autocomplete="new-password" class="form-input" placeholder="Новый пароль"
+                   type="password">
+            <AppButton class="bg-gray" @click="recovery" @submit.prevent>Изменить</AppButton>
+          </form>
+        <AppButton style="margin: 0; padding: 0" class="white" type="button" @click="cancel">Отмена</AppButton>
       </pop-up-block>
     </transition>
     <transition name="top-dynamic">

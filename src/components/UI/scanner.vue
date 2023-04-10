@@ -57,11 +57,9 @@ onMounted(() => {
     const imageFile = e.target.files[0];
     html5QrCode.scanFile(imageFile, true)
       .then(decodedText => {
-        html5QrCode.stop()
         qrSend(decodedText)
       })
       .catch(() => {
-        html5QrCode.stop()
         qrSend(0)
       });
   });

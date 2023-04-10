@@ -25,11 +25,9 @@ function logout() {
   <div class="account">
     <transition name="ok">
       <pop-up-block v-if="logoutAlert" class="ge5ye">
-        <div class="white fz-32 mrg-25 mrg-s-15">Вы уверены, что хотите выйти из аккаунта?
-        </div>
+        <div class="white fz-32 mrg-25 mrg-s-15">Вы уверены, что хотите выйти из аккаунта?</div>
         <AppButton class="pdg-lr-35 bold btn-mn-auto bg-red" type="button" @click="logout">Да</AppButton>
-        <AppButton class="bdr-wht pdg-lr-35 bold btn-mn-auto white" type="button" @click="logoutAlertAction">Нет
-        </AppButton>
+        <AppButton class="bdr-wht pdg-lr-35 bold btn-mn-auto white" type="button" @click="logoutAlertAction">Нет</AppButton>
       </pop-up-block>
     </transition>
     <div class="name fz-42 bold">{{ username }}<br>{{ surname }}</div>
