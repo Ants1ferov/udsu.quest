@@ -13,7 +13,6 @@ onMounted(() => {
     .get('https://api.udgu.suslovd.ru:9443/api/getusercount', {})
     .then((response) => {
       number.value += response.data.number
-      console.log(response.data)
       if (response.status === 200) {
       } else if (response.status === 409) {
       }
@@ -68,7 +67,6 @@ watch(number, (n) => {
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 }
 
