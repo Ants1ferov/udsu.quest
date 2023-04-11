@@ -15,6 +15,8 @@ let actionFail = ref(false)
 let error0 = ref(false)
 let error409 = ref(false)
 let error503 = ref(false)
+let metRul = ref(false)
+let red = ref(false)
 
 function error(code) {
   actionFail.value = true
@@ -31,8 +33,13 @@ function cancel() {
   actionFail.value = !actionFail.value
 }
 
+function metrikaRules() {
+  red.value = false
+  metRul.value = !metRul.value
+}
 function register() {
   if (userName !== '' && userSurname !== '' && email !== '' && password !== '') {
+    if (metRul.value === true) {
     axios
       .post('https://api.udgu.suslovd.ru:9443/api/add', {
         firstname: userName,
@@ -61,6 +68,9 @@ function register() {
           error(503)
         }
       })
+    } else {
+      red.value = true
+    }
   } else {
     error(0)
   }
@@ -88,10 +98,39 @@ function register() {
       <input v-model="email" autocomplete="email" class="form-input" placeholder="Email" type="email">
       <input v-model="password" autocomplete="new-password" class="form-input" placeholder="Пароль"
              type="password">
+      <div class="metrika">
+        <button class="mtrk-btn-check" :class="{red: red}" type="button" @click="metrikaRules">
+          <svg v-if="metRul" class="mtrk-btn-check-mark" width="24" height="24" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7.0876 13.1625C7.0126 13.1625 6.94385 13.15 6.88135 13.125C6.81885 13.1 6.75635 13.0563 6.69385 12.9938L3.3001 9.60005C3.1876 9.48755 3.13135 9.35005 3.13135 9.18755C3.13135 9.02505 3.1876 8.88755 3.3001 8.77505C3.4126 8.66255 3.54385 8.6063 3.69385 8.6063C3.84385 8.6063 3.9751 8.66255 4.0876 8.77505L7.0876 11.775L13.8938 4.9688C14.0063 4.8563 14.1407 4.80005 14.297 4.80005C14.4532 4.80005 14.5876 4.8563 14.7001 4.9688C14.8126 5.0813 14.8688 5.21567 14.8688 5.37192C14.8688 5.52817 14.8126 5.66255 14.7001 5.77505L7.48135 12.9938C7.41885 13.0563 7.35635 13.1 7.29385 13.125C7.23135 13.15 7.1626 13.1625 7.0876 13.1625Z" fill="black"/>
+          </svg>
+        </button>
+        <router-link to="/metrika-rules" type="button" class="mtrk-btn-rules fz-18">Принимаю условия</router-link>
+      </div>
       <AppButton class="bg-dark-gray fz-24" @click="register" @submit.prevent>Регистрация</AppButton>
     </form>
   </div>
 </template>
 
 <style scoped>
+.metrika {
+  width: 100%;
+  margin: 5px 0 10px 0;
+  display: flex;
+  align-items: center;
+}
+.mtrk-btn-check {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 28px;
+  height: 28px;
+  background-color: #e3e5e3;
+  border-radius: 7px;
+}
+.mtrk-btn-rules {
+  margin-left: 7px;
+}
+.red {
+  background-color: red;
+}
 </style>
