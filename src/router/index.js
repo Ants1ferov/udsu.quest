@@ -1,3 +1,4 @@
+import notFound from "@/pages/notFound.vue";
 import {createRouter, createWebHistory} from 'vue-router'
 import auth from "@/pages/auth.vue";
 import safetyRules from "@/pages/safety-rules.vue";
@@ -15,7 +16,10 @@ const router = createRouter({
     {
       path: '/safety-rules',
       name: 'safety rules',
-      component: safetyRules
+      component: safetyRules,
+      meta: {
+        transition: 'right'
+      }
     },
     {
       path: '/auth',
@@ -25,8 +29,19 @@ const router = createRouter({
     {
       path: '/metrika-rules',
       name: 'metrika-rules',
-      component: metrikaRules
-    }
+      component: metrikaRules,
+      meta: {
+        transition: 'right'
+      }
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'NotFound',
+      component: notFound,
+      meta: {
+        footer: true
+      }
+    },
   ]
 })
 
