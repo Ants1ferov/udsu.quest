@@ -7,6 +7,8 @@ import ErrorPopUp from "@/components/UI/errorPopUp.vue";
 import OkPopUp from "@/components/UI/okPopUp.vue";
 import PopUpBlock from "@/components/UI/popUpBlock.vue";
 
+const emit = defineEmits(['auth'])
+
 let email = ''
 let password = ''
 let recoveryOk = ref(false)
@@ -79,6 +81,7 @@ function login() {
         localStorage.setItem('quest', quest)
         localStorage.setItem('score', '0')
         localStorage.road = JSON.stringify(road)
+        emit('auth')
         setTimeout(() => {
           router.push({path: "/"})
         }, 500);

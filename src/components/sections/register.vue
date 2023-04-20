@@ -4,13 +4,13 @@ import AppButton from "@/components/UI/AppButton.vue";
 import {ref} from "vue";
 import router from "@/router";
 import ErrorPopUp from "@/components/UI/errorPopUp.vue";
-import OkPopUp from "@/components/UI/okPopUp.vue";
+
+const emit = defineEmits(['auth'])
 
 let userName = ''
 let userSurname = ''
 let email = ''
 let password = ''
-let actionOk = ref(false)
 let actionFail = ref(false)
 let error0 = ref(false)
 let error409 = ref(false)
@@ -56,7 +56,7 @@ function register() {
         localStorage.setItem('quest', '0')
         localStorage.setItem('score', '0')
         localStorage.road = JSON.stringify(true)
-        actionOk.value = !actionOk.value
+        emit('auth')
         setTimeout(() => {
           router.push({path: "/safety-rules"})
         }, 1500);
@@ -70,6 +70,10 @@ function register() {
       })
     } else {
       red.value = true
+      setTimeout(() => {
+        red.value = false
+      }, 1000);
+
     }
   } else {
     error(0)
@@ -87,9 +91,6 @@ function register() {
         <p v-if="error503" class="fz-24">Сервер не отвечает</p>
         <AppButton class="bg-gray bold btn-mn-auto" type="button" @click="cancel">Закрыть</AppButton>
       </error-pop-up>
-    </transition>
-    <transition name="ok">
-      <ok-pop-up v-if="actionOk"></ok-pop-up>
     </transition>
     <form class="form-auth" @submit.prevent="register">
       <input v-model="userName" autocomplete="name" class="form-input" placeholder="Имя" type="text">
@@ -131,6 +132,30 @@ function register() {
   margin-left: 7px;
 }
 .red {
-  background-color: red;
+  animation: shake 0.9s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  transform: translate3d(0, 0, 0);
+}
+@keyframes shake {
+  10%,
+  90% {
+    background-color: #ff2929;
+    transform: translate3d(-1px, 0, 0);
+  }
+  20%,
+  80% {
+    background-color: #ff7a7a;
+    transform: translate3d(2px, 0, 0);
+  }
+  30%,
+  50%,
+  70% {
+    background-color: #ffbebe;
+    transform: translate3d(-4px, 0, 0);
+  }
+  40%,
+  60% {
+    background-color: #ff5353;
+    transform: translate3d(4px, 0, 0);
+  }
 }
 </style>
