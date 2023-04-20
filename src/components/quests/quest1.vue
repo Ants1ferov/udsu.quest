@@ -49,54 +49,52 @@ const emit = defineEmits(['questComplete', 'score'])
 const wrongAns = ref(false)
 const answerOk = ref(false)
 function checkAnswer() {
-  if (answer.value.length > 3) {
-    let countFor = ref(0)
-    answer.value = answer.value.replace('ё', 'е')
-    answer.value = answer.value.replace(' ', '')
-    answer.value = answer.value.toLocaleLowerCase()
-    console.log(answer.value)
-    for (let i in answers) {
-      countFor.value += 1
-      if (answer.value === answers[i]) {
-        if (count.count === 16) {
+  let countFor = ref(0)
+  answer.value = answer.value.replace('ё', 'е')
+  answer.value = answer.value.replace(' ', '')
+  answer.value = answer.value.toLocaleLowerCase()
+  console.log(answer.value)
+  for (let i in answers) {
+    countFor.value += 1
+    if (answer.value === answers[i]) {
+      if (count.count === 16) {
+        count.count += 1
+        setTimeout(() => {
+          words[i].value = !words[i].value
+        }, 1150)
+        answer.value = ''
+        taskOk.value = true
+        answerOk.value = true
+        setTimeout(() => {
+          answerOk.value = false
+        }, 900)
+      } else {
+        if (words[i].value === true) {
+          answerRepeatOpen.value = true
+          setTimeout(() => {
+            answerRepeatOpen.value = false
+          }, 750)
+          answer.value = ''
+        } else {
+          answerOk.value = true
+          setTimeout(() => {
+            answerOk.value = false
+          }, 900)
+          emit('score', 15)
           count.count += 1
           setTimeout(() => {
             words[i].value = !words[i].value
           }, 1150)
           answer.value = ''
-          taskOk.value = true
-          answerOk.value = true
-          setTimeout(() => {
-            answerOk.value = false
-          }, 900)
-        } else {
-          if (words[i].value === true) {
-            answerRepeatOpen.value = true
-            setTimeout(() => {
-              answerRepeatOpen.value = false
-            }, 750)
-            answer.value = ''
-          } else {
-            answerOk.value = true
-            setTimeout(() => {
-              answerOk.value = false
-            }, 900)
-            emit('score', 15)
-            count.count += 1
-            setTimeout(() => {
-              words[i].value = !words[i].value
-            }, 1150)
-            answer.value = ''
-          }
-          break
         }
-      } else {
-        if (countFor > 0) {
-          break
-        }
-        else if (countFor.value > 16) {
-          wrongAnswer()
-        }
+        break
+      }
+    } else {
+      if (countFor > 0) {
+        break
+      }
+      else if (countFor.value > 16) {
+        wrongAnswer()
       }
     }
   }
@@ -211,7 +209,7 @@ function taskComplete() {
 <style scoped>
 .crossword-questions {
   text-align: left;
-  padding: 15px 25px 150px 25px;
+  padding: 15px 25px 50px 25px;
 }
 
 .crossword {
@@ -260,19 +258,6 @@ function taskComplete() {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-.input-word {
-  position: fixed;
-  bottom: 10%;
-  width: 70%;
-  margin: 0;
-  border-radius: 25px;
-  transition: all 300ms ease-in-out;
-}
-
-.input-word:focus {
-  bottom: 0;
-  transition: all 300ms ease-in-out;
 }
 
 .k9fc {

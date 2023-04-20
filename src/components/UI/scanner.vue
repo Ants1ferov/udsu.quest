@@ -122,8 +122,4 @@ onMounted(() => {
   width: 0;
   height: 0;
 }
-
-.input-file:active .input-file-btn {
-  background-color: #3a3a3a;
-}
 </style>

@@ -24,7 +24,10 @@ const router = createRouter({
     {
       path: '/auth',
       name: 'auth',
-      component: auth
+      component: auth,
+      meta: {
+        transition: 'fade'
+      }
     },
     {
       path: '/metrika-rules',
@@ -39,7 +42,7 @@ const router = createRouter({
       name: 'NotFound',
       component: notFound,
       meta: {
-        footer: true
+        transition: 'fade'
       }
     },
   ]
