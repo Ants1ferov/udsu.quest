@@ -72,12 +72,10 @@ function qrCheck(count) {
   if (count === 0) {
     scanner.value = !scanner.value
     qrFail.value = true
-  }
-  if (count === -1) {
+  } else if (count === -1) {
     scanner.value = !scanner.value
     qrPerFail.value = true
-  }
-  else if (count === 1 && quest.count === 0) {
+  } else if (count === 1 && quest.count === 0) {
     qrCheckOK()
   } else if (count === 2 && quest.count === 1) {
     qrCheckOK()
