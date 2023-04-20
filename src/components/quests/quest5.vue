@@ -35,6 +35,20 @@ const answer = [
   6,
   10
 ]
+const answer2 = [
+  2,
+  4,
+  8,
+  0,
+  7,
+  9,
+  5,
+  11,
+  3,
+  1,
+  6,
+  10
+]
 
 function questComplete() {
   emit('score', 100)
@@ -48,12 +62,12 @@ function wrongAnswer() {
 function questCheck() {
   let count = 0
   for (let i in answers) {
-    if (answers[i].id === answer[i]) {
+    if (answers[i].id === answer[i] || answers[i].id === answer2[i]) {
       count += 1
       console.log(count)
     }
   }
-  if (count >= 10) {
+  if (count >= 12) {
     questComplete()
   } else {
     wrongAnswer()
@@ -73,8 +87,7 @@ function selectWord(id) {
   answers.push({id: id, value: words[id].value})
   words[id].show = false
   if (answers.length === 12) {
-    console.log('все')
-    questCheck()
+    questOk.value = true
   }
 }
 </script>
@@ -118,7 +131,9 @@ function selectWord(id) {
         </transition-group>
       </div>
     </div>
-    <AppButton v-if="questOk" class="bg-dark-gray" @click="questCheck">Отправить</AppButton>
+    <transition name="fade">
+      <AppButton v-if="questOk" class="bg-dark-gray fz-32" @click="questCheck">Отправить</AppButton>
+    </transition>
   </div>
 </template>
 

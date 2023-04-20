@@ -7,6 +7,7 @@ import router from "@/router";
 import axios from "axios";
 
 const regLog = ref(true)
+const authOk = ref(false)
 
 onMounted(() => {
   axios
@@ -36,6 +37,16 @@ watch(number, (n) => {
 
 <template>
   <div class="auth">
+    <transition name="top-dynamic">
+      <div class="fast-pop-up-mini" v-if="authOk">
+        <svg height="64" viewBox="0 0 48 48" width="64" xmlns="http://www.w3.org/2000/svg">
+          <path d="M18.9 35.1q-.3
+         0-.55-.1-.25-.1-.5-.35L8.8 25.6q-.45-.45-.45-1.1 0-.65.45-1.1.45-.45 1.05-.45.6 0 1.05.45l8 8
+          18.15-18.15q.45-.45 1.075-.45t1.075.45q.45.45.45 1.075T39.2 15.4L19.95
+           34.65q-.25.25-.5.35-.25.1-.55.1Z" fill="#adff00"/>
+        </svg>
+      </div>
+    </transition>
     <div class="logo-block">
       <img alt="" class="block-logo-image" src="./../assets/img/design/logo.png">
     </div>
@@ -44,8 +55,8 @@ watch(number, (n) => {
     </div>
     <div class="auth-block">
       <transition mode="out-in" name="auth">
-        <register v-if="regLog"></register>
-        <login v-else-if="!regLog"></login>
+        <register @auth="authOk = !authOk" v-if="regLog"></register>
+        <login @auth="authOk = !authOk" v-else-if="!regLog"></login>
       </transition>
       <div class="button-block">
         <AppButton v-if="regLog" class="bdr-blk bold fz-16 btn-mn-auto" @click="regLog = !regLog">Уже есть

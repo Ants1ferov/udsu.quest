@@ -24,10 +24,14 @@ function logout() {
 <template>
   <div class="account">
     <transition name="ok">
-      <pop-up-block v-if="logoutAlert" class="ge5ye">
-        <div class="white fz-32 mrg-25 mrg-s-15">Вы уверены, что хотите выйти из аккаунта?</div>
-        <AppButton class="pdg-lr-35 bold btn-mn-auto bg-red" type="button" @click="logout">Да</AppButton>
-        <AppButton class="bdr-wht pdg-lr-35 bold btn-mn-auto white" type="button" @click="logoutAlertAction">Нет</AppButton>
+      <pop-up-block v-if="logoutAlert" class="alert-block">
+        <div>
+          <div class="white fz-32">Вы уверены, что хотите выйти из аккаунта?</div>
+        </div>
+        <div class="alert-block-bottom">
+          <AppButton class="pdg-lr-35 bold btn-mn-auto bg-red" type="button" @click="logout">Да</AppButton>
+          <AppButton class="bdr-wht pdg-lr-35 bold btn-mn-auto white" type="button" @click="logoutAlertAction">Нет</AppButton>
+        </div>
       </pop-up-block>
     </transition>
     <div class="name fz-42 bold">{{ username }}<br>{{ surname }}</div>
@@ -88,7 +92,8 @@ function logout() {
   right: 20px;
 }
 
-.ge5ye {
+.alert-block {
+  justify-content: space-between;
   position: absolute;
   left: auto;
   bottom: auto;
@@ -96,5 +101,12 @@ function logout() {
   height: 375px;
   top: 70%;
   background-color: #1e1e1e;
+}
+
+.alert-block-bottom {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 </style>
