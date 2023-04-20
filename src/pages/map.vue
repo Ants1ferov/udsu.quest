@@ -75,17 +75,7 @@ function qrCheck(count) {
   } else if (count === -1) {
     scanner.value = !scanner.value
     qrPerFail.value = true
-  } else if (count === 1 && quest.count === 0) {
-    qrCheckOK()
-  } else if (count === 2 && quest.count === 1) {
-    qrCheckOK()
-  } else if (count === 3 && quest.count === 2) {
-    qrCheckOK()
-  } else if (count === 4 && quest.count === 3) {
-    qrCheckOK()
-  } else if (count === 5 && quest.count === 4) {
-    qrCheckOK()
-  } else if (count === 6 && quest.count === 5) {
+  } else if (quest.count === count - 1) {
     qrCheckOK()
   } else {
     scanner.value = false
