@@ -1,4 +1,5 @@
 <script setup>
+import UniPoint from "@/components/maps/points/UniPoint.vue";
 import {onMounted, reactive, ref, watch} from "vue";
 import YaMaps1 from "@/components/maps/road/ya-maps-1.vue";
 import YaMaps2 from "@/components/maps/road/ya-maps-2.vue";
@@ -15,21 +16,13 @@ import Quest4 from "@/components/quests/quest4.vue";
 import Quest5 from "@/components/quests/quest5.vue";
 import Quest6 from "@/components/quests/quest6.vue";
 import CountScore from "@/components/UI/countScore.vue";
-import PointOne from "@/components/maps/points/pointOne.vue";
 import ErrorPopUp from "@/components/UI/errorPopUp.vue";
 import OkPopUp from "@/components/UI/okPopUp.vue";
 import router from "@/router";
-import PointZero from "@/components/maps/points/pointZero.vue";
-import PointTwo from "@/components/maps/points/pointTwo.vue";
-import PointThree from "@/components/maps/points/pointThree.vue";
-import PointFour from "@/components/maps/points/pointFour.vue";
-import PointFive from "@/components/maps/points/pointFive.vue";
-import PointSix from "@/components/maps/points/pointSix.vue";
-import PointSeven from "@/components/maps/points/pointSeven.vue";
 import axios from "axios";
-import Scanner from "@/components/UI/scanner.vue";
 import Quest7 from "@/components/quests/quest7.vue";
 import Account from "@/components/sections/account.vue";
+import Scanner from "@/components/UI/scanner.vue";
 
 onMounted(() => {
   if (localStorage.getItem('email') === null) {
@@ -51,6 +44,16 @@ let actionFail = ref(false)
 let road = ref(JSON.parse(localStorage.getItem('road')))
 let quest = ({count: parseInt(localStorage.getItem('quest'))})
 let qrPerFail = ref(false)
+let data = ref([
+  {a : '56.844301', b: '53.212378'},
+  {a : '56.844301', b: '53.212378'},
+  {a : '56.846569', b: '53.220352'},
+  {a : '56.849245', b: '53.213994'},
+  {a : '56.850250', b: '53.216939'},
+  {a : '56.850453', b: '53.206431'},
+  {a : '56.852765', b: '53.207936'},
+  {a : '56.853858', b: '53.219066'},
+])
 
 const score = reactive({number: parseInt(localStorage.getItem('score'))})
 const number = ref(parseInt(localStorage.getItem('score')))
@@ -230,20 +233,13 @@ function roadTrueFalse() {
         </div>
       </count-score>
       <div class="maps">
-        <point-zero v-if="quest.count === 0"></point-zero>
-        <point-one v-if="quest.count === 1 && !road"></point-one>
+        <UniPoint :data="data[quest.count]" :point="quest.count" v-if="!road || (road && quest.count === 0)"></UniPoint>
         <yaMaps1 v-if="quest.count === 1 && road"></yaMaps1>
-        <point-two v-if="quest.count === 2 && !road"></point-two>
         <yaMaps2 v-if="quest.count === 2 && road"></yaMaps2>
-        <point-three v-if="quest.count === 3 && !road"></point-three>
         <yaMaps3 v-if="quest.count === 3 && road"></yaMaps3>
-        <point-four v-if="quest.count === 4 && !road"></point-four>
         <yaMaps4 v-if="quest.count === 4 && road"></yaMaps4>
-        <point-five v-if="quest.count === 5 && !road"></point-five>
         <yaMaps5 v-if="quest.count === 5 && road"></yaMaps5>
-        <point-six v-if="quest.count === 6 && !road"></point-six>
         <yaMaps6 v-if="quest.count === 6 && road"></yaMaps6>
-        <point-seven v-if="quest.count === 7"></point-seven>
       </div>
       <div v-if="road && quest.count < 7" class="on-the-road">
         <p class="fz-32 mrg-25">Следуйте до точки {{ quest.count + 1 }}</p>
@@ -273,7 +269,6 @@ function roadTrueFalse() {
 </template>
 
 <style>
-/* ------------------------------------- */
 .tools {
   position: fixed;
   top: 40px;
@@ -293,8 +288,6 @@ function roadTrueFalse() {
   z-index: 10000;
   right: 0;
 }
-
-/* ------------------------------------- */
 .block-1 {
   display: flex;
   flex-direction: column;
