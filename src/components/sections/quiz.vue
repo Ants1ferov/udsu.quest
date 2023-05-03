@@ -20,9 +20,9 @@
 </template>
 
 <script>
+import Final from "@/components/sections/Final.vue";
 import Home from "@/components/sections/Home.vue";
 import Question from "@/components/sections/Question.vue";
-import Final from "@/components/sections/Final.vue";
 
 export default {
   name: "quiz",

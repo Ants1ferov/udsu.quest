@@ -1,8 +1,8 @@
 <script setup>
-import {ref} from "vue";
-import router from "@/router";
 import AppButton from "@/components/UI/AppButton.vue";
 import PopUpBlock from "@/components/UI/popUpBlock.vue";
+import router from "@/router";
+import {ref} from "vue";
 
 const username = localStorage.getItem('name')
 const surname = localStorage.getItem('surname')
@@ -30,7 +30,8 @@ function logout() {
         </div>
         <div class="alert-block-bottom">
           <AppButton class="pdg-lr-35 bold btn-mn-auto bg-red" type="button" @click="logout">Да</AppButton>
-          <AppButton class="bdr-wht pdg-lr-35 bold btn-mn-auto white" type="button" @click="logoutAlertAction">Нет</AppButton>
+          <AppButton class="bdr-wht pdg-lr-35 bold btn-mn-auto white" type="button" @click="logoutAlertAction">Нет
+          </AppButton>
         </div>
       </pop-up-block>
     </transition>

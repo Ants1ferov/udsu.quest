@@ -1,7 +1,7 @@
 <script setup>
 import AppButton from "@/components/UI/AppButton.vue";
-import {reactive, ref} from "vue";
 import ErrorPopUp from "@/components/UI/errorPopUp.vue";
+import {reactive, ref} from "vue";
 
 const emit = defineEmits(['questComplete', 'score'])
 const questOk = ref(false)

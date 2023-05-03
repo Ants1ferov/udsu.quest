@@ -2,7 +2,7 @@
   <div class="not-found">
     <p style="font-size: 72px">404</p>
     <p class="fz-32">странно, вы попали куда-то не туда</p>
-    <router-link to="/" class="app-button bg-dark-gray">обратно</router-link>
+    <router-link class="app-button bg-dark-gray" to="/">обратно</router-link>
   </div>
 </template>
 

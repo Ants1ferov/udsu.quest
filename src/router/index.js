@@ -1,9 +1,9 @@
-import notFound from "@/pages/notFound.vue";
-import {createRouter, createWebHistory} from 'vue-router'
 import auth from "@/pages/auth.vue";
-import safetyRules from "@/pages/safety-rules.vue";
 import map from "@/pages/map.vue";
 import metrikaRules from "@/pages/metrika-rules.vue";
+import notFound from "@/pages/notFound.vue";
+import safetyRules from "@/pages/safety-rules.vue";
+import {createRouter, createWebHistory} from 'vue-router'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
