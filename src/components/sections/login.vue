@@ -1,11 +1,11 @@
 <script setup>
-import axios from "axios";
 import AppButton from "@/components/UI/AppButton.vue";
-import {ref} from "vue";
-import router from "@/router";
 import ErrorPopUp from "@/components/UI/errorPopUp.vue";
 import OkPopUp from "@/components/UI/okPopUp.vue";
 import PopUpBlock from "@/components/UI/popUpBlock.vue";
+import router from "@/router";
+import axios from "axios";
+import {ref} from "vue";
 
 const emit = defineEmits(['auth'])
 
@@ -112,14 +112,14 @@ function login() {
         <AppButton class="bg-gray bold btn-mn-auto" type="button" @click="cancel">Закрыть</AppButton>
       </error-pop-up>
       <pop-up-block v-else-if="openRec">
-          <form class="recovery" style="position: relative; top: 50px">
-            <p class="white fz-28">Смена пароля</p>
-            <input v-model="email" autocomplete="email" class="form-input" placeholder="Email" type="email">
-            <input v-model="password" autocomplete="new-password" class="form-input" placeholder="Новый пароль"
-                   type="password">
-            <AppButton class="bg-gray" @click="recovery" @submit.prevent>Изменить</AppButton>
-          </form>
-        <AppButton style="margin: 0; padding: 0" class="white" type="button" @click="cancel">Отмена</AppButton>
+        <form class="recovery" style="position: relative; top: 50px">
+          <p class="white fz-28">Смена пароля</p>
+          <input v-model="email" autocomplete="email" class="form-input" placeholder="Email" type="email">
+          <input v-model="password" autocomplete="new-password" class="form-input" placeholder="Новый пароль"
+                 type="password">
+          <AppButton class="bg-gray" @click="recovery" @submit.prevent>Изменить</AppButton>
+        </form>
+        <AppButton class="white" style="margin: 0; padding: 0" type="button" @click="cancel">Отмена</AppButton>
       </pop-up-block>
     </transition>
     <transition name="top-dynamic">

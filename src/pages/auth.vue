@@ -1,10 +1,10 @@
 <script setup>
-import {onMounted, reactive, ref, watch} from "vue";
-import AppButton from "@/components/UI/AppButton.vue";
-import Register from "@/components/sections/register.vue";
 import Login from "@/components/sections/login.vue";
+import Register from "@/components/sections/register.vue";
+import AppButton from "@/components/UI/AppButton.vue";
 import router from "@/router";
 import axios from "axios";
+import {onMounted, reactive, ref, watch} from "vue";
 
 const regLog = ref(true)
 const authOk = ref(false)
@@ -23,8 +23,7 @@ onMounted(() => {
     })
   if (localStorage.getItem('email') === null) {
 
-  }
-  else {
+  } else {
     router.push({path: "/"})
   }
 })
@@ -38,7 +37,7 @@ watch(number, (n) => {
 <template>
   <div class="auth">
     <transition name="top-dynamic">
-      <div class="fast-pop-up-mini" v-if="authOk">
+      <div v-if="authOk" class="fast-pop-up-mini">
         <svg height="64" viewBox="0 0 48 48" width="64" xmlns="http://www.w3.org/2000/svg">
           <path d="M18.9 35.1q-.3
          0-.55-.1-.25-.1-.5-.35L8.8 25.6q-.45-.45-.45-1.1 0-.65.45-1.1.45-.45 1.05-.45.6 0 1.05.45l8 8
@@ -55,8 +54,8 @@ watch(number, (n) => {
     </div>
     <div class="auth-block">
       <transition mode="out-in" name="auth">
-        <register @auth="authOk = !authOk" v-if="regLog"></register>
-        <login @auth="authOk = !authOk" v-else-if="!regLog"></login>
+        <register v-if="regLog" @auth="authOk = !authOk"></register>
+        <login v-else-if="!regLog" @auth="authOk = !authOk"></login>
       </transition>
       <div class="button-block">
         <AppButton v-if="regLog" class="bdr-blk bold fz-16 btn-mn-auto" @click="regLog = !regLog">Уже есть

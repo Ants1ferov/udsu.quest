@@ -1,7 +1,7 @@
 <script setup>
 import AppButton from "@/components/UI/AppButton.vue";
-import {defineEmits, ref} from 'vue';
 import ErrorPopUp from "@/components/UI/errorPopUp.vue";
+import {defineEmits, ref} from 'vue';
 
 let answer = [
   '',

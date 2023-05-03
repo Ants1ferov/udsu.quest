@@ -1,7 +1,7 @@
 <script setup>
+import AppButton from "@/components/UI/AppButton.vue";
 import {Html5Qrcode} from "html5-qrcode";
 import {onMounted, ref} from "vue";
-import AppButton from "@/components/UI/AppButton.vue";
 
 let cameraScan = ref(false)
 
@@ -27,7 +27,7 @@ function qrSend(value) {
     emit('qr', 5)
   } else if (value === 'vq4TC7f0') {
     emit('qr', 6)
-  } else if (value === -1){
+  } else if (value === -1) {
     emit('qr', -1)
   } else {
     emit('qr', 0)

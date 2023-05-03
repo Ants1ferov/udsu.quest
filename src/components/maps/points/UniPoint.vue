@@ -1,5 +1,6 @@
 <script setup>
 import {ref} from "vue";
+
 const props = defineProps(['data', 'point'])
 let crd = ref([props.data['a'], props.data['b']])
 const contentFirst = 'Это точка '

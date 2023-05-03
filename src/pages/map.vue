@@ -1,29 +1,29 @@
 <script setup>
 import UniPoint from "@/components/maps/points/UniPoint.vue";
 import UniMaps from "@/components/maps/road/UniMaps.vue";
-import {onMounted, reactive, ref, watch} from "vue";
-import PopUpBlock from "@/components/UI/popUpBlock.vue";
-import AppButton from "@/components/UI/AppButton.vue";
 import Quest1 from "@/components/quests/quest1.vue";
 import Quest2 from "@/components/quests/quest2.vue";
 import Quest3 from "@/components/quests/quest3.vue";
 import Quest4 from "@/components/quests/quest4.vue";
 import Quest5 from "@/components/quests/quest5.vue";
 import Quest6 from "@/components/quests/quest6.vue";
+import Quest7 from "@/components/quests/quest7.vue";
+import Account from "@/components/sections/account.vue";
+import AppButton from "@/components/UI/AppButton.vue";
 import CountScore from "@/components/UI/countScore.vue";
 import ErrorPopUp from "@/components/UI/errorPopUp.vue";
 import OkPopUp from "@/components/UI/okPopUp.vue";
+import PopUpBlock from "@/components/UI/popUpBlock.vue";
+import Scanner from "@/components/UI/scanner.vue";
 import router from "@/router";
 import axios from "axios";
-import Quest7 from "@/components/quests/quest7.vue";
-import Account from "@/components/sections/account.vue";
-import Scanner from "@/components/UI/scanner.vue";
+import {onMounted, reactive, ref, watch} from "vue";
 
 onMounted(() => {
   if (localStorage.getItem('email') === null) {
     router.push({path: "auth"})
-  } else if (localStorage.getItem('email') === 'udsu.test@list.ru')
-    {test.value = true
+  } else if (localStorage.getItem('email') === 'udsu.test@list.ru') {
+    test.value = true
   }
 })
 
@@ -38,14 +38,14 @@ let road = ref(JSON.parse(localStorage.getItem('road')))
 let quest = ({count: parseInt(localStorage.getItem('quest'))})
 let qrPerFail = ref(false)
 const points = [
-  {a : '56.844301', b: '53.212378'},
-  {a : '56.844301', b: '53.212378'},
-  {a : '56.846569', b: '53.220352'},
-  {a : '56.849245', b: '53.213994'},
-  {a : '56.850250', b: '53.216939'},
-  {a : '56.850453', b: '53.206431'},
-  {a : '56.852765', b: '53.207936'},
-  {a : '56.853858', b: '53.219066'},
+  {a: '56.844301', b: '53.212378'},
+  {a: '56.844301', b: '53.212378'},
+  {a: '56.846569', b: '53.220352'},
+  {a: '56.849245', b: '53.213994'},
+  {a: '56.850250', b: '53.216939'},
+  {a: '56.850453', b: '53.206431'},
+  {a: '56.852765', b: '53.207936'},
+  {a: '56.853858', b: '53.219066'},
 ]
 const maps = [
   [
@@ -213,7 +213,7 @@ function roadTrueFalse() {
 <template>
   <div class="map">
     <div v-if="test" class="tools" @click="tools = !tools">
-      <img src="@/assets/img/button/setting.svg" alt="setting button">
+      <img alt="setting button" src="@/assets/img/button/setting.svg">
     </div>
     <transition name="ok">
       <div v-if="tools" class="testing">
@@ -273,7 +273,8 @@ function roadTrueFalse() {
         </div>
       </count-score>
       <div class="maps">
-        <UniPoint v-if="!road || (road && quest.count === 0)" :data="points[quest.count]" :point="quest.count"></UniPoint>
+        <UniPoint v-if="!road || (road && quest.count === 0)" :data="points[quest.count]"
+                  :point="quest.count"></UniPoint>
         <UniMaps v-if="road && quest.count > 0" :data="maps[quest.count - 1]" :point="quest.count"></UniMaps>
       </div>
       <div v-if="road && quest.count < 7" class="on-the-road">
@@ -323,6 +324,7 @@ function roadTrueFalse() {
   z-index: 10000;
   right: 0;
 }
+
 .block-1 {
   display: flex;
   flex-direction: column;

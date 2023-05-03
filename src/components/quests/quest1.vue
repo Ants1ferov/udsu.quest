@@ -1,7 +1,7 @@
 <script setup xmlns="http://www.w3.org/1999/html">
 import AppButton from "@/components/UI/AppButton.vue";
-import {defineEmits, reactive, ref} from "vue";
 import FastPopUp from "@/components/UI/fastPopUp.vue";
+import {defineEmits, reactive, ref} from "vue";
 
 const answers = [
   'гимнастерка',
@@ -48,6 +48,7 @@ let count = reactive({count: 0})
 const emit = defineEmits(['questComplete', 'score'])
 const wrongAns = ref(false)
 const answerOk = ref(false)
+
 function checkAnswer() {
   let countFor = ref(0)
   answer.value = answer.value.replace('ё', 'е')
@@ -92,19 +93,20 @@ function checkAnswer() {
     } else {
       if (countFor > 0) {
         break
-      }
-      else if (countFor.value > 16) {
+      } else if (countFor.value > 16) {
         wrongAnswer()
       }
     }
   }
 }
+
 function wrongAnswer() {
   wrongAns.value = true
   setTimeout(() => {
     wrongAns.value = false
   }, 900)
 }
+
 function taskComplete() {
   emit('questComplete', true)
 }
@@ -163,15 +165,17 @@ function taskComplete() {
         <img v-if="words[15].value" alt="" class="cross" src="@/assets/img/crossword/16.svg">
         <img v-if="words[16].value" alt="" class="cross" src="@/assets/img/crossword/17.svg">
       </div>
-      <div class="answer-check" v-if="!taskOk">
+      <div v-if="!taskOk" class="answer-check">
         <div class="block-input-flex">
-          <input type="text" class="form-input input-flex" placeholder="Слово" :class="{ red: wrongAns }" v-model="answer">
+          <input v-model="answer" :class="{ red: wrongAns }" class="form-input input-flex" placeholder="Слово"
+                 type="text">
         </div>
-        <AppButton @click="checkAnswer"
+        <AppButton :class="{ shake: wrongAns }"
                    class="answer-check bg-dark-gray fz-24 bold"
-                   :class="{ shake: wrongAns }">Проверить</AppButton>
+                   @click="checkAnswer">Проверить
+        </AppButton>
       </div>
-      <AppButton @click="taskComplete" v-if="taskOk" class="bg-dark-gray k9fc">Отправить</AppButton>
+      <AppButton v-if="taskOk" class="bg-dark-gray k9fc" @click="taskComplete">Отправить</AppButton>
       <transition mode="out-in" name="adf">
         <div v-if="!taskOk">
           <div class="crossword-questions fz-24 non-copy">
@@ -273,9 +277,11 @@ function taskComplete() {
   animation: shake 0.9s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
   transform: translate3d(0, 0, 0);
 }
+
 .red {
   color: orangered;
 }
+
 @keyframes shake {
   10%,
   90% {

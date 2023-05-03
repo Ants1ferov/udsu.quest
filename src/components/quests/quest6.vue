@@ -1,6 +1,6 @@
 <script setup>
-import Quiz from "@/components/sections/quiz.vue";
 import qwe from "@/components/quests/quizzes/quest6.json"
+import Quiz from "@/components/sections/quiz.vue";
 
 const json = qwe
 const emit = defineEmits(['questComplete', 'score'])
