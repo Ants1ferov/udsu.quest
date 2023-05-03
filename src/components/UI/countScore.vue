@@ -27,6 +27,5 @@
 
 .score-count {
   color: #ffffff;
-  font-family: sans-serif;
 }
 </style>
