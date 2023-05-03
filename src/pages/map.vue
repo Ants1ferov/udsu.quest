@@ -1,12 +1,7 @@
 <script setup>
 import UniPoint from "@/components/maps/points/UniPoint.vue";
+import UniMaps from "@/components/maps/road/UniMaps.vue";
 import {onMounted, reactive, ref, watch} from "vue";
-import YaMaps1 from "@/components/maps/road/ya-maps-1.vue";
-import YaMaps2 from "@/components/maps/road/ya-maps-2.vue";
-import YaMaps3 from "@/components/maps/road/ya-maps-3.vue";
-import YaMaps4 from "@/components/maps/road/ya-maps-4.vue";
-import YaMaps5 from "@/components/maps/road/ya-maps-5.vue";
-import YaMaps6 from "@/components/maps/road/ya-maps-6.vue";
 import PopUpBlock from "@/components/UI/popUpBlock.vue";
 import AppButton from "@/components/UI/AppButton.vue";
 import Quest1 from "@/components/quests/quest1.vue";
@@ -27,10 +22,8 @@ import Scanner from "@/components/UI/scanner.vue";
 onMounted(() => {
   if (localStorage.getItem('email') === null) {
     router.push({path: "auth"})
-  } else {
-    if (localStorage.getItem('email') === 'udsu.test@list.ru') {
-      test.value = true
-    }
+  } else if (localStorage.getItem('email') === 'udsu.test@list.ru')
+    {test.value = true
   }
 })
 
@@ -44,7 +37,7 @@ let actionFail = ref(false)
 let road = ref(JSON.parse(localStorage.getItem('road')))
 let quest = ({count: parseInt(localStorage.getItem('quest'))})
 let qrPerFail = ref(false)
-let data = ref([
+const points = [
   {a : '56.844301', b: '53.212378'},
   {a : '56.844301', b: '53.212378'},
   {a : '56.846569', b: '53.220352'},
@@ -53,8 +46,72 @@ let data = ref([
   {a : '56.850453', b: '53.206431'},
   {a : '56.852765', b: '53.207936'},
   {a : '56.853858', b: '53.219066'},
-])
-
+]
+const maps = [
+  [
+    [56.844301, 53.212378],
+    [56.844132, 53.212413],
+    [56.844335, 53.214665],
+    [56.845787, 53.214231],
+    [56.846324, 53.220463],
+    [56.846625, 53.220357]
+  ],
+  [
+    [56.846625, 53.220357],
+    [56.846328, 53.220450],
+    [56.846250, 53.219499],
+    [56.849397, 53.218401],
+    [56.849040, 53.214527],
+    [56.849162, 53.214363],
+  ],
+  [
+    [56.849242, 53.214006],
+    [56.849001, 53.214125],
+    [56.849203, 53.216254],
+    [56.849552, 53.216200],
+    [56.849611, 53.216487],
+    [56.849810, 53.216445],
+    [56.850233, 53.216734],
+    [56.850250, 53.216939],
+  ],
+  [
+    [56.850250, 53.216939],
+    [56.850253, 53.216723],
+    [56.849928, 53.216719],
+    [56.849800, 53.216443],
+    [56.849570, 53.216475],
+    [56.849327, 53.216227],
+    [56.849214, 53.216252],
+    [56.848711, 53.210548],
+    [56.850435, 53.209783],
+    [56.850414, 53.209435],
+    [56.850624, 53.209302],
+    [56.850453, 53.206431],
+  ],
+  [
+    [56.850453, 53.206431],
+    [56.850429, 53.206279],
+    [56.851535, 53.206063],
+    [56.851522, 53.205746],
+    [56.852161, 53.205642],
+    [56.852193, 53.206667],
+    [56.852495, 53.206638],
+    [56.852539, 53.207383],
+    [56.852765, 53.207936],
+  ],
+  [
+    [56.852765, 53.207936],
+    [56.852593, 53.208131],
+    [56.852681, 53.210073],
+    [56.852459, 53.211395],
+    [56.852096, 53.211657],
+    [56.852054, 53.217109],
+    [56.852226, 53.217211],
+    [56.852235, 53.217526],
+    [56.852763, 53.218770],
+    [56.853858, 53.219066],
+  ]
+]
 const score = reactive({number: parseInt(localStorage.getItem('score'))})
 const number = ref(parseInt(localStorage.getItem('score')))
 watch(number, (n) => {
@@ -156,24 +213,7 @@ function roadTrueFalse() {
 <template>
   <div class="map">
     <div v-if="test" class="tools" @click="tools = !tools">
-      <svg height="48" width="48" xmlns="http://www.w3.org/2000/svg">
-        <path d="M27.3 44h-6.6q-.55 0-.975-.35-.425-.35-.525-.9l-.8-5.05q-.95-.35-2-.95t-1.85-1.25L9.9
-         37.65q-.55.25-1.1.075T7.95 37l-3.3-5.85q-.3-.5-.15-1.05t.6-.9l4.3-3.15q-.1-.45-.125-1.025Q9.25
-          24.45 9.25 24q0-.45.025-1.025T9.4 21.95L5.1 18.8q-.45-.35-.6-.9-.15-.55.15-1.05L7.95 11q.3-.55.85-.725.55-.175
-           1.1.075l4.65 2.15q.8-.65 1.85-1.25t2-.9l.8-5.1q.1-.55.525-.9Q20.15 4 20.7 4h6.6q.55 0 .975.35.425.35.525.9l.8
-            5.05q.95.35 2.025.925Q32.7 11.8 33.45 12.5l4.65-2.15q.55-.25 1.1-.075t.85.725l3.3 5.8q.3.5.175
-             1.075t-.625.925l-4.3 3.05q.1.5.125 1.075.025.575.025 1.075t-.025 1.05q-.025.55-.125 1.05l4.3
-              3.1q.45.35.6.9.15.55-.15 1.05L40.05 37q-.3.55-.85.725-.55.175-1.1-.075l-4.65-2.15q-.8.65-1.825
-               1.275-1.025.625-2.025.925l-.8 5.05q-.1.55-.525.9-.425.35-.975.35ZM24 30.5q2.7 0 4.6-1.9 1.9-1.9
-                1.9-4.6 0-2.7-1.9-4.6-1.9-1.9-4.6-1.9-2.7 0-4.6 1.9-1.9 1.9-1.9 4.6 0 2.7 1.9 4.6 1.9 1.9 4.6
-                 1.9Zm0-3q-1.45 0-2.475-1.025Q20.5 25.45 20.5 24q0-1.45 1.025-2.475Q22.55 20.5 24 20.5q1.45 0
-                  2.475 1.025Q27.5 22.55 27.5 24q0 1.45-1.025 2.475Q25.45 27.5 24 27.5Zm0-3.5Zm-2.2
-                   17h4.4l.7-5.6q1.65-.4 3.125-1.25T32.7 32.1l5.3 2.3 2-3.6-4.7-3.45q.2-.85.325-1.675.125-.825.125-1.675
-                    0-.85-.1-1.675-.1-.825-.35-1.675L40 17.2l-2-3.6-5.3 2.3q-1.15-1.3-2.6-2.175-1.45-.875-3.2-1.125L26.2
-                     7h-4.4l-.7 5.6q-1.7.35-3.175 1.2-1.475.85-2.625 2.1L10 13.6l-2 3.6 4.7 3.45q-.2.85-.325
-                      1.675-.125.825-.125 1.675 0 .85.125 1.675.125.825.325 1.675L8 30.8l2 3.6 5.3-2.3q1.2
-                       1.2 2.675 2.05Q19.45 35 21.1 35.4Z"/>
-      </svg>
+      <img src="@/assets/img/button/setting.svg" alt="setting button">
     </div>
     <transition name="ok">
       <div v-if="tools" class="testing">
@@ -233,13 +273,8 @@ function roadTrueFalse() {
         </div>
       </count-score>
       <div class="maps">
-        <UniPoint :data="data[quest.count]" :point="quest.count" v-if="!road || (road && quest.count === 0)"></UniPoint>
-        <yaMaps1 v-if="quest.count === 1 && road"></yaMaps1>
-        <yaMaps2 v-if="quest.count === 2 && road"></yaMaps2>
-        <yaMaps3 v-if="quest.count === 3 && road"></yaMaps3>
-        <yaMaps4 v-if="quest.count === 4 && road"></yaMaps4>
-        <yaMaps5 v-if="quest.count === 5 && road"></yaMaps5>
-        <yaMaps6 v-if="quest.count === 6 && road"></yaMaps6>
+        <UniPoint v-if="!road || (road && quest.count === 0)" :data="points[quest.count]" :point="quest.count"></UniPoint>
+        <UniMaps v-if="road && quest.count > 0" :data="maps[quest.count - 1]" :point="quest.count"></UniMaps>
       </div>
       <div v-if="road && quest.count < 7" class="on-the-road">
         <p class="fz-32 mrg-25">Следуйте до точки {{ quest.count + 1 }}</p>
